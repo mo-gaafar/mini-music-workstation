@@ -1,1 +1,1 @@
-# Mini_Digital_Music_Workstation
+# Digital Music Workstation
