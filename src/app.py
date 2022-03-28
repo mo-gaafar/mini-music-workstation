@@ -15,7 +15,7 @@ class MainWindow(QtWidgets.QMainWindow):
         ''' Main window constructor'''
 
         super(MainWindow, self).__init__(*args, **kwargs)
-        uic.loadUi('./resources/MainWindow.ui', self)
+        uic.loadUi('./resources/music_ws_mainwindow.ui', self)
 
 
         # set the title and icon
