@@ -212,7 +212,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Media-Pause-256.png</normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Media-Pause-256.png</iconset>
+                        <normaloff>./icons/Media-Pause-256.png</normaloff>./icons/Media-Pause-256.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -241,7 +241,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Media-Play-256.png</normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Media-Play-256.png</iconset>
+                        <normaloff>./icons/Media-Play-256.png</normaloff>./icons/Media-Play-256.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -270,7 +270,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Shape-Square-256.png</normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Shape-Square-256.png</iconset>
+                        <normaloff>./icons/Shape-Square-256.png</normaloff>./icons/Shape-Square-256.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -453,7 +453,7 @@ selection-color: rgb(85, 255, 255);</string>
   <action name="actionOpen">
    <property name="icon">
     <iconset>
-     <normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Open-256.png</normaloff>../source/repos/mo-gaafar/Nyquist_Theory_Illustrator/data/icons/Open-256.png</iconset>
+     <normaloff>./icons/Open-256.png</normaloff>./icons/Open-256.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
