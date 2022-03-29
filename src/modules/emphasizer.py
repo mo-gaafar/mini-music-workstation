@@ -4,7 +4,7 @@ from modules import spectrogram
 from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import fftfreq, fft
 import numpy as np
-import pyaudio
+#import pyaudio
 
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
