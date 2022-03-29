@@ -1,11 +1,12 @@
 # https://namingconvention.org/python/ use the pythonic naming convention here (friendly reminder)
 
 from PyQt5 import QtGui, QtWidgets, uic
+from modules import utility as util
+from modules import interface
 import sys
 
 
 import qt_material
-import modules.interface
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -19,9 +20,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # set the title and icon
         self.setWindowIcon(QtGui.QIcon('./resources/icons/icon.png'))
-        self.setWindowTitle("Nyquist Theory Illustrator")
+        self.setWindowTitle("Music Workstation")
 
-       # initialize arrays and variables
+        interface.init_connectors(self)
+        # initialize arrays and variables
 
 
 def main():

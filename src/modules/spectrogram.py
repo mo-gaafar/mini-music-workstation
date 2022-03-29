@@ -1,7 +1,7 @@
 #should contain old spectrogram code modified to work with the new classes
 
 #OLD FUNCTIONS 
-
+#TODO: no idea make it work
 
 #     def CreateSpectrogramFigure(self):
 #         self.figure = plt.figure()                     # Create matplotlib fig

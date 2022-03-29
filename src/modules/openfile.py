@@ -1,8 +1,8 @@
 #OLD CODE... REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 #NEW FUNCITONALITY: SHOULD DEAL WITH MUSIC FILES
-
-
+#TODO: import mp3 file
+#TODO: create MusicSignal object with filepath, time,magnitude, sampling frequency information
 
 # # converts file path to SampledSignal object
 # from classes import SampledSignal
