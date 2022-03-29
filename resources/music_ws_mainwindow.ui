@@ -49,18 +49,20 @@ color: rgb(255, 255, 255);</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QTabBar::tab:hover {
-    background-color: rgb(171, 191, 255);
+    background-color: rgb(68, 68, 68);
 }
 
 QTabBar::tab:selected{
-    background-color: rgb(234, 237, 255);
+    background-color: transparent;
+	border-right: 2px solid rgb(1, 195, 141)
 }
 QTabBar::tab {
-    background-color: rgb(160, 160, 160);	
+    background-color: transparent;	
     height:20px;
     width: 25px;
     border: none;
-    margin: 0px;
+    margin-top: 2px;
+	margin-left: 2px;
     padding-top: 4px;
     padding-bottom: 13px;
 	padding-right: 2px
@@ -73,7 +75,7 @@ QTabBar::tab {
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <property name="iconSize">
            <size>
@@ -93,7 +95,7 @@ QTabBar::tab {
           <widget class="QWidget" name="piano_tab">
            <attribute name="icon">
             <iconset>
-             <normaloff>icons/Piano-256-2.png</normaloff>icons/Piano-256-2.png</iconset>
+             <normaloff>icons/piano3.png</normaloff>icons/piano3.png</iconset>
            </attribute>
            <attribute name="title">
             <string/>
@@ -102,7 +104,7 @@ QTabBar::tab {
           <widget class="QWidget" name="guitar_tab">
            <attribute name="icon">
             <iconset>
-             <normaloff>icons/Electric-Guitar-01-358.png</normaloff>icons/Electric-Guitar-01-358.png</iconset>
+             <normaloff>icons/Electric-Guitar-01-3582.png</normaloff>icons/Electric-Guitar-01-3582.png</iconset>
            </attribute>
            <attribute name="title">
             <string/>
@@ -111,7 +113,7 @@ QTabBar::tab {
           <widget class="QWidget" name="drumkit_tab">
            <attribute name="icon">
             <iconset>
-             <normaloff>icons/drums.png</normaloff>icons/drums.png</iconset>
+             <normaloff>icons/drums-1.png</normaloff>icons/drums-1.png</iconset>
            </attribute>
            <attribute name="title">
             <string/>
@@ -485,6 +487,9 @@ border-radius: 10px;
                  </property>
                  <property name="layoutDirection">
                   <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="segmentStyle">
+                  <enum>QLCDNumber::Flat</enum>
                  </property>
                 </widget>
                </item>
