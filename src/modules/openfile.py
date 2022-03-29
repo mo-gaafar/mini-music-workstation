@@ -49,7 +49,8 @@ def open_file(self,path):
 	print_debug(f_rate)
 	time = np.linspace(0, len(signal) / f_rate,num = len(signal))
 	
-	self.music_signal= MusicSignal(path,time,signal,2*f_rate) 
+	self.music_signal= MusicSignal(path,time,signal,2*f_rate)
+	self.pointsToAppend = 0
 	
 	
 

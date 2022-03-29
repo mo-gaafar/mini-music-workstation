@@ -2,13 +2,10 @@
 
 from PyQt5 import QtGui, QtWidgets, uic, QtCore
 from modules import utility as util
-from modules import interface 
+from modules import interface
 from modules.emphasizer import *
 
 import sys
-
-
-
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -21,15 +18,17 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi('./resources/music_ws_mainwindow.ui', self)
 
         # set the title and icon
-        self.setWindowIcon(QtGui.QIcon('./resources/icons/io.png'))
+        self.setWindowIcon(QtGui.QIcon('./resources/icons/icon.png'))
         self.setWindowTitle("Music Workstation")
 
         interface.init_connectors(self)
+        print_debug("Connectors Initialized")
+
         # initialize arrays and variables
-        self.toggle_play=0
-        self.music_signal= MusicSignal()
+        self.music_signal = MusicSignal()
         # initialize points to append
         self.pointsToAppend = 0
+
 
 def main():
 
