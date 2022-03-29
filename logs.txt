@@ -1,2 +1,8 @@
-2022-03-29 12:43:28,661 NumExpr defaulting to 8 threads.
-2022-03-29 12:43:34,195 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
+2022-03-29 14:27:03,137 NumExpr defaulting to 8 threads.
+2022-03-29 14:27:04,749 1
+2022-03-29 14:27:07,915 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown.mp3
+2022-03-29 14:27:14,449 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown.mp3
+2022-03-29 14:27:17,774 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
+2022-03-29 14:27:17,824 frame
+2022-03-29 14:27:17,825 44100
+2022-03-29 14:27:18,029 44100

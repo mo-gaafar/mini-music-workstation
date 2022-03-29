@@ -1,10 +1,14 @@
 # define class and related functions
 
+from click import pass_context
 from modules import spectrogram
 from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import fftfreq, fft
 import numpy as np
-import pyaudio
+import sounddevice as sd
+
+from modules.utility import print_debug
+
 
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
@@ -24,9 +28,10 @@ class MusicSignal():
         "guitar": 1
     }
     '''Contains instrument magnitude multiplier'''
+    
+    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1):
 
-    def __init__(self, filepath, time_array, magnitude_array, f_sampling):
-
+        self.magnitude_array=magnitude_array
         self.f_sampling = f_sampling
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
@@ -35,7 +40,9 @@ class MusicSignal():
         self.current_time_domain = [[time_array], [magnitude_array]]
 
         self.freq_domain = [[], []]
+        print_debug(self.f_sampling)
 
+    
     def fft_update(self):
         self.freq_domain = [
             np.abs(fft(self.current_time_domain), self.n_samples)]
@@ -53,3 +60,17 @@ class MusicSignal():
     def modify_instrument(self, instrument_dict, magnitude_multiplier):
         '''Should make use of all fft functions defined above'''
         pass
+
+
+def play(self):
+  #  if self.toggle_play == 0:
+        sd.play(self.music_signal.magnitude_array, self.music_signal.f_sampling)
+    #elif self.toggle_play == 1:
+      #  sd.stop()
+
+
+
+def pause(self):
+    
+    sd.stop()
+   # self.toggle_play=1

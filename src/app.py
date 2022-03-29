@@ -2,7 +2,9 @@
 
 from PyQt5 import QtGui, QtWidgets, uic
 from modules import utility as util
-from modules import interface
+from modules import interface 
+from modules.emphasizer import *
+
 import sys
 
 
@@ -24,7 +26,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         interface.init_connectors(self)
         # initialize arrays and variables
-
+        self.toggle_play=0
+        self.music_signal= MusicSignal()
 
 def main():
 
