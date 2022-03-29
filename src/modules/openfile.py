@@ -5,28 +5,48 @@
 #TODO: create MusicSignal object with filepath, time,magnitude, sampling frequency information
 
 # # converts file path to SampledSignal object
-# from classes import SampledSignal
-# import utility as util
-# from PyQt5.QtWidgets import QFileDialog
-# import wfdb
-# import csv
-# import numpy as np
-
+from winsound import PlaySound
+from modules import utility as util
+from PyQt5.QtWidgets import QFileDialog
+import wfdb
+import csv
+import numpy
+import pygame
+import playsound 
+import matplotlib.pyplot as plt
+import numpy as np
+import wave, sys
 # from main import MAX_SAMPLES
 # import viewer
 
 
-# def browse_window(self):
-#     self.graph_empty = False
-#     self.filename = QFileDialog.getOpenFileName(
-#         None, 'open the signal file', './', filter="Raw Data(*.csv *.txt *.xls *.hea *.dat *.rec)")
-#     path = self.filename[0]
-#     util.printDebug("Selected path: " + path)
-#     open_file(self, path)
-#     viewer.move_to_viewer(self, "browse")
+def browse_window(self):
+    self.graph_empty = False
+    self.filename = QFileDialog.getOpenFileName(
+        None, 'open the signal file', './', filter="Raw Data(*.mp3 *.wav)")
+    path = self.filename[0]
+    util.print_debug("Selected path: " + path)
+    #play the sound 
+    pygame.mixer.init()
+    
+    # pygame.mixer.music.play()
+   # open_file(self, path)
+    play(path)
+
+def play(path):
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.play()
+
+# def pause(self,path):
+#     pygame.mixer.music.load(path)
+#     pygame.mixer.music.pause()
 
 
-# def open_file(self, path):
+
+
+
+# 
+#def open_file(self, path):
 #     # called by a function in main.py
 #     # gets fsampling
 #     # gets magnitude array

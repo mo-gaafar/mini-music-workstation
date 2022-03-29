@@ -15,8 +15,14 @@ def init_connectors(self):
     ''' Menu Bar'''
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
-        lambda: print_debug("Not connected"))
+        lambda: openfile.browse_window(self))
 
+
+    # self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
+    # self.play_pushButton.triggered.clicked.connect(
+    #     lambda: openfile.play("path"))
+   
+   
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''

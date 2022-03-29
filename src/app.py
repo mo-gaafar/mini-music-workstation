@@ -19,7 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi('./resources/music_ws_mainwindow.ui', self)
 
         # set the title and icon
-        self.setWindowIcon(QtGui.QIcon('./resources/icons/icon.png'))
+        self.setWindowIcon(QtGui.QIcon('./resources/icons/io.png'))
         self.setWindowTitle("Music Workstation")
 
         interface.init_connectors(self)
