@@ -1,8 +1,7 @@
-2022-03-29 14:27:03,137 NumExpr defaulting to 8 threads.
-2022-03-29 14:27:04,749 1
-2022-03-29 14:27:07,915 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown.mp3
-2022-03-29 14:27:14,449 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown.mp3
-2022-03-29 14:27:17,774 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
-2022-03-29 14:27:17,824 frame
-2022-03-29 14:27:17,825 44100
-2022-03-29 14:27:18,029 44100
+2022-03-29 18:59:03,869 Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2022-03-29 18:59:03,870 NumExpr defaulting to 8 threads.
+2022-03-29 18:59:07,502 1
+2022-03-29 18:59:19,719 Selected path: C:/Users/maria/Desktop/DSPTASK3/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
+2022-03-29 18:59:19,736 frame
+2022-03-29 18:59:19,737 44100
+2022-03-29 18:59:19,864 88200

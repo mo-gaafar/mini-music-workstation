@@ -1,6 +1,6 @@
 # https://namingconvention.org/python/ use the pythonic naming convention here (friendly reminder)
 
-from PyQt5 import QtGui, QtWidgets, uic
+from PyQt5 import QtGui, QtWidgets, uic, QtCore
 from modules import utility as util
 from modules import interface 
 from modules.emphasizer import *
@@ -8,7 +8,7 @@ from modules.emphasizer import *
 import sys
 
 
-import qt_material
+
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -28,6 +28,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # initialize arrays and variables
         self.toggle_play=0
         self.music_signal= MusicSignal()
+        # initialize points to append
+        self.pointsToAppend = 0
 
 def main():
 

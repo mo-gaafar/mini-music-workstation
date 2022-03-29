@@ -36,8 +36,10 @@ class MusicSignal():
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
 
-        self.original_time_domain = [[time_array], [magnitude_array]]
-        self.current_time_domain = [[time_array], [magnitude_array]]
+        self.original_time_array = time_array
+        self.current_time_array = time_array
+        self.original_magnitude_array = magnitude_array
+        self.current_magnitude_array =  magnitude_array
 
         self.freq_domain = [[], []]
         print_debug(self.f_sampling)
@@ -45,7 +47,7 @@ class MusicSignal():
     
     def fft_update(self):
         self.freq_domain = [
-            np.abs(fft(self.current_time_domain), self.n_samples)]
+            np.abs(fft(self.current_magnitude_array), self.n_samples)]
 
     def inverse_fft(self):
         pass
@@ -61,16 +63,24 @@ class MusicSignal():
         '''Should make use of all fft functions defined above'''
         pass
 
+def waveform_update_plot(self):
+    time = self.music_signal.current_time_array[self.pointsToAppend:self.pointsToAppend+10000]
+    magnitude = self.music_signal.current_magnitude_array[self.pointsToAppend:self.pointsToAppend+10000]
+    self.pointsToAppend += 10000
+    self.waveform_widget.plot(time, magnitude)
+    self.waveform_widget.plotItem.setXRange(time[0]-1.0,time[9999])
+
+
+         
 
 def play(self):
-  #  if self.toggle_play == 0:
-        sd.play(self.music_signal.magnitude_array, self.music_signal.f_sampling)
-    #elif self.toggle_play == 1:
-      #  sd.stop()
+    self.timer.start()
+    sd.play(self.music_signal.current_magnitude_array, self.music_signal.f_sampling)
+   
 
 
 
 def pause(self):
-    
+    self.timer.stop()
     sd.stop()
    # self.toggle_play=1

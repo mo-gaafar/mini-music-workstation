@@ -10,7 +10,6 @@ from PyQt5.QtWidgets import QFileDialog
 import wfdb
 import csv
 import numpy
-import playsound 
 import matplotlib.pyplot as plt
 import numpy as np
 import wave, sys
@@ -50,8 +49,8 @@ def open_file(self,path):
 	print_debug(f_rate)
 	time = np.linspace(0, len(signal) / f_rate,num = len(signal))
 	
-	self.music_signal= MusicSignal(path,time,signal,f_rate) 
-
+	self.music_signal= MusicSignal(path,time,signal,2*f_rate) 
+	
 	
 
 

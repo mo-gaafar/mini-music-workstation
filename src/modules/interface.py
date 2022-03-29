@@ -1,6 +1,6 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
-
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber
 from PyQt5.QtGui import *
 from modules import openfile, emphasizer, instruments, spectrogram
@@ -25,7 +25,12 @@ def init_connectors(self):
     self.pause_pushButton = self.findChild(QPushButton, "pause_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: emphasizer.pause(self))
-   
+
+  #Initialize Qt Timer
+    self.timer = QtCore.QTimer()
+    self.timer.setInterval(50)  # Overflow timer
+    self.timer.timeout.connect(lambda: emphasizer.waveform_update_plot(self))  # Event handler
+    
    
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
