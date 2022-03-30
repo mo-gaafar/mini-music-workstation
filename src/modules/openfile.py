@@ -40,16 +40,17 @@ def open_file(self,path):
 	# -1 indicates all or max frames
 	signal = raw.readframes(-1)
 	
-	signal = np.frombuffer(signal, dtype ="int16")
+	signal = np.frombuffer(signal, dtype =np.int16)
 	
 	# gets the frame rate
 	f_rate = raw.getframerate()
     
+	n_channel = raw.getnchannels()
 	print_debug("frame")
 	print_debug(f_rate)
 	time = np.linspace(0, len(signal) / f_rate,num = len(signal))
 	
-	self.music_signal= MusicSignal(path,time,signal,2*f_rate)
+	self.music_signal= MusicSignal(path,time,signal,2*f_rate,n_channel)
 	self.pointsToAppend = 0
 	
 	

@@ -1,12 +1,13 @@
 # define class and related functions
 
 from click import pass_context
+from isort import stream
 from modules import spectrogram
 from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import fftfreq, fft
 import numpy as np
 import sounddevice as sd
-
+import pyaudio
 from modules.utility import print_debug
 from modules import spectrogram as spectro
 
@@ -15,7 +16,6 @@ from modules import spectrogram as spectro
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
 # TODO: preserve phase information when modifying the magnitude??????
-
 
 class MusicSignal():
     instrument_freqrange_dict = {
@@ -30,12 +30,13 @@ class MusicSignal():
     }
     '''Contains instrument magnitude multiplier'''
 
-    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1):
+    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1,n_channel=0):
 
         self.magnitude_array = magnitude_array
         self.f_sampling = f_sampling
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
+        self.n_channel = n_channel
 
         self.original_time_array = time_array
         self.current_time_array = time_array
@@ -83,14 +84,20 @@ def play(self):
     print_debug(interval)
     self.timer.setInterval(interval)
     self.timer.start()
-    sd.play(self.music_signal.current_magnitude_array,
+    sd.play(self.music_signal.current_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
-
+   
     spectro.create_spectrogram_figure(self)
     spectro.plot_spectro(self)
 
 
 def pause(self):
+   
     self.timer.stop()
     sd.stop()
-   # self.toggle_play=1
+
+def stop(self):
+    sd.stop()
+    self.timer.stop()
+    self.pointsToAppend=0
+    waveform_update_plot(self)
