@@ -10,8 +10,8 @@ import sounddevice as sd
 import pyaudio
 from modules.utility import print_debug
 from modules import spectrogram as spectro
-
-
+import PyQt5.QtCore
+import pyqtgraph as pg
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
@@ -74,7 +74,10 @@ def waveform_update_plot(self):
         self.pointsToAppend:self.pointsToAppend+update_sample_interval]
     self.pointsToAppend += update_sample_interval
     self.waveform_widget.clear()
-    self.waveform_widget.plot(time, magnitude)
+    
+    pen= pg.mkPen(color=(0 ,200 , 150), style=PyQt5.QtCore.Qt.DotLine)  
+
+    self.waveform_widget.plot(time, magnitude,pen=pen)
     self.waveform_widget.plotItem.setXRange(time[0], time[-1])
 
 

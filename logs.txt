@@ -1,27 +1,9 @@
-2022-03-30 23:21:15,477 NumExpr defaulting to 8 threads.
-2022-03-30 23:21:16,942 Connectors Initialized
-2022-03-30 23:21:16,942 1
-2022-03-30 23:21:25,599 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
-2022-03-30 23:21:25,648 frame
-2022-03-30 23:21:25,648 44100
-2022-03-30 23:21:25,824 88200
-2022-03-30 23:21:26,541 Interval in ms: 
-2022-03-30 23:21:26,542 113.37868480725623
-2022-03-30 23:21:37,653 Interval in ms: 
-2022-03-30 23:21:37,653 113.37868480725623
-2022-03-30 23:21:42,223 Interval in ms: 
-2022-03-30 23:21:42,224 113.37868480725623
-2022-03-30 23:21:42,669 Interval in ms: 
-2022-03-30 23:21:42,670 113.37868480725623
-2022-03-30 23:21:43,374 Interval in ms: 
-2022-03-30 23:21:43,374 113.37868480725623
-2022-03-30 23:21:44,105 Interval in ms: 
-2022-03-30 23:21:44,105 113.37868480725623
-2022-03-30 23:21:45,786 Interval in ms: 
-2022-03-30 23:21:45,787 113.37868480725623
-2022-03-30 23:21:47,774 Interval in ms: 
-2022-03-30 23:21:47,774 113.37868480725623
-2022-03-30 23:21:50,773 Interval in ms: 
-2022-03-30 23:21:50,773 113.37868480725623
-2022-03-30 23:21:52,632 Interval in ms: 
-2022-03-30 23:21:52,633 113.37868480725623
+2022-03-30 23:34:44,940 NumExpr defaulting to 8 threads.
+2022-03-30 23:34:46,419 Connectors Initialized
+2022-03-30 23:34:46,420 1
+2022-03-30 23:34:51,761 Selected path: D:/ABDULLAH/Engineering/Spring 2022/DSP/Tasks/Musical Instruments Emphasizer (Task 3)/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
+2022-03-30 23:34:51,806 frame
+2022-03-30 23:34:51,807 44100
+2022-03-30 23:34:51,987 88200
+2022-03-30 23:34:52,715 Interval in ms: 
+2022-03-30 23:34:52,716 113.37868480725623
