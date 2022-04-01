@@ -1,10 +1,16 @@
 # define class and related functions
 
+from click import pass_context
 from modules import spectrogram
 from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import fftfreq, fft
 import numpy as np
-#import pyaudio
+import sounddevice as sd
+
+from modules.utility import print_debug
+from modules import spectrogram as spectro
+
+
 
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
@@ -25,20 +31,24 @@ class MusicSignal():
     }
     '''Contains instrument magnitude multiplier'''
 
-    def __init__(self, filepath, time_array, magnitude_array, f_sampling):
+    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1):
 
+        self.magnitude_array = magnitude_array
         self.f_sampling = f_sampling
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
 
-        self.original_time_domain = [[time_array], [magnitude_array]]
-        self.current_time_domain = [[time_array], [magnitude_array]]
+        self.original_time_array = time_array
+        self.current_time_array = time_array
+        self.original_magnitude_array = magnitude_array
+        self.current_magnitude_array = magnitude_array
 
         self.freq_domain = [[], []]
+        print_debug(self.f_sampling)
 
     def fft_update(self):
         self.freq_domain = [
-            np.abs(fft(self.current_time_domain), self.n_samples)]
+            np.abs(fft(self.current_magnitude_array), self.n_samples)]
 
     def inverse_fft(self):
         pass
@@ -53,3 +63,35 @@ class MusicSignal():
     def modify_instrument(self, instrument_dict, magnitude_multiplier):
         '''Should make use of all fft functions defined above'''
         pass
+
+
+def waveform_update_plot(self):
+    #print_debug("Refresh Plot")
+    update_sample_interval = 10000
+    time = self.music_signal.current_time_array[self.pointsToAppend:
+                                                self.pointsToAppend+update_sample_interval]
+    magnitude = self.music_signal.current_magnitude_array[
+        self.pointsToAppend:self.pointsToAppend+update_sample_interval]
+    self.pointsToAppend += update_sample_interval
+    self.waveform_widget.clear()
+    self.waveform_widget.plot(time, magnitude)
+    self.waveform_widget.plotItem.setXRange(time[0], time[-1])
+
+
+def play(self):
+    print_debug("Interval in ms: ")
+    interval = 1000*10000/(self.music_signal.f_sampling)
+    print_debug(interval)
+    self.timer.setInterval(interval)
+    self.timer.start()
+    sd.play(self.music_signal.current_magnitude_array,
+            self.music_signal.f_sampling)
+
+    spectro.create_spectrogram_figure(self)
+    spectro.plot_spectro(self)
+
+
+def pause(self):
+    self.timer.stop()
+    sd.stop()
+   # self.toggle_play=1

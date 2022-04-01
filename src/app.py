@@ -1,12 +1,11 @@
 # https://namingconvention.org/python/ use the pythonic naming convention here (friendly reminder)
 
-from PyQt5 import QtGui, QtWidgets, uic
+from PyQt5 import QtGui, QtWidgets, uic, QtCore
 from modules import utility as util
 from modules import interface
+from modules.emphasizer import *
+
 import sys
-
-
-import qt_material
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -19,11 +18,16 @@ class MainWindow(QtWidgets.QMainWindow):
         uic.loadUi('./resources/music_ws_mainwindow.ui', self)
 
         # set the title and icon
-        self.setWindowIcon(QtGui.QIcon('./resources/icons/io.png'))
+        self.setWindowIcon(QtGui.QIcon('./resources/icons/icon.png'))
         self.setWindowTitle("Music Workstation")
 
         interface.init_connectors(self)
+        print_debug("Connectors Initialized")
+
         # initialize arrays and variables
+        self.music_signal = MusicSignal()
+        # initialize points to append
+        self.pointsToAppend = 0
 
 
 def main():
