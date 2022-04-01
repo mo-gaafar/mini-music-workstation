@@ -45,9 +45,16 @@ class Drums(Instrument):
                         ,'crash_cymbal':[]}
         self.read_all_samples()
     
-  
-        
-    
+    def read_all_samples(self):
+        for key in self.drum_kit_tones:
+            for index in self.drum_kit_tones[key]:
+                tone=wave.open('resources\drum_tones\\' + str(index))
+                signal = tone.readframes(-1) 
+                signal = np.frombuffer(signal, dtype =np.int16)
+                
+                self.read_drum_tones[key].append(signal)
+   
+
 
 
 class Piano(Instrument):
