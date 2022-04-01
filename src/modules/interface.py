@@ -30,8 +30,37 @@ def init_connectors(self):
     self.timer = QtCore.QTimer()
     self.timer.setInterval(50)  # Overflow timer
     self.timer.timeout.connect(lambda: emphasizer.waveform_update_plot(self))  # Event handler
-    
-   
+  # piano keys
+   #c  
+    self.pause_pushButton = self.findChild(QPushButton, "C_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(0))
+    #D
+    self.pause_pushButton = self.findChild(QPushButton, "D_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(1))
+    #E
+    self.pause_pushButton = self.findChild(QPushButton, "E_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(2))
+    #F
+    self.pause_pushButton = self.findChild(QPushButton, "F_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(3))
+    #G
+    self.pause_pushButton = self.findChild(QPushButton, "G_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(4))
+    #A
+    self.pause_pushButton = self.findChild(QPushButton, "A_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(5))
+    #B   
+    self.pause_pushButton = self.findChild(QPushButton, "B_pushButton")
+    self.pause_pushButton.clicked.connect(
+        lambda: self.piano_instrument.generating_note(6))
+
+
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''
