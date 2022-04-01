@@ -25,7 +25,10 @@ def init_connectors(self):
     self.pause_pushButton = self.findChild(QPushButton, "pause_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: emphasizer.pause(self))
-
+  #stop
+    self.stop_pushButton = self.findChild(QPushButton, "stop_pushButton")
+    self.stop_pushButton.clicked.connect(
+        lambda: emphasizer.stop(self))
   #Initialize Qt Timer
     self.timer = QtCore.QTimer()
     self.timer.setInterval(50)  # Overflow timer

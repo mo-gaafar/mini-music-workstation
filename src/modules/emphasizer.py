@@ -6,12 +6,10 @@ from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import fftfreq, fft
 import numpy as np
 import sounddevice as sd
-
 from modules.utility import print_debug
 from modules import spectrogram as spectro
-
-
-
+import PyQt5.QtCore
+import pyqtgraph as pg
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
@@ -31,12 +29,13 @@ class MusicSignal():
     }
     '''Contains instrument magnitude multiplier'''
 
-    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1):
+    def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
 
         self.magnitude_array = magnitude_array
         self.f_sampling = f_sampling
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
+        self.n_channel = n_channel
 
         self.original_time_array = time_array
         self.current_time_array = time_array
@@ -74,7 +73,10 @@ def waveform_update_plot(self):
         self.pointsToAppend:self.pointsToAppend+update_sample_interval]
     self.pointsToAppend += update_sample_interval
     self.waveform_widget.clear()
-    self.waveform_widget.plot(time, magnitude)
+
+    pen = pg.mkPen(color=(0, 200, 150), style=PyQt5.QtCore.Qt.DotLine)
+
+    self.waveform_widget.plot(time, magnitude, pen=pen)
     self.waveform_widget.plotItem.setXRange(time[0], time[-1])
 
 
@@ -84,7 +86,7 @@ def play(self):
     print_debug(interval)
     self.timer.setInterval(interval)
     self.timer.start()
-    sd.play(self.music_signal.current_magnitude_array,
+    sd.play(self.music_signal.current_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
 
     spectro.create_spectrogram_figure(self)
@@ -92,6 +94,13 @@ def play(self):
 
 
 def pause(self):
+
     self.timer.stop()
     sd.stop()
-   # self.toggle_play=1
+
+
+def stop(self):
+    sd.stop()
+    self.timer.stop()
+    self.pointsToAppend = 0
+    waveform_update_plot(self)

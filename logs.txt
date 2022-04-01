@@ -1,4 +1,20 @@
+
 2022-04-01 18:41:39,376 Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 2022-04-01 18:41:39,377 NumExpr defaulting to 8 threads.
 2022-04-01 18:41:40,824 Connectors Initialized
 2022-04-01 18:41:40,824 1
+2022-03-31 09:09:15,783 Note: NumExpr detected 12 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2022-03-31 09:09:15,784 NumExpr defaulting to 8 threads.
+2022-03-31 09:09:18,424 Connectors Initialized
+2022-03-31 09:09:18,424 1
+2022-03-31 09:09:19,469 Interval in ms: 
+2022-03-31 09:09:19,469 10000000.0
+2022-03-31 09:09:20,438 Interval in ms: 
+2022-03-31 09:09:20,438 10000000.0
+2022-03-31 09:09:23,648 Selected path: L:/Documents/(6) Cairo Uni Spring 2022/SBEN311_Biomedical_Signal_Processing/Tasks & Projects/Mini_Music_Workstation/misc/London-Symphony-Orchestra-The-Final-Countdown (online-audio-converter.com).wav
+2022-03-31 09:09:23,665 frame
+2022-03-31 09:09:23,666 44100
+2022-03-31 09:09:23,756 88200
+2022-03-31 09:09:24,537 Interval in ms: 
+2022-03-31 09:09:24,538 113.37868480725623
+
