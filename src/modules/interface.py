@@ -1,6 +1,6 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
-
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
@@ -16,18 +16,18 @@ def init_connectors(self):
     self.halftones = self.findChild(QWidget, "halftones")
     self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
     self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
-    self.horizontalLayout_10 = self.findChild(QHBoxLayout, "horizontalLayout_10")
+    self.horizontalLayout_10 = self.findChild(
+        QHBoxLayout, "horizontalLayout_10")
     self.horizontalLayout = self.findChild(QHBoxLayout, "horizontalLayout")
-    
+
     self.layout = QStackedLayout()
-    
+
     self.groupBox_4.setLayout(self.layout)
     self.layout.addWidget(self.halftones)
     self.layout.addWidget(self.keys)
     self.layout.setStackingMode(1)
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
-
 
     '''Initializes all event connectors and triggers'''
 
@@ -36,52 +36,52 @@ def init_connectors(self):
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
 
-  #play button
+  # play button
     self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
     self.play_pushButton.clicked.connect(
         lambda: emphasizer.play(self))
-  #pause button  
+  # pause button
     self.pause_pushButton = self.findChild(QPushButton, "pause_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: emphasizer.pause(self))
-  #stop
+  # stop
     self.stop_pushButton = self.findChild(QPushButton, "stop_pushButton")
     self.stop_pushButton.clicked.connect(
         lambda: emphasizer.stop(self))
-  #Initialize Qt Timer
+  # Initialize Qt Timer
     self.timer = QtCore.QTimer()
     self.timer.setInterval(50)  # Overflow timer
-    self.timer.timeout.connect(lambda: emphasizer.waveform_update_plot(self))  # Event handler
+    self.timer.timeout.connect(
+        lambda: emphasizer.waveform_update_plot(self))  # Event handler
   # piano keys
-   #c  
+   # c
     self.pause_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(0))
-    #D
+    # D
     self.pause_pushButton = self.findChild(QPushButton, "D_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(1))
-    #E
+    # E
     self.pause_pushButton = self.findChild(QPushButton, "E_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(2))
-    #F
+    # F
     self.pause_pushButton = self.findChild(QPushButton, "F_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(3))
-    #G
+    # G
     self.pause_pushButton = self.findChild(QPushButton, "G_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(4))
-    #A
+    # A
     self.pause_pushButton = self.findChild(QPushButton, "A_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(5))
-    #B   
+    # B
     self.pause_pushButton = self.findChild(QPushButton, "B_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(6))
-
 
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
