@@ -1,3 +1,4 @@
+
 2022-03-30 20:44:12,521 Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 2022-03-30 20:44:12,522 NumExpr defaulting to 8 threads.
 2022-03-30 20:44:14,871 Connectors Initialized
@@ -8,3 +9,4 @@
 2022-03-30 20:44:24,850 88200
 2022-03-30 20:44:27,240 Interval in ms: 
 2022-03-30 20:44:27,240 113.37868480725623
+

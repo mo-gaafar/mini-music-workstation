@@ -11,6 +11,7 @@ from modules.utility import print_debug
 from modules import spectrogram as spectro
 
 
+
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
