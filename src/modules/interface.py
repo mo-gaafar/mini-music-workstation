@@ -168,9 +168,9 @@ def init_connectors(self):
     self.B_pushButton_2.clicked.connect(
         lambda: self.piano_instrument.generating_note(23))
     # DIAL 2
-    self.dial_2 = self.findChild(QDial, "dial_2")
-    self.dial_2.valueChanged.connect(
-        lambda: self.piano_instrument.dial_value(self.dial_2.value()))
+    self.octave_dial = self.findChild(QDial, "octave_dial")
+    self.octave_dial.valueChanged.connect(
+        lambda: self.piano_instrument.dial_value(self.octave_dial.value()))
 
 
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
