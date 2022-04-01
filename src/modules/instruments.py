@@ -19,25 +19,17 @@ class Instrument():
 
 
 class Piano(Instrument):
-    octave_label_dict={0:['A', 'A#', 'B']
-                ,1:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,2:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,3:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,4:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,5:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,6:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,7:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
-                ,8:['C']}
     def __init__(self):
         super().__init__()
         self.BASE_FREQ = 440
         self.PIANO_SAMPLING_RATE=44100
         self.octave_number =6  #default
 
-    def key_freq(self,key_index):
+    def key_freq(self,key_index,octave_number):
 
-        n= self.n_jumps(key_index)
+        n= self.n_jumps(key_index,octave_number)
         print(n)
+        print(octave_number)
         note_freq=self.BASE_FREQ*pow(2,n/12)
         return note_freq
 
@@ -56,12 +48,11 @@ class Piano(Instrument):
     
     def play_note(self,input_note):
          sd.play(input_note, 0.5*self.PIANO_SAMPLING_RATE)
-    def n_jumps(self,key_index):
+
+    def n_jumps(self,key_index,octave_number):
         OCTAVE_LENGTH = 12
         A4_INDEX = 10
-        #i= the octave number
-        #index is the button pressed
-        octave_number = self.octave_number
+
         if octave_number==0 :
             n= OCTAVE_LENGTH - key_index +12*3+10
             return -n
@@ -91,9 +82,16 @@ class Piano(Instrument):
             n=key_index+12*3+3
             return n
     def generating_note(self,key_index):
-        freq= self.key_freq(key_index)
+        if key_index <12:
+            octave_number= self.octave_number
+        else:
+            key_index= key_index - 12
+            octave_number= self.octave_number+1
+            
+        freq= self.key_freq(key_index,octave_number)
         wave= self.generating_wave(freq,duration=0.5)
         self.play_note(wave)
+
     
 #TODO: make this adaptable to the 3 instrument types
 #TODO: connect in interface
