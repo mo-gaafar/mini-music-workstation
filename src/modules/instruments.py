@@ -55,6 +55,14 @@ class Drums(Instrument):
                 self.read_drum_tones[key].append(signal)
    
 
+    def play_drums(self,tone):
+        play_tone= random.choice(self.read_drum_tones[tone])
+        sd.play(play_tone, self.drum_sampling_rate)
+
+    def selecting_drum_kit(self,index):  
+       self.play_drums(index)
+        
+    
 
 
 class Piano(Instrument):
