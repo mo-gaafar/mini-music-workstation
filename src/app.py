@@ -29,6 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.piano_instrument= Piano()
         # initialize points to app
         self.pointsToAppend = 0
+        interface.create_stacked_layout(self)
         interface.init_connectors(self)
 
 

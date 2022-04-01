@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1177</width>
-    <height>849</height>
+    <height>930</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -101,16 +101,29 @@ QTabBar::tab {
             <string/>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
-            <item row="0" column="0">
+            <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
              <widget class="QGroupBox" name="groupBox_4">
               <property name="minimumSize">
                <size>
                 <width>1080</width>
-                <height>500</height>
+                <height>600</height>
                </size>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>570</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QGroupBox {
+border: 1.2px solid #ffffff;
+border-style: outset;
+border-radius: 15px;
+}</string>
+              </property>
               <property name="title">
-               <string>GroupBox</string>
+               <string/>
               </property>
               <layout class="QGridLayout" name="gridLayout_8">
                <item row="0" column="0">
@@ -118,34 +131,113 @@ QTabBar::tab {
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_7">
                    <item>
-                    <widget class="QDial" name="dial_3">
-                     <property name="maximumSize">
-                      <size>
-                       <width>80</width>
-                       <height>16777215</height>
-                      </size>
+                    <layout class="QVBoxLayout" name="verticalLayout_6">
+                     <property name="spacing">
+                      <number>0</number>
                      </property>
-                    </widget>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_5">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="piano_volume_label">
+                         <property name="text">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#a9a9a9;&quot;&gt;100&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QDial" name="piano_volume_dial">
+                         <property name="minimumSize">
+                          <size>
+                           <width>60</width>
+                           <height>60</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>80</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(1, 195, 141);</string>
+                         </property>
+                         <property name="notchesVisible">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_10">
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#a9a9a9;&quot;&gt;Volume&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                    <item>
-                    <widget class="QDial" name="dial">
-                     <property name="maximumSize">
-                      <size>
-                       <width>80</width>
-                       <height>16777215</height>
-                      </size>
+                    <layout class="QVBoxLayout" name="verticalLayout_9">
+                     <property name="spacing">
+                      <number>0</number>
                      </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QDial" name="dial_2">
-                     <property name="maximumSize">
-                      <size>
-                       <width>80</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                    </widget>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_10">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="label_13">
+                         <property name="text">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#a9a9a9;&quot;&gt;100&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QDial" name="dial_5">
+                         <property name="minimumSize">
+                          <size>
+                           <width>60</width>
+                           <height>60</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>80</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(1, 195, 141);</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_14">
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#a9a9a9;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                    <item>
                     <spacer name="horizontalSpacer_2">
@@ -161,22 +253,129 @@ QTabBar::tab {
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLCDNumber" name="lcdNumber">
-                     <property name="maximumSize">
-                      <size>
-                       <width>100</width>
-                       <height>50</height>
-                      </size>
+                    <layout class="QVBoxLayout" name="verticalLayout_11">
+                     <item>
+                      <widget class="QLCDNumber" name="octave_lcd">
+                       <property name="minimumSize">
+                        <size>
+                         <width>145</width>
+                         <height>32</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_7">
+                     <property name="spacing">
+                      <number>0</number>
                      </property>
-                    </widget>
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_8">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QLabel" name="octave_label">
+                         <property name="text">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p/&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QDial" name="octave_dial">
+                         <property name="minimumSize">
+                          <size>
+                           <width>60</width>
+                           <height>60</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>80</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(1, 195, 141);</string>
+                         </property>
+                         <property name="minimum">
+                          <number>1</number>
+                         </property>
+                         <property name="maximum">
+                          <number>7</number>
+                         </property>
+                         <property name="notchesVisible">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_12">
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#a9a9a9;&quot;&gt;Octave&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </item>
+                 <item>
+                  <widget class="Line" name="line_2">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: rgb(169, 169, 169);</string>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                 </layout>
                </item>
-               <item row="2" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+               <item row="4" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                 <widget class="QWidget" name="keys" native="true">
                  <property name="minimumSize">
+                  <size>
+                   <width>1060</width>
+                   <height>445</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
                   <size>
                    <width>1060</width>
                    <height>433</height>
@@ -185,6 +384,9 @@ QTabBar::tab {
                  <layout class="QHBoxLayout" name="horizontalLayout_10">
                   <property name="spacing">
                    <number>6</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
                   </property>
                   <item>
                    <widget class="QPushButton" name="C_pushButton">
@@ -833,17 +1035,17 @@ QPushButton:pressed {
                  </layout>
                 </widget>
                </item>
-               <item row="1" column="0">
+               <item row="3" column="0">
                 <widget class="QWidget" name="halftones" native="true">
                  <property name="minimumSize">
                   <size>
                    <width>1060</width>
-                   <height>256</height>
+                   <height>263</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>16777215</width>
+                   <width>1060</width>
                    <height>256</height>
                   </size>
                  </property>
@@ -852,8 +1054,21 @@ QPushButton:pressed {
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout">
                   <property name="spacing">
-                   <number>7</number>
+                   <number>0</number>
                   </property>
+                  <item>
+                   <spacer name="verticalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>21</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                   <item>
                    <widget class="QPushButton" name="Csharp_pushButton">
                     <property name="minimumSize">
@@ -902,6 +1117,19 @@ QPushButton:pressed {
                    </widget>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_4">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>4</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="Dsharp_pushButton">
                     <property name="minimumSize">
                      <size>
@@ -925,7 +1153,7 @@ QPushButton:pressed {
         cx: 0.7, cy: 1.4, fx: 0.7, fy: 1.7,
         radius: 1, stop: 0 #888, stop: 1 #000
         );
-    padding: 5px;
+    padding: 20px;
     }
 
 QPushButton:hover {
@@ -947,6 +1175,19 @@ QPushButton:pressed {
                      <string/>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>80</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <widget class="QPushButton" name="Fsharp_pushButton">
@@ -996,6 +1237,19 @@ QPushButton:pressed {
                    </widget>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_6">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>5</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="Gsharp_pushButton">
                     <property name="minimumSize">
                      <size>
@@ -1041,6 +1295,19 @@ QPushButton:pressed {
                      <string/>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_7">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>3</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <widget class="QPushButton" name="Asharp_pushButton">
@@ -1090,6 +1357,19 @@ QPushButton:pressed {
                    </widget>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_8">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>76</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="Csharp_pushButton_2">
                     <property name="minimumSize">
                      <size>
@@ -1135,6 +1415,19 @@ QPushButton:pressed {
                      <string/>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_9">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>3</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <widget class="QPushButton" name="Dsharp_pushButton_2">
@@ -1184,6 +1477,19 @@ QPushButton:pressed {
                    </widget>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>73</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="Fsharp_pushButton_2">
                     <property name="minimumSize">
                      <size>
@@ -1229,6 +1535,19 @@ QPushButton:pressed {
                      <string/>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_11">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>1</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                   <item>
                    <widget class="QPushButton" name="Gsharp_pushButton_2">
@@ -1278,6 +1597,19 @@ QPushButton:pressed {
                    </widget>
                   </item>
                   <item>
+                   <spacer name="verticalSpacer_12">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>5</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="Asharp_pushButton_2">
                     <property name="minimumSize">
                      <size>
@@ -1323,6 +1655,19 @@ QPushButton:pressed {
                      <string/>
                     </property>
                    </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_13">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
                   </item>
                  </layout>
                 </widget>
@@ -1932,7 +2277,7 @@ QGroupBox::title  {
             </widget>
            </item>
            <item row="0" column="4" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="slider2_label">
              <property name="styleSheet">
               <string notr="true">background-color: transparent;</string>
              </property>
@@ -1942,7 +2287,7 @@ QGroupBox::title  {
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="master_label">
              <property name="styleSheet">
               <string notr="true">background-color: transparent;</string>
              </property>
@@ -1952,7 +2297,7 @@ QGroupBox::title  {
             </widget>
            </item>
            <item row="0" column="5" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="slider3_label">
              <property name="styleSheet">
               <string notr="true">background-color: transparent;</string>
              </property>
@@ -1962,7 +2307,7 @@ QGroupBox::title  {
             </widget>
            </item>
            <item row="0" column="3" alignment="Qt::AlignHCenter">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="slider1_label">
              <property name="styleSheet">
               <string notr="true">background-color: transparent;</string>
              </property>

@@ -10,15 +10,11 @@ from modules.utility import print_debug
 # interface globals
 
 
-def init_connectors(self):
-
+def create_stacked_layout(self):
     self.keys = self.findChild(QWidget, "keys")
     self.halftones = self.findChild(QWidget, "halftones")
     self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
     self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
-    self.horizontalLayout_10 = self.findChild(
-        QHBoxLayout, "horizontalLayout_10")
-    self.horizontalLayout = self.findChild(QHBoxLayout, "horizontalLayout")
 
     self.layout = QStackedLayout()
 
@@ -28,6 +24,26 @@ def init_connectors(self):
     self.layout.setStackingMode(1)
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
+
+def init_connectors(self):
+
+    def create_stacked_layout(self):
+        self.keys = self.findChild(QWidget, "keys")
+        self.halftones = self.findChild(QWidget, "halftones")
+        self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
+        self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
+        self.horizontalLayout_10 = self.findChild(
+            QHBoxLayout, "horizontalLayout_10")
+        self.horizontalLayout = self.findChild(QHBoxLayout, "horizontalLayout")
+
+        self.layout = QStackedLayout()
+
+        self.groupBox_4.setLayout(self.layout)
+        self.layout.addWidget(self.halftones)
+        self.layout.addWidget(self.keys)
+        self.layout.setStackingMode(1)
+        self.verticalLayout_4.addLayout(self.layout)
+        self.layout.setAlignment(Qt.AlignCenter)
 
     '''Initializes all event connectors and triggers'''
 
