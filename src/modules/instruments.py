@@ -1,12 +1,12 @@
 #TODO: structure needs more work
 from types import new_class
-
-
+import numpy as np
+import sounddevice as sd
 class Instrument():
     # super class of all instruments
     # should contain the common general functions
     def __init__(self):
-        self.test
+        pass
     # Functions;
     # play notes
     # import base sample/tone
@@ -19,7 +19,7 @@ class Instrument():
 
 
 class Piano(Instrument):
-     octave_label_dict={0:['A', 'A#', 'B']
+    octave_label_dict={0:['A', 'A#', 'B']
                 ,1:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
                 ,2:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
                 ,3:['C', 'C#', 'D','D#','E','F','F#','G', 'G#','A', 'A#', 'B']
@@ -30,22 +30,20 @@ class Piano(Instrument):
                 ,8:['C']}
     def __init__(self):
         super().__init__()
-        piano_sampling_rate=44100
+        self.BASE_FREQ = 440
+        self.PIANO_SAMPLING_RATE=44100
+        self.octave_number =6  #default
 
-    def play_note(input_note):
-         sd.play(input_note, piano_sampling_rate)
-    def generating_note(self,octave_dect(i[index])):
-        frequency= key_freq(octave_dect(i[index]))
-        wave= generating_wave(freq,duration=0.5)
-        play_note(wave)
-    def key_freq(self,octave_dect(i[index])):
-        n= n_jumps(self,octave_dect(i[index]))
-        note_freq=base_freq*2^(n/12)
-      return note_freq
+    def key_freq(self,key_index):
+
+        n= self.n_jumps(key_index)
+        print(n)
+        note_freq=self.BASE_FREQ*pow(2,n/12)
+        return note_freq
 
     def generating_wave(self,freq,duration=0.5):
-         time = np.linspace(0, duration, int(piano_sampling_rate * duration))
-        piano_wave = np.sin(2 * np.pi * freq * time) * np.exp(-0.0004 * 2 * np.pi * freq * time)
+        time = np.linspace(0, duration, int(self.PIANO_SAMPLING_RATE * duration))
+        piano_wave =0.6*np.sin(2 * np.pi * freq * time) * np.exp(-0.0004 * 2 * np.pi * freq * time)
         #overtones 
         piano_wave += np.sin(2 * 2 * np.pi * freq * time) * np.exp(-0.0004 * 2 * np.pi * freq * time) / 2
         piano_wave += np.sin(3 * 2 * np.pi * freq * time) * np.exp(-0.0004 * 2 * np.pi * freq * time) / 4
@@ -55,38 +53,47 @@ class Piano(Instrument):
         piano_wave += piano_wave * piano_wave * piano_wave
         #piano_wave *= 1 + 16 * time * np.exp(-6 * time)
         return  piano_wave
-    def n_jumps(self,octave_number,index):
+    
+    def play_note(self,input_note):
+         sd.play(input_note, 0.5*self.PIANO_SAMPLING_RATE)
+    def n_jumps(self,key_index):
         OCTAVE_LENGTH = 12
-        A4_INDEX = 7
+        A4_INDEX = 10
         #i= the octave number
         #index is the button pressed
+        octave_number = self.octave_number
         if octave_number==0 :
-            n= OCTAVE_LENGTH - index +12^3+10
+            n= OCTAVE_LENGTH - key_index +12*3+10
             return -n
         elif octave_number==1:
-            n= OCTAVE_LENGTH - index+12^2+10
+            n= OCTAVE_LENGTH - key_index+12*2+10
             return -n
         elif octave_number==2:
-            n= OCTAVE_LENGTH - index+12+10
+            n= OCTAVE_LENGTH - key_index+12+10
             return -n
         elif octave_number==3:
-            n= OCTAVE_LENGTH - index+10
+            n= OCTAVE_LENGTH - key_index+10
             return -n
         elif octave_number== 4:
-            n= index-A4_INDEX 
-            return -n
-        elif i== 5:
-            n=octave_dect(octave_number[index])+2
+            n= key_index-A4_INDEX +1
             return n
-        elif i== 6:
-            n=octave_dect(i[index])+12+2
+
+        elif octave_number== 5:
+            n=key_index+3
             return n
-        elif i== 7:
-            n=octave_dect(i[index])+12^2+2
+        elif octave_number== 6:
+            n=key_index+12+3
             return n
-        elif i== 8:
-            n=octave_dect(i[index])+12^3+2
+        elif octave_number== 7:
+            n=key_index+12*2+3
             return n
+        elif octave_number== 8:
+            n=key_index+12*3+3
+            return n
+    def generating_note(self,key_index):
+        freq= self.key_freq(key_index)
+        wave= self.generating_wave(freq,duration=0.5)
+        self.play_note(wave)
     
 #TODO: make this adaptable to the 3 instrument types
 #TODO: connect in interface
