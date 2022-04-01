@@ -1,8 +1,9 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 
-from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber
+from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout
 from PyQt5.QtGui import *
+from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
 from modules.utility import print_debug
 
@@ -10,12 +11,31 @@ from modules.utility import print_debug
 
 
 def init_connectors(self):
+
+    self.keys = self.findChild(QWidget, "keys")
+    self.halftones = self.findChild(QWidget, "halftones")
+    self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
+    self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
+    self.horizontalLayout_10 = self.findChild(QHBoxLayout, "horizontalLayout_10")
+    self.horizontalLayout = self.findChild(QHBoxLayout, "horizontalLayout")
+    
+    self.layout = QStackedLayout()
+    
+    self.groupBox_4.setLayout(self.layout)
+    self.layout.addWidget(self.halftones)
+    self.layout.addWidget(self.keys)
+    self.layout.setStackingMode(1)
+    self.verticalLayout_4.addLayout(self.layout)
+    self.layout.setAlignment(Qt.AlignCenter)
+
+
     '''Initializes all event connectors and triggers'''
 
     ''' Menu Bar'''
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
+
 
 
     # self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
