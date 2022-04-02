@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>guitar_ui3.png</file>
+    <file>guitar_ui2.png</file>
+    <file>guitar_ui1.png</file>
+    <file>guitar_ui.png</file>
     <file>pngwing.com11.png</file>
     <file>drum_top.png</file>
   </qresource>
