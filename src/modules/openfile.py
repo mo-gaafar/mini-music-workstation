@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import wave, sys
 import app
+from modules import spectrogram
 from modules.utility import print_debug
 
 # from main import MAX_SAMPLES
@@ -52,6 +53,7 @@ def open_file(self,path):
 	
 	self.music_signal= MusicSignal(path,time,signal,2*f_rate,n_channel)
 	self.pointsToAppend = 0
+	spectrogram.plot_spectro(self, path)
 	
 	
 
