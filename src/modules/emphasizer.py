@@ -1,15 +1,17 @@
 # define class and related functions
 
+from signal import signal
 from click import pass_context
 from modules import spectrogram
 from matplotlib.pyplot import magnitude_spectrum
-from scipy.fft import fftfreq, fft
+from scipy.fft import rfftfreq, rfft, ifft, irfft
 import numpy as np
 import sounddevice as sd
 from modules.utility import print_debug
 from modules import spectrogram as spectro
 import PyQt5.QtCore
 import pyqtgraph as pg
+
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
@@ -17,19 +19,21 @@ import pyqtgraph as pg
 
 
 class MusicSignal():
-    instrument_freqrange_dict = {
-        "violin": [(1, 0)],
-        "guitar": [(1, 2), (3, 4)]
-    }
-    '''Contains instrument name and corresponding array of freq range tuples'''
-
-    instrument_magnitude_multiplier_dict = {
-        "violin": 1,
-        "guitar": 1
-    }
-    '''Contains instrument magnitude multiplier'''
 
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
+        self.INSTRUMENT_FREQRANGE_DICT = {
+            "violin": [(1, 0)],
+            "drums": [(1, 10000)],
+            "wind": [(500, 10000)]
+        }
+        '''Contains instrument name and corresponding array of freq range tuples'''
+
+        self.INSTRUMENT_MULTIPLIER_DICT = {
+            "violin": 1,
+            "drums": 1,
+            "wind": 1
+        }
+        '''Contains instrument magnitude multipliers'''
 
         self.magnitude_array = magnitude_array
         self.f_sampling = f_sampling
@@ -42,26 +46,68 @@ class MusicSignal():
         self.original_magnitude_array = magnitude_array
         self.current_magnitude_array = magnitude_array
 
-        self.freq_domain = [[], []]
+        self.original_freq_magnitude_array = []
+        self.freq_magnitude_array = []
+        self.freq_phase_array = []
+        self.freq_array = []
+        if len(self.current_magnitude_array) > 0:
+            self.fft_update()
+
         print_debug(self.f_sampling)
 
     def fft_update(self):
-        self.freq_domain = [
-            np.abs(fft(self.current_magnitude_array), self.n_samples)]
+        '''Calculates the fft for the current magnitude array'''
+        # done once to save processing time instead of twice for mag and angle
 
-    def inverse_fft(self):
-        pass
+        self.freq_array = rfftfreq(
+            len(self.current_magnitude_array),
+            1/self.f_sampling)
+        fft_coefficients = rfft(self.current_magnitude_array)
+        self.freq_phase_array = np.angle(fft_coefficients)
 
-    def restore_original(self):
+        self.original_freq_magnitude_array = np.abs(fft_coefficients)
+        self.freq_magnitude_array = np.abs(fft_coefficients)
+
+    def phase_preserved_inverse(self):
+        '''Restores complex values using magnitude * e^(i theta)'''
+        complex_coefficients = np.multiply(
+            self.freq_magnitude_array, np.exp(np.multiply(1j, self.freq_phase_array)))
+        self.current_magnitude_array = np.real(irfft(complex_coefficients))
+
+    def reset_signal(self):
         '''Stores original signal back into current (same with fft) '''
         pass
 
-    def remove_frequency_range(self, starting, ending):
-        pass
+    def emphasize_frequency_range(self, starting, ending, factor):
+        '''multiplies the frequency range's magnitude by a factor '''
+        for frequency in self.freq_array:
+            if starting < frequency < ending:
+                # TODO: Review the logic
+                freq_sample_interval = len(self.freq_array)/(self.f_sampling)
+                freq_index = round(freq_sample_interval * frequency)
 
-    def modify_instrument(self, instrument_dict, magnitude_multiplier):
-        '''Should make use of all fft functions defined above'''
-        pass
+                # maintains original freq array values to reduce cpu load
+                self.freq_magnitude_array[freq_index] = self.original_freq_magnitude_array[freq_index] * factor
+
+    def modify_instrument(self, instrument_name, magnitude_multiplier):
+        '''Should make use of all functions defined above'''
+        # self.fft_update() #inefficient (should only be called once per music signal)
+
+        self.INSTRUMENT_MULTIPLIER_DICT[instrument_name] = magnitude_multiplier
+        # supports multiple bands ;) + more efficient
+        for instrument in self.INSTRUMENT_FREQRANGE_DICT:
+            for range_array_tuple in self.INSTRUMENT_FREQRANGE_DICT[instrument]:
+                self.emphasize_frequency_range(
+                    int(range_array_tuple[0]),
+                    int(range_array_tuple[1]),
+                    self.INSTRUMENT_MULTIPLIER_DICT[instrument])
+
+        self.phase_preserved_inverse()
+
+    def modify_master_volume(self, volume_slider_value):
+        factor = volume_slider_value/10
+        self.current_magnitude_array = np.multiply(factor,
+                                                   self.original_magnitude_array)
 
 
 def waveform_update_plot(self):
@@ -86,11 +132,12 @@ def play(self):
     print_debug(interval)
     self.timer.setInterval(interval)
     self.timer.start()
+
     sd.play(self.music_signal.current_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
 
-    spectro.create_spectrogram_figure(self)
-    spectro.plot_spectro(self)
+    # spectro.create_spectrogram_figure(self)
+    # spectro.plot_spectro(self)
 
 
 def pause(self):

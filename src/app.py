@@ -34,7 +34,6 @@ class MainWindow(QtWidgets.QMainWindow):
         interface.init_connectors(self)
 
 
-
 def main():
 
     app = QtWidgets.QApplication(sys.argv)
