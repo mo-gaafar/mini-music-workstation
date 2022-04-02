@@ -75,7 +75,7 @@ QTabBar::tab {
            <enum>QTabWidget::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="iconSize">
            <size>
@@ -170,6 +170,12 @@ border-radius: 15px;
                          </property>
                          <property name="styleSheet">
                           <string notr="true">background-color: rgb(1, 195, 141);</string>
+                         </property>
+                         <property name="maximum">
+                          <number>100</number>
+                         </property>
+                         <property name="value">
+                          <number>100</number>
                          </property>
                          <property name="notchesVisible">
                           <bool>true</bool>
@@ -2894,6 +2900,12 @@ QGroupBox::title  {
                 <enum>Qt::Vertical</enum>
                </property>
                <widget class="PlotWidget" name="waveform_widget" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>300</height>
+                 </size>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(0, 0, 0);
 border-radius: 10px;</string>
@@ -3301,6 +3313,12 @@ QGroupBox::title  {
              <property name="styleSheet">
               <string notr="true">background-color: transparent;</string>
              </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>100</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -3318,7 +3336,7 @@ QGroupBox::title  {
               <string notr="true">background-color: transparent;</string>
              </property>
              <property name="text">
-              <string>10   </string>
+              <string>1   </string>
              </property>
             </widget>
            </item>
@@ -3338,7 +3356,7 @@ QGroupBox::title  {
               <string notr="true">background-color: transparent;</string>
              </property>
              <property name="text">
-              <string>10   </string>
+              <string>1   </string>
              </property>
             </widget>
            </item>
@@ -3348,7 +3366,7 @@ QGroupBox::title  {
               <string notr="true">background-color: transparent;</string>
              </property>
              <property name="text">
-              <string>10   </string>
+              <string>1   </string>
              </property>
             </widget>
            </item>

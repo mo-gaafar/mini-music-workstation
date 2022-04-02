@@ -154,6 +154,17 @@ def init_connectors(self):
     self.octave_dial.valueChanged.connect(
         lambda: self.piano_instrument.dial_value(self.octave_dial.value()))
 
+    self.octave_lcd = self.findChild(QLCDNumber, "octave_lcd")
+    self.octave_dial.valueChanged.connect(
+        lambda: self.octave_lcd.display(self.octave_dial.value()))
+
+    self.piano_volume_label = self.findChild(QLabel, "piano_volume_label")
+    self.piano_volume_dial.valueChanged.connect(
+        lambda: self.piano_volume_label.setText(str(self.piano_volume_dial.value())))
+
+    self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
+    self.chord_lcd.display('a')
+
     ############################ Drums buttons ###################################
 
     self.snare_pushButton = self.findChild(QPushButton, "snare_pushButton")
@@ -195,17 +206,33 @@ def init_connectors(self):
     self.verticalSlider_4.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("wind", self.verticalSlider_4.value()/5))
 
+    self.slider3_label = self.findChild(QLabel, "slider3_label")
+    self.verticalSlider_4.valueChanged.connect(
+        lambda: self.slider3_label.setText(str(self.verticalSlider_4.value())))
+
     self.verticalSlider_3 = self.findChild(QSlider, "verticalSlider_3")
     self.verticalSlider_3.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("violin", self.verticalSlider_3.value()/5))
+
+    self.slider2_label = self.findChild(QLabel, "slider2_label")
+    self.verticalSlider_3.valueChanged.connect(
+        lambda: self.slider2_label.setText(str(self.verticalSlider_3.value())))
 
     self.verticalSlider_2 = self.findChild(QSlider, "verticalSlider_2")
     self.verticalSlider_2.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("drums", self.verticalSlider_2.value()/5))
 
+    self.slider1_label = self.findChild(QLabel, "slider1_label")
+    self.verticalSlider_2.valueChanged.connect(
+        lambda: self.slider1_label.setText(str(self.verticalSlider_2.value())))
+
     self.verticalSlider = self.findChild(QSlider, "verticalSlider")
     self.verticalSlider.sliderReleased.connect(
         lambda: self.music_signal.modify_master_volume(self.verticalSlider.value()))
+
+    self.master_label = self.findChild(QLabel, "master_label")
+    self.verticalSlider.valueChanged.connect(
+        lambda: self.master_label.setText(str(self.verticalSlider.value())))
 
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
     self.ride_pushButton.clicked.connect(
