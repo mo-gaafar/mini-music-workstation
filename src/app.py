@@ -26,12 +26,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # initialize arrays and variables
         self.music_signal = MusicSignal()
-        self.piano_instrument= Piano()
+        self.piano_instrument = Piano()
         # initialize points to app
         self.pointsToAppend = 0
         interface.create_stacked_layout(self)
         interface.init_connectors(self)
-
 
 
 def main():

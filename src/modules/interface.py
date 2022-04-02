@@ -25,26 +25,8 @@ def create_stacked_layout(self):
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
 
+
 def init_connectors(self):
-
-    def create_stacked_layout(self):
-        self.keys = self.findChild(QWidget, "keys")
-        self.halftones = self.findChild(QWidget, "halftones")
-        self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
-        self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
-        self.horizontalLayout_10 = self.findChild(
-            QHBoxLayout, "horizontalLayout_10")
-        self.horizontalLayout = self.findChild(QHBoxLayout, "horizontalLayout")
-
-        self.layout = QStackedLayout()
-
-        self.groupBox_4.setLayout(self.layout)
-        self.layout.addWidget(self.halftones)
-        self.layout.addWidget(self.keys)
-        self.layout.setStackingMode(1)
-        self.verticalLayout_4.addLayout(self.layout)
-        self.layout.setAlignment(Qt.AlignCenter)
-
     '''Initializes all event connectors and triggers'''
 
     ''' Menu Bar'''
@@ -74,11 +56,11 @@ def init_connectors(self):
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.C_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(0))
-    #c sharp
+    # c sharp
     self.Csharp_pushButton = self.findChild(QPushButton, "Csharp_pushButton")
     self.Csharp_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(1))
-    # d 
+    # d
     self.D_pushButton = self.findChild(QPushButton, "D_pushButton")
     self.D_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(2))
@@ -115,7 +97,7 @@ def init_connectors(self):
     self.pause_pushButton = self.findChild(QPushButton, "Asharp_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(10))
-    # b 
+    # b
     self.pause_pushButton = self.findChild(QPushButton, "B_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(11))
@@ -160,7 +142,8 @@ def init_connectors(self):
     self.pause_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(21))
 
-    self.Asharp_pushButton_2 = self.findChild(QPushButton, "Asharp_pushButton_2")
+    self.Asharp_pushButton_2 = self.findChild(
+        QPushButton, "Asharp_pushButton_2")
     self.Asharp_pushButton_2.clicked.connect(
         lambda: self.piano_instrument.generating_note(22))
 
@@ -172,6 +155,10 @@ def init_connectors(self):
     self.octave_dial.valueChanged.connect(
         lambda: self.piano_instrument.dial_value(self.octave_dial.value()))
 
+    # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
+    self.verticalSlider_2 = self.findChild(QSlider, "verticalSlider_2")
+    self.verticalSlider_2.sliderReleased.connect(
+        lambda: self.music_signal.modify_instrument("drums", self.verticalSlider_2.value()/5))
 
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 

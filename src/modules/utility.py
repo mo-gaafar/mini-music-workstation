@@ -6,7 +6,7 @@ DEBUG_MODE = True
 LOGGING_MODE = True
 
 
-logging.basicConfig(filename="logs.txt",
+logging.basicConfig(filename="logs.log",
                     format='%(asctime)s %(message)s', filemode='w')
 
 logger = logging.getLogger()
