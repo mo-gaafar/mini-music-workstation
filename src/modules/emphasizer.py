@@ -22,16 +22,16 @@ class MusicSignal():
 
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
         self.INSTRUMENT_FREQRANGE_DICT = {
-            "violin": [(1, 0)],
-            "drums": [(1, 10000)],
-            "wind": [(500, 10000)]
+            "violin": [(1500, 5000)],
+            "drums": [(10, 1500)],
+            "wind": [(5000, 14000)]
         }
         '''Contains instrument name and corresponding array of freq range tuples'''
 
         self.INSTRUMENT_MULTIPLIER_DICT = {
-            "violin": 1,
-            "drums": 1,
-            "wind": 1
+            "violin": 0,
+            "drums": 0,
+            "wind": 0
         }
         '''Contains instrument magnitude multipliers'''
 
@@ -40,11 +40,13 @@ class MusicSignal():
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
         self.n_channel = n_channel
+        self.last_slider_value = 0  # TODO: update the default to 100 in gui
 
-        self.original_time_array = time_array
-        self.current_time_array = time_array
+        self.time_array = time_array
+
         self.original_magnitude_array = magnitude_array
         self.current_magnitude_array = magnitude_array
+        self.mastered_magnitude_array = magnitude_array
 
         self.original_freq_magnitude_array = []
         self.freq_magnitude_array = []
@@ -72,7 +74,8 @@ class MusicSignal():
         '''Restores complex values using magnitude * e^(i theta)'''
         complex_coefficients = np.multiply(
             self.freq_magnitude_array, np.exp(np.multiply(1j, self.freq_phase_array)))
-        self.current_magnitude_array = np.real(irfft(complex_coefficients))
+        self.current_magnitude_array = np.int16(
+            irfft(complex_coefficients))
 
     def reset_signal(self):
         '''Stores original signal back into current (same with fft) '''
@@ -83,9 +86,12 @@ class MusicSignal():
         for frequency in self.freq_array:
             if starting < frequency < ending:
                 # TODO: Review the logic
-                freq_sample_interval = len(self.freq_array)/(self.f_sampling)
+                freq_sample_interval = len(self.freq_array)/(self.f_sampling/2)
                 freq_index = round(freq_sample_interval * frequency)
-
+                # print_debug("Modified Frequencies"+str(frequency) +
+                #             " Freq_Index "+str(freq_index))
+                # print_debug("Actual Current Frequency" +
+                # str(self.freq_array[freq_index]))
                 # maintains original freq array values to reduce cpu load
                 self.freq_magnitude_array[freq_index] = self.original_freq_magnitude_array[freq_index] * factor
 
@@ -103,20 +109,23 @@ class MusicSignal():
                     self.INSTRUMENT_MULTIPLIER_DICT[instrument])
 
         self.phase_preserved_inverse()
+        self.modify_master_volume(self.last_slider_value)
 
     def modify_master_volume(self, volume_slider_value):
-        factor = volume_slider_value/10
-        self.current_magnitude_array = np.multiply(factor,
-                                                   self.original_magnitude_array)
+        self.last_slider_value = volume_slider_value
+        factor = volume_slider_value/100
+        self.mastered_magnitude_array = np.int16(np.multiply(factor,
+                                                             self.current_magnitude_array))
 
 
 def waveform_update_plot(self):
-    #print_debug("Refresh Plot")
+    # print_debug("Refresh Plot")
     update_sample_interval = 10000
-    time = self.music_signal.current_time_array[self.pointsToAppend:
-                                                self.pointsToAppend+update_sample_interval]
+    time = self.music_signal.time_array[self.pointsToAppend:
+                                        self.pointsToAppend+update_sample_interval]
     magnitude = self.music_signal.current_magnitude_array[
         self.pointsToAppend:self.pointsToAppend+update_sample_interval]
+
     self.pointsToAppend += update_sample_interval
     self.waveform_widget.clear()
 
@@ -133,7 +142,7 @@ def play(self):
     self.timer.setInterval(interval)
     self.timer.start()
 
-    sd.play(self.music_signal.current_magnitude_array[self.pointsToAppend:],
+    sd.play(self.music_signal.mastered_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
 
     # spectro.create_spectrogram_figure(self)

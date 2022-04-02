@@ -49,7 +49,7 @@ def init_connectors(self):
     self.timer.setInterval(50)  # Overflow timer
     self.timer.timeout.connect(
         lambda: emphasizer.waveform_update_plot(self))  # Event handler
-  
+
   ################### piano keys ##############################
    # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
@@ -158,36 +158,47 @@ def init_connectors(self):
 
     self.snare_pushButton = self.findChild(QPushButton, "snare_pushButton")
     self.snare_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('snare'))
+        lambda: self.drums_instrument.selecting_drum_kit('snare'))
 
     self.kick_pushButton = self.findChild(QPushButton, "kick_pushButton")
     self.kick_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('kick'))
+        lambda: self.drums_instrument.selecting_drum_kit('kick'))
 
     self.kick_pushButton_3 = self.findChild(QPushButton, "kick_pushButton_3")
     self.kick_pushButton_3.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('kick'))
+        lambda: self.drums_instrument.selecting_drum_kit('kick'))
 
-    self.highhat1_pushButton = self.findChild(QPushButton, "highhat1_pushButton")
+    self.highhat1_pushButton = self.findChild(
+        QPushButton, "highhat1_pushButton")
     self.highhat1_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('hat'))
+        lambda: self.drums_instrument.selecting_drum_kit('hat'))
 
-    self.highhat_2pushButton = self.findChild(QPushButton, "highhat_2pushButton")
+    self.highhat_2pushButton = self.findChild(
+        QPushButton, "highhat_2pushButton")
     self.highhat_2pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('hat'))
+        lambda: self.drums_instrument.selecting_drum_kit('hat'))
 
     self.hightom_pushButton = self.findChild(QPushButton, "hightom_pushButton")
     self.hightom_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
+        lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
 
-    self.floortom_pushButton = self.findChild(QPushButton, "floortom_pushButton")
+    self.floortom_pushButton = self.findChild(
+        QPushButton, "floortom_pushButton")
     self.floortom_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
+        lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
 
     self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
     self.crash_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
+        lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
+    self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
+    self.verticalSlider_4.sliderReleased.connect(
+        lambda: self.music_signal.modify_instrument("wind", self.verticalSlider_4.value()/5))
+
+    self.verticalSlider_3 = self.findChild(QSlider, "verticalSlider_3")
+    self.verticalSlider_3.sliderReleased.connect(
+        lambda: self.music_signal.modify_instrument("violin", self.verticalSlider_3.value()/5))
+
     self.verticalSlider_2 = self.findChild(QSlider, "verticalSlider_2")
     self.verticalSlider_2.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("drums", self.verticalSlider_2.value()/5))
@@ -198,8 +209,8 @@ def init_connectors(self):
 
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
     self.ride_pushButton.clicked.connect(
-       lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
-   
+        lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
+
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''
