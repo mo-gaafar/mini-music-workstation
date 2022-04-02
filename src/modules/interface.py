@@ -69,7 +69,8 @@ def init_connectors(self):
     self.timer.setInterval(50)  # Overflow timer
     self.timer.timeout.connect(
         lambda: emphasizer.waveform_update_plot(self))  # Event handler
-  # piano keys
+  
+  ################### piano keys ##############################
    # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.C_pushButton.clicked.connect(
@@ -172,7 +173,40 @@ def init_connectors(self):
     self.octave_dial.valueChanged.connect(
         lambda: self.piano_instrument.dial_value(self.octave_dial.value()))
 
+    ############################ Drums buttons ###################################
 
+    self.snare_pushButton = self.findChild(QPushButton, "snare_pushButton")
+    self.snare_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('snare'))
+
+    self.kick_pushButton = self.findChild(QPushButton, "kick_pushButton")
+    self.kick_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('kick'))
+
+    self.highhat1_pushButton = self.findChild(QPushButton, "highhat1_pushButton")
+    self.highhat1_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('hat'))
+
+    self.highhat_2pushButton = self.findChild(QPushButton, "highhat_2pushButton")
+    self.highhat_2pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('hat'))
+
+    self.hightom_pushButton = self.findChild(QPushButton, "hightom_pushButton")
+    self.hightom_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
+
+    self.floortom_pushButton = self.findChild(QPushButton, "floortom_pushButton")
+    self.floortom_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
+
+    self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
+    self.crash_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
+
+    self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
+    self.ride_pushButton.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
+   
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''
