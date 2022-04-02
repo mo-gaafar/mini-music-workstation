@@ -160,6 +160,10 @@ def init_connectors(self):
     self.verticalSlider_2.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("drums", self.verticalSlider_2.value()/5))
 
+    self.verticalSlider = self.findChild(QSlider, "verticalSlider")
+    self.verticalSlider.sliderReleased.connect(
+        lambda: self.music_signal.modify_master_volume(self.verticalSlider.value()))
+
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''

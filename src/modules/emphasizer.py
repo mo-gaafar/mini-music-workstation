@@ -11,6 +11,7 @@ from modules.utility import print_debug
 from modules import spectrogram as spectro
 import PyQt5.QtCore
 import pyqtgraph as pg
+
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
@@ -22,8 +23,8 @@ class MusicSignal():
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
         self.INSTRUMENT_FREQRANGE_DICT = {
             "violin": [(1, 0)],
-            "drums": [(1, 400)],
-            "wind": [(500, 1000)]
+            "drums": [(1, 10000)],
+            "wind": [(500, 10000)]
         }
         '''Contains instrument name and corresponding array of freq range tuples'''
 
@@ -70,8 +71,8 @@ class MusicSignal():
     def phase_preserved_inverse(self):
         '''Restores complex values using magnitude * e^(i theta)'''
         complex_coefficients = np.multiply(
-            self.freq_magnitude_array, np.exp(1j * self.freq_phase_array))
-        self.current_magnitude_array = irfft(complex_coefficients)
+            self.freq_magnitude_array, np.exp(np.multiply(1j, self.freq_phase_array)))
+        self.current_magnitude_array = np.real(irfft(complex_coefficients))
 
     def reset_signal(self):
         '''Stores original signal back into current (same with fft) '''
@@ -92,7 +93,6 @@ class MusicSignal():
         '''Should make use of all functions defined above'''
         # self.fft_update() #inefficient (should only be called once per music signal)
 
-        
         self.INSTRUMENT_MULTIPLIER_DICT[instrument_name] = magnitude_multiplier
         # supports multiple bands ;) + more efficient
         for instrument in self.INSTRUMENT_FREQRANGE_DICT:
@@ -103,6 +103,11 @@ class MusicSignal():
                     self.INSTRUMENT_MULTIPLIER_DICT[instrument])
 
         self.phase_preserved_inverse()
+
+    def modify_master_volume(self, volume_slider_value):
+        factor = volume_slider_value/10
+        self.current_magnitude_array = np.multiply(factor,
+                                                   self.original_magnitude_array)
 
 
 def waveform_update_plot(self):
@@ -127,11 +132,12 @@ def play(self):
     print_debug(interval)
     self.timer.setInterval(interval)
     self.timer.start()
+
     sd.play(self.music_signal.current_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
 
-    spectro.create_spectrogram_figure(self)
-    spectro.plot_spectro(self)
+    # spectro.create_spectrogram_figure(self)
+    # spectro.plot_spectro(self)
 
 
 def pause(self):
