@@ -22,9 +22,9 @@ class MusicSignal():
 
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
         self.INSTRUMENT_FREQRANGE_DICT = {
-            "violin": [(1500, 5000)],
-            "drums": [(10, 1500)],
-            "wind": [(5000, 14000)]
+            "violin": [(2500, 5000)],
+            "drums": [(10, 2500)],
+            "wind": [(5000, 16000)]
         }
         '''Contains instrument name and corresponding array of freq range tuples'''
 
@@ -145,8 +145,7 @@ def play(self):
     sd.play(self.music_signal.mastered_magnitude_array[self.pointsToAppend:],
             self.music_signal.f_sampling)
 
-    # spectro.create_spectrogram_figure(self)
-    # spectro.plot_spectro(self)
+    spectro.plot_spectro(self)
 
 
 def pause(self):

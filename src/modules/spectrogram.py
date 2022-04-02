@@ -9,7 +9,9 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
 from scipy import signal, mean
 from scipy.io import wavfile
-import os, wave, pylab
+import os
+import wave
+import pylab
 
 
 plt.rcParams['axes.facecolor'] = 'black'
@@ -28,11 +30,13 @@ def create_spectrogram_figure(self):
     self.spectrogram_widget.addWidget(self.Spectrogram)
 
 
-def plot_spectro(self, path):
+def plot_spectro(self):
+    
+    self.axes.clear()
 
-    create_spectrogram_figure(self)
-    self.sample_rate, self.samples = wavfile.read(path)
-    self.samples = mean(self.samples, axis = 1)
+    samples = self.music_signal.mastered_magnitude_array
+    sample_rate = self.music_signal.f_sampling
+
     pylab.subplot(111)
-    pylab.title('spectrogram of %r' % path)
-    pylab.specgram(self.samples, Fs=self.sample_rate)
+    # pylab.title('spectrogram of %r' % path)
+    pylab.specgram(samples, Fs=sample_rate)
