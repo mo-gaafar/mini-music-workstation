@@ -8,6 +8,8 @@ from modules.emphasizer import *
 
 import sys
 
+from modules.spectrogram import create_spectrogram_figure
+
 
 class MainWindow(QtWidgets.QMainWindow):
     ''' This is the PyQt5 GUI Main Window'''
@@ -32,6 +34,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.pointsToAppend = 0
         interface.create_piano_layout(self)
         interface.init_connectors(self)
+        create_spectrogram_figure(self)
 
 
 def main():
