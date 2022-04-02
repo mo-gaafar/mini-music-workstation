@@ -1,7 +1,7 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial
+from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
@@ -10,20 +10,20 @@ from modules.utility import print_debug
 # interface globals
 
 
-def create_stacked_layout(self):
+def create_piano_layout(self):
     self.keys = self.findChild(QWidget, "keys")
     self.halftones = self.findChild(QWidget, "halftones")
-    self.groupBox_4 = self.findChild(QGroupBox, "groupBox_4")
     self.verticalLayout_4 = self.findChild(QVBoxLayout, "verticalLayout_4")
 
     self.layout = QStackedLayout()
 
-    self.groupBox_4.setLayout(self.layout)
     self.layout.addWidget(self.halftones)
     self.layout.addWidget(self.keys)
     self.layout.setStackingMode(1)
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
+
+
 
 def init_connectors(self):
 

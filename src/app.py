@@ -2,7 +2,7 @@
 
 from PyQt5 import QtGui, QtWidgets, uic, QtCore
 from modules import utility as util
-from modules import interface
+from modules import interface, resource
 from modules.instruments import *
 from modules.emphasizer import *
 
@@ -30,7 +30,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.drums_instrument= Drums()
         # initialize points to app
         self.pointsToAppend = 0
-        interface.create_stacked_layout(self)
+        interface.create_piano_layout(self)
         interface.init_connectors(self)
 
 
