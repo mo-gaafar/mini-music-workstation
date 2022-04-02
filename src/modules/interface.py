@@ -164,6 +164,10 @@ def init_connectors(self):
     self.kick_pushButton.clicked.connect(
        lambda: self.drums_instrument.selecting_drum_kit('kick'))
 
+    self.kick_pushButton_3 = self.findChild(QPushButton, "kick_pushButton_3")
+    self.kick_pushButton_3.clicked.connect(
+       lambda: self.drums_instrument.selecting_drum_kit('kick'))
+
     self.highhat1_pushButton = self.findChild(QPushButton, "highhat1_pushButton")
     self.highhat1_pushButton.clicked.connect(
        lambda: self.drums_instrument.selecting_drum_kit('hat'))
