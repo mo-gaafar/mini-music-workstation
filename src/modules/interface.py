@@ -32,26 +32,26 @@ def init_connectors(self):
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
 
-  # play button
+    # play button
     self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
     self.play_pushButton.clicked.connect(
         lambda: emphasizer.play(self))
-  # pause button
+    # pause button
     self.pause_pushButton = self.findChild(QPushButton, "pause_pushButton")
     self.pause_pushButton.clicked.connect(
         lambda: emphasizer.pause(self))
-  # stop
+    # stop
     self.stop_pushButton = self.findChild(QPushButton, "stop_pushButton")
     self.stop_pushButton.clicked.connect(
         lambda: emphasizer.stop(self))
-  # Initialize Qt Timer
+    # Initialize Qt Timer
     self.timer = QtCore.QTimer()
     self.timer.setInterval(50)  # Overflow timer
     self.timer.timeout.connect(
         lambda: emphasizer.waveform_update_plot(self))  # Event handler
 
-  ################### piano keys ##############################
-   # c
+    ################### piano keys ##############################
+    # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.C_pushButton.clicked.connect(
         lambda: self.piano_instrument.generating_note(0))
