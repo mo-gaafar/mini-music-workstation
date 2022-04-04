@@ -5,6 +5,7 @@ from modules import utility as util
 from modules import interface, resource
 from modules.instruments import *
 from modules.emphasizer import *
+import numpy as np
 
 import sys
 
@@ -27,14 +28,15 @@ class MainWindow(QtWidgets.QMainWindow):
         print_debug("Connectors Initialized")
 
         # initialize arrays and variables
-        #pygame.mixer.init()   
-        pygame.mixer.pre_init( channels = 1, allowedchanges=0)
+        # pygame.mixer.init()
+        pygame.mixer.pre_init(
+            channels=1, allowedchanges=0, buffer=512, frequency=44100)
         pygame.mixer.init()
 
         self.music_signal = MusicSignal()
-        self.piano_instrument= Piano()
-        self.drums_instrument= Drums()
-        self.guitar_instrument= Guitar()
+        self.piano_instrument = Piano()
+        self.drums_instrument = Drums()
+        self.guitar_instrument = Guitar()
         # initialize points to app
         self.pointsToAppend = 0
         interface.create_piano_layout(self)
