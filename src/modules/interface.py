@@ -162,8 +162,8 @@ def init_connectors(self):
     self.piano_volume_dial.valueChanged.connect(
         lambda: self.piano_volume_label.setText(str(self.piano_volume_dial.value())))
 
-    self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
-    self.chord_lcd.display('a')
+    #self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
+    #self.chord_lcd.display('a')
 
     ############################ Drums buttons ###################################
 
@@ -201,6 +201,18 @@ def init_connectors(self):
     self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
     self.crash_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
+    ################### guitar keys ##############################
+    self.chord_dial = self.findChild(QDial, "chord_dial")
+    self.chord_dial.valueChanged.connect(
+        lambda: self.guitar_instrument.guitar_chord_selection(self.chord_dial.value()))
+
+    self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
+    self.chord_dial.valueChanged.connect(
+        lambda: self.chord_lcd.display(self.chord_dial.value()))
+    
+    self.chord_dial.valueChanged.connect(
+        lambda: self.guitar_instrument.guitar_string_sound())
+
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
