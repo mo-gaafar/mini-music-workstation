@@ -152,7 +152,7 @@ class Piano(Instrument):
             octave_number = self.octave_number+1
 
         freq = self.key_freq(key_index, octave_number)
-        wave = self.generating_wave(freq, duration=1.7)
+        wave = self.generating_wave(freq, duration=3)
         self.play_note(wave)
 
 
@@ -171,7 +171,7 @@ class Guitar(Instrument):
         """Generates a new wavetable for the string."""
         wavetable_size = self.GUITAR_SAMPLING_RATE // int(string_pitch)
         wavetable = (2 * np.random.randint(0, 2,
-                     wavetable_size) - 1).astype(np.float)
+                                           wavetable_size) - 1).astype(np.float)
         return wavetable
 
     def get_sample(self, wave_table, starting_sample, stretch_factor):
@@ -195,7 +195,9 @@ class Guitar(Instrument):
         self.chord_number = self.guitar_chords['D_major']
 
     def play_string(self, sound):
-        sd.play(sound, self.GUITAR_SAMPLING_RATE)
+        print_debug(sound)
+        sound_object = pygame.sndarray.make_sound(array=sound)
+        sound_object.play()
 
     def guitar_string_sound(self):
         # freqs of chord is the pitch
