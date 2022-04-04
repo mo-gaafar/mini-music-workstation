@@ -1,14 +1,18 @@
-#TODO: structure needs more work
+# TODO: structure needs more work
 from types import new_class
 import numpy as np
 from numpy.core.fromnumeric import size
 from numpy.core.function_base import linspace
 import sounddevice as sd
 import scipy
-
+import pygame
 import wave
 from collections import defaultdict
-from numpy import random
+from numpy import array, random
+
+from modules.utility import print_debug, print_log
+
+
 class Instrument():
     # super class of all instruments
     # should contain the common general functions
@@ -24,64 +28,56 @@ class Instrument():
 
 # ahlan bel inhertiance
 
-class Drums(Instrument): 
+
+class Drums(Instrument):
 
     def __init__(self):
         super().__init__()
-        self.drum_sampling_rate=44100        
-        self.drum_kit_tones={
-                        'snare':['snare1.wav','snare2.wav','snare3.wav','snare4.wav']
-                        ,'hat':['hat1.wav','hat2.wav','hat3.wav','hat4.wav']
-                        ,'kick':['kick1.wav','kick2.wav','kick3.wav','kick4.wav']
-                        ,'FLoor_tom':['Floor_tom1.wav','Floor_tom2.wav','Floor_tom3.wav','Floor_tom4.wav']
-                        ,'H_tom':['H_tom1.wav','H_tom2.wav','H_tom3.wav','H_tom4.wav']
-                        ,'ride_cymbal':['ride_cymbal1.wav','ride_cymbal2.wav','ride_cymbal3.wav','ride_cymbal4.wav']
-                        ,'crash_cymbal':['crash_cymbal1.wav','crash_cymbal2.wav','crash_cymbal3.wav','crash_cymbal4.wav']}
-        self.read_drum_tones={
-                        'snare':[]
-                        ,'hat':[]
-                        ,'kick':[]
-                        ,'FLoor_tom':[]
-                        ,'H_tom':[]
-                        ,'ride_cymbal':[]
-                        ,'crash_cymbal':[]}
+        self.drum_sampling_rate = 44100
+        self.drum_kit_tones = {
+            'snare': ['snare1.wav', 'snare2.wav', 'snare3.wav', 'snare4.wav'], 'hat': ['hat1.wav', 'hat2.wav', 'hat3.wav', 'hat4.wav'], 'kick': ['kick1.wav', 'kick2.wav', 'kick3.wav', 'kick4.wav'], 'FLoor_tom': ['Floor_tom1.wav', 'Floor_tom2.wav', 'Floor_tom3.wav', 'Floor_tom4.wav'], 'H_tom': ['H_tom1.wav', 'H_tom2.wav', 'H_tom3.wav', 'H_tom4.wav'], 'ride_cymbal': ['ride_cymbal1.wav', 'ride_cymbal2.wav', 'ride_cymbal3.wav', 'ride_cymbal4.wav'], 'crash_cymbal': ['crash_cymbal1.wav', 'crash_cymbal2.wav', 'crash_cymbal3.wav', 'crash_cymbal4.wav']}
+
+        self.read_drum_tones = {
+            'snare': [], 'hat': [], 'kick': [], 'FLoor_tom': [], 'H_tom': [], 'ride_cymbal': [], 'crash_cymbal': []}
         self.read_all_samples()
-    
+
     def read_all_samples(self):
         for key in self.drum_kit_tones:
             for index in self.drum_kit_tones[key]:
-                tone=wave.open('resources\drum_tones\\' + str(index))
-                signal = tone.readframes(-1) 
-                signal = np.frombuffer(signal, dtype =np.int16)
-                
+                tone = wave.open('resources\drum_tones\\' + str(index))
+                signal = tone.readframes(-1)
+                signal = np.frombuffer(signal, dtype=np.int16)
                 self.read_drum_tones[key].append(signal)
-   
 
-    def play_drums(self,tone):
-        play_tone= random.choice(self.read_drum_tones[tone])
-        sd.play(play_tone, self.drum_sampling_rate)
+    def play_drums(self, tone):
 
-    def selecting_drum_kit(self,index):  
-       self.play_drums(index)
-        
-    
+        play_tone = random.choice(self.read_drum_tones[tone])
+
+        print_debug('play_tone  ')
+        print_debug(play_tone)
+
+        sound_object = pygame.sndarray.make_sound(array=play_tone)
+        sound_object.play()
+
+    def selecting_drum_kit(self, index):
+        self.play_drums(index)
 
 
 class Piano(Instrument):
     def __init__(self):
         super().__init__()
         self.BASE_FREQ = 440
-        self.PIANO_SAMPLING_RATE=44100
-        self.octave_number =1  #default
+        self.PIANO_SAMPLING_RATE = 44100
+        self.octave_number = 1  # default
 
-    def key_freq(self,key_index,octave_number):
+    def key_freq(self, key_index, octave_number):
 
-        n= self.n_jumps(key_index,octave_number)
+        n = self.n_jumps(key_index, octave_number)
         print('number of jumps:')
         print(n)
         print('octave:')
         print(octave_number)
-        note_freq=self.BASE_FREQ*pow(2,n/12)
+        note_freq = self.BASE_FREQ*pow(2, n/12)
         print('freq:')
         print(note_freq)
         return note_freq
@@ -91,65 +87,78 @@ class Piano(Instrument):
         piano_wave = 0.6*np.sin(2 * np.pi * freq * time) * np.exp(-0.0015 * 2 * np.pi * freq * time)
         #overtones 
         piano_wave += 0.4*np.sin(2 * 2 * np.pi * freq * time) * np.exp(-0.0015 * 2 * np.pi * freq * time) / 2
-       
+        
         piano_wave += piano_wave * piano_wave * piano_wave
         #piano_wave *= 1 + 16 * time * np.exp(-6 * time)
-        return  piano_wave
-    
-    def play_note(self,input_note):
-         sd.play(input_note, self.PIANO_SAMPLING_RATE)
-    def dial_value(self,dial_number):
-        #TODO:LIMIT DIAL 1-7
-        self.octave_number= dial_number
+
+        piano_wave = self.float_to_int16(piano_wave)
+        return piano_wave
+
+    def float_to_int16(self, float_array):
+        int_array = np.int16(float_array * (32767/2))
+        return int_array
+
+    def play_note(self, input_note):
+
+        print_debug(input_note)
+        sound_object = pygame.sndarray.make_sound(array=input_note)
+        sound_object.play()
+
+    def dial_value(self, dial_number):
+        # TODO:LIMIT DIAL 1-7
+        self.octave_number = dial_number
         print('HERE DIAL')
         print(self.octave_number)
-    def n_jumps(self,key_index,octave_number):
+
+    def n_jumps(self, key_index, octave_number):
         OCTAVE_LENGTH = 12
         A4_INDEX = 10
 
-        if octave_number==0 :
-            n= OCTAVE_LENGTH - key_index +12*3+9
+        if octave_number == 0:
+            n = OCTAVE_LENGTH - key_index + 12*3+9
             return -n
-        elif octave_number==1:
-            n= OCTAVE_LENGTH - key_index+12*2+9
+        elif octave_number == 1:
+            n = OCTAVE_LENGTH - key_index+12*2+9
             return -n
-        elif octave_number==2:
-            n= OCTAVE_LENGTH - key_index+12+9
+        elif octave_number == 2:
+            n = OCTAVE_LENGTH - key_index+12+9
             return -n
-        elif octave_number==3:
-            n= OCTAVE_LENGTH - key_index+9
+        elif octave_number == 3:
+            n = OCTAVE_LENGTH - key_index+9
             return -n
-        elif octave_number== 4:
-            n= key_index-A4_INDEX +1
+        elif octave_number == 4:
+            n = key_index-A4_INDEX + 1
             return n
 
-        elif octave_number== 5:
-            n=key_index+3
+        elif octave_number == 5:
+            n = key_index+3
             return n
-        elif octave_number== 6:
-            n=key_index+12+3
+        elif octave_number == 6:
+            n = key_index+12+3
             return n
-        elif octave_number== 7:
-            n=key_index+12*2+3
+        elif octave_number == 7:
+            n = key_index+12*2+3
             return n
-        elif octave_number== 8:
-            n=key_index+12*3+3
+        elif octave_number == 8:
+            n = key_index+12*3+3
             return n
-    def generating_note(self,key_index):
-        if key_index <12:
-            octave_number= self.octave_number
+
+    def generating_note(self, key_index):
+        if key_index < 12:
+            octave_number = self.octave_number
         else:
             key_index= key_index - 12
             octave_number= self.octave_number+1
             
         freq= self.key_freq(key_index,octave_number)
-        wave= self.generating_wave(freq,duration=2.5)
+        wave= self.generating_wave(freq,duration=3)
         self.play_note(wave)
 
-    
+
 class Guitar(Instrument):
     def __init__(self):
         super().__init__()
+        
         self.GUITAR_SAMPLING_RATE=44100
         self.guitar_chords={
                         'G_major':[98,123,147,196,247,392]
@@ -197,8 +206,14 @@ class Guitar(Instrument):
         elif dial_number ==5:
             self.chord=self.guitar_chords['D_major']
 
-    def play_string(self,sound):
-         sd.play(sound, self.GUITAR_SAMPLING_RATE)
+    def guitar_chord_selection(self, dial_number):
+
+        self.chord_number = self.guitar_chords['D_major']
+
+    def play_string(self, sound):
+        print_debug(sound)
+        sound_object = pygame.sndarray.make_sound(array=sound)
+        sound_object.play()
 
     def guitar_string_sound(self,string_num):
         print('chord:')
@@ -216,24 +231,6 @@ class Guitar(Instrument):
 
 
 
-
-
-    #def ks(self, f=220, length = np.linspace(0, np.fix(44100/220), int(44100*(np.fix(44100/220))))):
-        #fs = 44100
-        #f = 220
-       # n = np.fix(fs/f)
-        #x = np.zeros((1, len(length)))
-        #b1 = [np.zeros(1, n), 1]
-        #a1 = [1, np.zeros(1, n-1), -0.5, -0.5]
-       # zi = np.random.uniform(1, max(max(size(a1)), max(size(b1))) -1)
-       
-      #y = lfilter(b1,a1,x,zi)
-       # play_string(y)
-
-
-
-
-#TODO: make this adaptable to the 3 instrument types
 #TODO: connect in interface
 def keyboard_pressed(key, instrument_index):
     # match key: match case needs python 3.10...
