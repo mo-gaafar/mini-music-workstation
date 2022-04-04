@@ -53,8 +53,8 @@ def init_connectors(self):
   ################### piano keys ##############################
    # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
-    self.C_pushButton.clicked.connect(
-        lambda: self.piano_instrument.generating_note(0))
+    self.C_pushButton.pressed.connect(
+        lambda: self.guitar_instrument.ks())
     # c sharp
     self.Csharp_pushButton = self.findChild(QPushButton, "Csharp_pushButton")
     self.Csharp_pushButton.clicked.connect(
@@ -202,6 +202,30 @@ def init_connectors(self):
     self.crash_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
     ################### guitar keys ##############################
+    self.Estring_pushButton = self.findChild(QPushButton, "Estring_pushButton")
+    self.Estring_pushButton.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(0))
+
+    self.Astring_pushButton = self.findChild(QPushButton, "Astring_pushButton")
+    self.Astring_pushButton.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(1))
+
+    self.Dstring_pushButton = self.findChild(QPushButton, "Dstring_pushButton")
+    self.Dstring_pushButton.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(2))
+
+    self.Gstring_pushButton = self.findChild(QPushButton, "Gstring_pushButton")
+    self.Gstring_pushButton.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(3))
+
+    self.Bstring_pushButton = self.findChild(QPushButton, "Bstring_pushButton")
+    self.Bstring_pushButton.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(4))
+
+    self.Estring_pushButton_2 = self.findChild(QPushButton, "Estring_pushButton_2")
+    self.Estring_pushButton_2.clicked.connect(
+        lambda: self.guitar_instrument.guitar_string_sound(5))
+
     self.chord_dial = self.findChild(QDial, "chord_dial")
     self.chord_dial.valueChanged.connect(
         lambda: self.guitar_instrument.guitar_chord_selection(self.chord_dial.value()))
