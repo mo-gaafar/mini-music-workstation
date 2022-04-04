@@ -5,7 +5,6 @@ import sounddevice as sd
 
 import wave
 from collections import defaultdict
-from modules.utility import print_debug
 from numpy import random
 class Instrument():
     # super class of all instruments
@@ -145,6 +144,73 @@ class Piano(Instrument):
         self.play_note(wave)
 
     
+class Guitar(Instrument):
+    def __init__(self):
+        super().__init__()
+        self.GUITAR_SAMPLING_RATE=44100
+        self.guitar_chords={
+                        'G_major':[98,123,147,196,247,392]
+                        ,'D_major':[82,110,147,220,294,370]
+                        ,'C_major':[82,131,165,196,262,329]
+                        ,'E_major':[82,123,165,208,247,329]
+                        ,'A_major':[82,110,165,220,277,329]}
+        self.chord_number=1
+        self.current_sample = 0 #default
+        self.previous_value = 0 #default
+        self.strings = []
+    def wavetable_initiator(self,string_pitch):
+        """Generates a new wavetable for the string."""
+        print('WAVETABLE_INIT')
+        wavetable_size = self.GUITAR_SAMPLING_RATE // int(string_pitch)
+        wavetable = (2 * np.random.randint(0, 2, wavetable_size) - 1).astype(np.float)
+        return wavetable
+      
+    def get_sample(self,wave_table,starting_sample,stretch_factor):
+        """Returns next sample from string."""
+        print('SAMPLE')
+        if self.current_sample >= starting_sample:
+            current_sample_mod = self.current_sample % wave_table.size
+            r = np.random.binomial(1, 1 - 1/stretch_factor)
+            if r == 0:
+                wave_table[current_sample_mod] =  0.5 * (wave_table[current_sample_mod] + self.previous_value)
+            sample = wave_table[current_sample_mod]
+            self.previous_value = sample
+            self.current_sample += 1
+        else:
+            self.current_sample += 1
+            sample = 0
+        return sample
+    def guitar_chord_selection(self,dial_number):
+        print('chord D:')
+        self.chord_number=self.guitar_chords['D_major']
+
+    def play_string(self,sound):
+         sd.play(sound, self.GUITAR_SAMPLING_RATE)
+
+    def guitar_string_sound(self):
+    # freqs of chord is the pitch 
+    # starting_sample is the delay
+    # sampling_freq is 44100
+        print(self.chord_number)
+        pitchs = self.chord_number
+        print(pitchs[1])
+       # string_freq=pitchs[string_index]
+        unit_delay = self.GUITAR_SAMPLING_RATE//3
+        delays = [unit_delay * _ for _ in range(len(pitchs))]
+        stretch_factors = [2 * f/98 for f in pitchs]
+        for pitch, delay, stretch_factor in zip(pitchs, delays, stretch_factors):
+            wave = self.wavetable_initiator(pitch)
+            string_sample=self.get_sample(wave,delay,stretch_factor)
+            self.strings.append(string_sample)
+        guitar_sound = [sum(string_sample for string_sample in self.strings) for _ in range(self.GUITAR_SAMPLING_RATE * 6)]
+        self.play_string(guitar_sound)
+
+
+
+
+
+
+
 #TODO: make this adaptable to the 3 instrument types
 #TODO: connect in interface
 def keyboard_pressed(key, instrument_index):
