@@ -23,3 +23,8 @@ def print_debug(string):
         print(string)
     if LOGGING_MODE:
         logger.info(string)
+
+
+def print_log(string):
+    if LOGGING_MODE:
+        logger.info(string)
