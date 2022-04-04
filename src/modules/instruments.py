@@ -2,10 +2,12 @@
 from types import new_class
 import numpy as np
 import sounddevice as sd
-
+import pygame
 import wave
 from collections import defaultdict
 from numpy import random
+
+from modules.utility import print_debug
 class Instrument():
     # super class of all instruments
     # should contain the common general functions
@@ -34,6 +36,8 @@ class Drums(Instrument):
                         ,'H_tom':['H_tom1.wav','H_tom2.wav','H_tom3.wav','H_tom4.wav']
                         ,'ride_cymbal':['ride_cymbal1.wav','ride_cymbal2.wav','ride_cymbal3.wav','ride_cymbal4.wav']
                         ,'crash_cymbal':['crash_cymbal1.wav','crash_cymbal2.wav','crash_cymbal3.wav','crash_cymbal4.wav']}
+                        
+    
         self.read_drum_tones={
                         'snare':[]
                         ,'hat':[]
@@ -43,20 +47,24 @@ class Drums(Instrument):
                         ,'ride_cymbal':[]
                         ,'crash_cymbal':[]}
         self.read_all_samples()
-    
     def read_all_samples(self):
         for key in self.drum_kit_tones:
             for index in self.drum_kit_tones[key]:
                 tone=wave.open('resources\drum_tones\\' + str(index))
                 signal = tone.readframes(-1) 
-                signal = np.frombuffer(signal, dtype =np.int16)
-                
+                signal = np.frombuffer(signal, dtype =np.int16)               
                 self.read_drum_tones[key].append(signal)
    
-
+    
     def play_drums(self,tone):
+           
         play_tone= random.choice(self.read_drum_tones[tone])
-        sd.play(play_tone, self.drum_sampling_rate)
+        
+        print_debug('play_tone  ')
+        print_debug(play_tone) 
+        
+        sound_object=pygame.sndarray.make_sound(array=play_tone)
+        sound_object.play()
 
     def selecting_drum_kit(self,index):  
        self.play_drums(index)
@@ -93,8 +101,10 @@ class Piano(Instrument):
         #piano_wave *= 1 + 16 * time * np.exp(-6 * time)
         return  piano_wave
     
-    def play_note(self,input_note):
-         sd.play(input_note, self.PIANO_SAMPLING_RATE)
+    def play_note(self,input_note):  
+       print_debug(input_note)
+       sd.play(input_note,self.PIANO_SAMPLING_RATE)
+   
     def dial_value(self,dial_number):
         #TODO:LIMIT DIAL 1-7
         self.octave_number= dial_number

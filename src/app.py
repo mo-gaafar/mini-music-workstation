@@ -27,6 +27,10 @@ class MainWindow(QtWidgets.QMainWindow):
         print_debug("Connectors Initialized")
 
         # initialize arrays and variables
+        #pygame.mixer.init()   
+        pygame.mixer.pre_init( channels = 1, allowedchanges=0)
+        pygame.mixer.init()
+
         self.music_signal = MusicSignal()
         self.piano_instrument= Piano()
         self.drums_instrument= Drums()
