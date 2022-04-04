@@ -102,8 +102,23 @@ class Piano(Instrument):
         return  piano_wave
     
     def play_note(self,input_note):  
-       print_debug(input_note)
-       sd.play(input_note,self.PIANO_SAMPLING_RATE)
+            
+            print_debug(input_note)
+            note=np.array(input_note,dtype=np.int8)
+            sound_object=pygame.sndarray.make_sound(array=input_note)
+            
+            print_debug(note)
+
+            print_debug('piiiii')
+        
+            print_debug(input_note)
+            print_debug('siiiiiiiiii')
+
+            print_debug(sound_object)
+            # print_debug(np.int16(input_note))
+        
+            
+            sound_object.play()
    
     def dial_value(self,dial_number):
         #TODO:LIMIT DIAL 1-7
