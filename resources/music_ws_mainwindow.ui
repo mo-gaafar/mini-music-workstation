@@ -2007,7 +2007,7 @@ QPushButton:pressed {
                 <string notr="true">background-color: transparent;</string>
                </property>
                <property name="maximum">
-                <number>4</number>
+                <number>5</number>
                </property>
                <property name="notchesVisible">
                 <bool>true</bool>

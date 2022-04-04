@@ -234,8 +234,6 @@ def init_connectors(self):
     self.chord_dial.valueChanged.connect(
         lambda: self.chord_lcd.display(self.chord_dial.value()))
     
-    self.chord_dial.valueChanged.connect(
-        lambda: self.guitar_instrument.guitar_string_sound())
 
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
