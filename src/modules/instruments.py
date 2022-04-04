@@ -143,7 +143,7 @@ class Piano(Instrument):
             octave_number= self.octave_number+1
             
         freq= self.key_freq(key_index,octave_number)
-        wave= self.generating_wave(freq,duration=1.7)
+        wave= self.generating_wave(freq,duration=2.5)
         self.play_note(wave)
 
     

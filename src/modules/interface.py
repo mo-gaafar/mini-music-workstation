@@ -54,7 +54,7 @@ def init_connectors(self):
    # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.C_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.ks())
+        lambda: self.piano_instrument.generating_note(0))
     # c sharp
     self.Csharp_pushButton = self.findChild(QPushButton, "Csharp_pushButton")
     self.Csharp_pushButton.clicked.connect(
