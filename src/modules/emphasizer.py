@@ -12,7 +12,7 @@ from modules import spectrogram as spectro
 import PyQt5.QtCore
 import pyqtgraph as pg
 import pygame
-
+from PyQt5.QtWidgets import QMessageBox
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
 # TODO: implement waveform drawing in pyqtgraph
@@ -150,7 +150,11 @@ def play(self):
     print_debug(interval)
     self.timer.setInterval(interval)
     self.timer.start()
-
+   
+    if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
+        QMessageBox.warning(
+            self, 'NO SIGNAL ', 'You have to plot a signal first')
+   
     self.sound_object = pygame.sndarray.make_sound(
         array=self.music_signal.mastered_magnitude_array[self.pointsToAppend:])
     self.sound_object.play()
@@ -164,7 +168,14 @@ def pause(self):
 
 
 def stop(self):
+    
+    if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
+        QMessageBox.warning(
+            self, 'NO SIGNAL ', 'You have to plot a signal first')
     self.sound_object.stop()
     self.timer.stop()
     self.pointsToAppend = 0
     waveform_update_plot(self)
+    
+    QMessageBox.information(
+            self, 'Music Workstation', 'Signal has been rested')
