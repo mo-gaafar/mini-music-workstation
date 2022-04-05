@@ -269,7 +269,7 @@ def init_connectors(self):
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
-        lambda: self.music_signal.set_instrument_factor("wind", self.verticalSlider_4.value()/5))
+        lambda: self.music_signal.set_instrument_factor("violin", self.verticalSlider_4.value()/5))
     self.verticalSlider_4.sliderReleased.connect(
         lambda: spectrogram.plot_spectro(self))
 
@@ -279,7 +279,7 @@ def init_connectors(self):
 
     self.verticalSlider_3 = self.findChild(QSlider, "verticalSlider_3")
     self.verticalSlider_3.sliderReleased.connect(
-        lambda: self.music_signal.set_instrument_factor("violin", self.verticalSlider_3.value()/5))
+        lambda: self.music_signal.set_instrument_factor("wind", self.verticalSlider_3.value()/5))
 
     self.master_volume_bar = self.findChild(QProgressBar, "master_volume_bar")
     self.timer.timeout.connect(
