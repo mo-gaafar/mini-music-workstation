@@ -1,7 +1,7 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QTabWidget,QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
+from PyQt5.QtWidgets import QTabWidget,QProgressBar,QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
