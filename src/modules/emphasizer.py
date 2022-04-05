@@ -97,7 +97,7 @@ class MusicSignal():
         for frequency in self.freq_array:
             if starting < frequency < ending:
                 # converting from frequency to corresponding fftfreq index
-                freq_sample_interval = len(self.freq_array)/(self.f_sampling/2)
+                freq_sample_interval = len(self.freq_array)/(self.f_sampling/2) #how many samples are there in unit frequency
                 freq_index = round(freq_sample_interval * frequency)
                 # maintains original freq array values to reduce cpu load
                 self.freq_magnitude_array[freq_index] = self.original_freq_magnitude_array[freq_index] * factor
@@ -142,6 +142,8 @@ def waveform_update_plot(self):
 
     self.waveform_widget.plot(time, magnitude, pen=pen)
     self.waveform_widget.plotItem.setXRange(time[0], time[-1])
+    self.waveform_widget.plotItem.setYRange(
+        min(magnitude), max(magnitude))
 
 
 def play(self):
