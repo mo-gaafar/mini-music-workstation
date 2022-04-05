@@ -37,6 +37,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.piano_instrument = Piano()
         self.drums_instrument = Drums()
         self.guitar_instrument = Guitar()
+        self.toggle_play=0
         # initialize points to app
         self.pointsToAppend = 0
         interface.create_piano_layout(self)

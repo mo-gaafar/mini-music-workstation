@@ -145,26 +145,31 @@ def waveform_update_plot(self):
 
 
 def play(self):
-    print_debug("Interval in ms: ")
-    interval = 1000*10000/(self.music_signal.f_sampling)
-    print_debug(interval)
-    self.timer.setInterval(interval)
-    self.timer.start()
-   
-    if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
-        QMessageBox.warning(
-            self, 'NO SIGNAL ', 'You have to plot a signal first')
-   
-    self.sound_object = pygame.sndarray.make_sound(
-        array=self.music_signal.mastered_magnitude_array[self.pointsToAppend:])
-    self.sound_object.play()
-    spectro.plot_spectro(self)
+    if (self.toggle_play == 0):
+        print_debug("Interval in ms: ")
+        interval = 1000*10000/(self.music_signal.f_sampling)
+        print_debug(interval)
+        self.timer.setInterval(interval)
+        self.timer.start()
+    
+        if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
+            QMessageBox.warning(
+                self, 'NO SIGNAL ', 'You have to plot a signal first')
+    
+        self.sound_object = pygame.sndarray.make_sound(
+            array=self.music_signal.mastered_magnitude_array[self.pointsToAppend:])
+        self.sound_object.play()
+        spectro.plot_spectro(self)
+        self.toggle_play=1
+    else:
+        pass
 
 
 def pause(self):
 
     self.timer.stop()
     self.sound_object.stop()
+    self.toggle_play = 0
 
 
 def stop(self):
@@ -176,6 +181,7 @@ def stop(self):
     self.timer.stop()
     self.pointsToAppend = 0
     waveform_update_plot(self)
-    
+    self.toggle_play = 0
+
     QMessageBox.information(
             self, 'Music Workstation', 'Signal has been rested')
