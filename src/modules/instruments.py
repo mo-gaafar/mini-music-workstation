@@ -17,16 +17,19 @@ class Instrument():
     # super class of all instruments
     # should contain the common general functions
     def __init__(self):
-        pass
+        self.master_volume = 1
 
     def float_to_int16(self, float_array):
         int_array = np.int16(float_array * (32767/2))
         return int_array
 
     def play_sound(self, sound):
+        sound = np.int16(np.multiply(sound, self.master_volume))
         sound_object = pygame.sndarray.make_sound(array=sound)
         sound_object.play()
 
+    def set_volume(self, volume):
+        self.master_volume = volume/100
     # Functions;
     # play notes
     # import base sample/tone
@@ -60,7 +63,7 @@ class Drums(Instrument):
 
     def play_drums(self, tone):
 
-        play_sound = np.int16( random.choice(self.read_drum_tones[tone]))
+        play_sound = np.int16(random.choice(self.read_drum_tones[tone]))
         self.play_sound(play_sound)
 
     def selecting_drum_kit(self, index):

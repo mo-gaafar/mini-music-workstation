@@ -11,6 +11,7 @@ from modules.utility import print_debug
 from modules import spectrogram as spectro
 import PyQt5.QtCore
 import pyqtgraph as pg
+import pygame
 
 # TODO: implement master volume control (pyaudio?)
 # TODO: implement start play stop functionality
@@ -142,20 +143,20 @@ def play(self):
     self.timer.setInterval(interval)
     self.timer.start()
 
-    sd.play(self.music_signal.mastered_magnitude_array[self.pointsToAppend:],
-            self.music_signal.f_sampling)
-
+    self.sound_object = pygame.sndarray.make_sound(
+        array=self.music_signal.mastered_magnitude_array[self.pointsToAppend:])
+    self.sound_object.play()
     spectro.plot_spectro(self)
 
 
 def pause(self):
 
     self.timer.stop()
-    sd.stop()
+    self.sound_object.stop()
 
 
 def stop(self):
-    sd.stop()
+    self.sound_object.stop()
     self.timer.stop()
     self.pointsToAppend = 0
     waveform_update_plot(self)
