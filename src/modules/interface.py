@@ -32,7 +32,7 @@ def init_connectors(self):
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
 
-    self.actionAbout_us = self.findChild(QAction, "actionAbout_us")
+    self.actionAbout_us = self.findChild(QAction, "actionAbout_Us")
     self.actionAbout_us.triggered.connect(
         lambda: about_us(self))
 
