@@ -31,10 +31,12 @@ def create_spectrogram_figure(self):
 
 
 def plot_spectro(self):
-    
+
     self.axes.clear()
 
     samples = self.music_signal.mastered_magnitude_array
     sample_rate = self.music_signal.f_sampling
 
     pylab.specgram(samples, Fs=sample_rate)
+    self.Spectrogram.draw()
+    self.figure.canvas.draw()
