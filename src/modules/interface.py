@@ -57,102 +57,117 @@ def init_connectors(self):
         lambda: self.piano_instrument.generating_note(0))
     # c sharp
     self.Csharp_pushButton = self.findChild(QPushButton, "Csharp_pushButton")
-    self.Csharp_pushButton.clicked.connect(
+    self.Csharp_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(1))
     # d
     self.D_pushButton = self.findChild(QPushButton, "D_pushButton")
-    self.D_pushButton.clicked.connect(
+    self.D_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(2))
     # d sharp
     self.pause_pushButton = self.findChild(QPushButton, "Dsharp_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(3))
     # e
     self.pause_pushButton = self.findChild(QPushButton, "E_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(4))
     # f
     self.pause_pushButton = self.findChild(QPushButton, "F_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(5))
     # f sharp
     self.pause_pushButton = self.findChild(QPushButton, "Fsharp_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(6))
     # g
 
     self.pause_pushButton = self.findChild(QPushButton, "G_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(7))
     # g sharp
     self.pause_pushButton = self.findChild(QPushButton, "Gsharp_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(8))
     # a
     self.pause_pushButton = self.findChild(QPushButton, "A_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(9))
     # a sharp
     self.pause_pushButton = self.findChild(QPushButton, "Asharp_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(10))
     # b
     self.pause_pushButton = self.findChild(QPushButton, "B_pushButton")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(11))
 
     self.pause_pushButton = self.findChild(QPushButton, "C_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(12))
 
     self.pause_pushButton = self.findChild(QPushButton, "Csharp_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(13))
 
     self.pause_pushButton = self.findChild(QPushButton, "D_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(14))
 
     self.pause_pushButton = self.findChild(QPushButton, "Dsharp_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(15))
 
     self.pause_pushButton = self.findChild(QPushButton, "E_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(16))
 
     self.pause_pushButton = self.findChild(QPushButton, "F_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(17))
 
     self.pause_pushButton = self.findChild(QPushButton, "Fsharp_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(18))
 
     self.pause_pushButton = self.findChild(QPushButton, "G_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(19))
 
     self.pause_pushButton = self.findChild(QPushButton, "Gsharp_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(20))
 
     self.pause_pushButton = self.findChild(QPushButton, "A_pushButton_2")
-    self.pause_pushButton.clicked.connect(
+    self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(21))
 
     self.Asharp_pushButton_2 = self.findChild(
         QPushButton, "Asharp_pushButton_2")
-    self.Asharp_pushButton_2.clicked.connect(
+    self.Asharp_pushButton_2.pressed.connect(
         lambda: self.piano_instrument.generating_note(22))
 
     self.B_pushButton_2 = self.findChild(QPushButton, "B_pushButton_2")
-    self.B_pushButton_2.clicked.connect(
+    self.B_pushButton_2.pressed.connect(
         lambda: self.piano_instrument.generating_note(23))
     # DIAL 2
     self.octave_dial = self.findChild(QDial, "octave_dial")
     self.octave_dial.valueChanged.connect(
         lambda: self.piano_instrument.dial_value(self.octave_dial.value()))
+
+    self.sus_dial = self.findChild(QDial, "sus_dial")
+    self.overtones_dial = self.findChild(QDial, "overtones_dial")
+    self.sus_dial.valueChanged.connect(
+        lambda: self.piano_instrument.alter_sus_overtones_values(self.sus_dial.value(), self.overtones_dial.value()))
+    self.overtones_dial.valueChanged.connect(
+        lambda: self.piano_instrument.alter_sus_overtones_values(self.sus_dial.value(), self.overtones_dial.value()))
+
+    self.sus_label = self.findChild(QLabel, "sus_label")
+    self.sus_dial.valueChanged.connect(
+        lambda: self.sus_label.setText(str(self.sus_dial.value())))
+
+    self.overtones_label = self.findChild(QLabel, "overtones_label")
+    self.overtones_dial.valueChanged.connect(
+        lambda: self.overtones_label.setText(str(self.overtones_dial.value())))
 
     self.octave_lcd = self.findChild(QLCDNumber, "octave_lcd")
     self.octave_dial.valueChanged.connect(
@@ -232,7 +247,7 @@ def init_connectors(self):
 
     self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
     self.chord_dial.valueChanged.connect(
-        lambda: self.chord_lcd.display(self.chord_dial.value()))
+        lambda: self.chord_lcd.display(self.guitar_instrument.set_chord_lcd(self.chord_dial.value())))
     
 
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++

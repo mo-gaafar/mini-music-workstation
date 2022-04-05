@@ -73,6 +73,8 @@ class Piano(Instrument):
         self.BASE_FREQ = 440
         self.PIANO_SAMPLING_RATE = 44100
         self.octave_number = 1  # default
+        self.sus_value = 1
+        self.overtone_value = 1
 
     def key_freq(self, key_index, octave_number):
 
@@ -86,14 +88,18 @@ class Piano(Instrument):
         print(note_freq)
         return note_freq
 
+    def alter_sus_overtones_values(self, sus, overtones):
+        self.sus_value = sus
+        self.overtone_value = overtones
+
     def generating_wave(self, freq, duration=2.5):
         time = np.linspace(0, duration, int(
             self.PIANO_SAMPLING_RATE * duration))
         piano_wave = 0.6*np.sin(2 * np.pi * freq * time) * \
-            np.exp(-0.0015 * 2 * np.pi * freq * time)
+            np.exp(-0.0015 * self.sus_value * 2 * np.pi * freq * time)
         # overtones
         piano_wave += 0.4*np.sin(2 * 2 * np.pi * freq * time) * \
-            np.exp(-0.0015 * 2 * np.pi * freq * time) / 2
+            np.exp(-0.0015 * self.overtone_value * 2 * np.pi * freq * time) / 2
 
         piano_wave += piano_wave * piano_wave * piano_wave
         #piano_wave *= 1 + 16 * time * np.exp(-6 * time)
@@ -202,7 +208,7 @@ class Guitar(Instrument):
         elif dial_number == 4:
             self.chord = self.guitar_chords['E_major']
         elif dial_number == 5:
-            self.chord = self.guitar_chords['D_major']
+            self.chord = self.guitar_chords['A_major']
 
     def guitar_chord_selection(self, dial_number):
 
@@ -225,6 +231,14 @@ class Guitar(Instrument):
         wave = self.wavetable_initiator(frequancy)
         guitar_sound = self.get_sample(wave, self.GUITAR_SAMPLING_RATE * 5)
         self.play_string(guitar_sound)
+
+    def set_chord_lcd(self, lcd):
+        if lcd == 0: return "o"
+        elif lcd == 1: return 'g'
+        elif lcd == 2: return 'D'
+        elif lcd == 3: return 'C'
+        elif lcd == 4: return 'E'
+        elif lcd == 5: return 'A'
 
 
 #TODO: connect in interface
