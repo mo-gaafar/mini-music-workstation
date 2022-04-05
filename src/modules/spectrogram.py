@@ -37,6 +37,4 @@ def plot_spectro(self):
     samples = self.music_signal.mastered_magnitude_array
     sample_rate = self.music_signal.f_sampling
 
-    pylab.subplot(111)
-    # pylab.title('spectrogram of %r' % path)
     pylab.specgram(samples, Fs=sample_rate)

@@ -1,7 +1,7 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
+from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout, QProgressBar
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
@@ -266,6 +266,8 @@ def init_connectors(self):
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("wind", self.verticalSlider_4.value()/5))
+    self.verticalSlider_4.sliderReleased.connect(
+        lambda: spectrogram.plot_spectro(self))
 
     self.slider3_label = self.findChild(QLabel, "slider3_label")
     self.verticalSlider_4.valueChanged.connect(
@@ -274,6 +276,10 @@ def init_connectors(self):
     self.verticalSlider_3 = self.findChild(QSlider, "verticalSlider_3")
     self.verticalSlider_3.sliderReleased.connect(
         lambda: self.music_signal.modify_instrument("violin", self.verticalSlider_3.value()/5))
+
+    self.master_volume_bar = self.findChild(QProgressBar, "master_volume_bar")
+    self.timer.timeout.connect(
+        lambda: self.master_volume_bar.setValue(emphasizer.return_master_volume(self)))
 
     self.slider2_label = self.findChild(QLabel, "slider2_label")
     self.verticalSlider_3.valueChanged.connect(

@@ -7,7 +7,7 @@ from matplotlib.pyplot import magnitude_spectrum
 from scipy.fft import rfftfreq, rfft, ifft, irfft
 import numpy as np
 import sounddevice as sd
-from modules.utility import print_debug
+from modules.utility import *
 from modules import spectrogram as spectro
 import PyQt5.QtCore
 import pyqtgraph as pg
@@ -30,9 +30,9 @@ class MusicSignal():
         '''Contains instrument name and corresponding array of freq range tuples'''
 
         self.INSTRUMENT_MULTIPLIER_DICT = {
-            "violin": 0,
-            "drums": 0,
-            "wind": 0
+            "violin": 1,
+            "drums": 1,
+            "wind": 1
         }
         '''Contains instrument magnitude multipliers'''
 
@@ -44,6 +44,8 @@ class MusicSignal():
         self.last_slider_value = 0  # TODO: update the default to 100 in gui
 
         self.time_array = time_array
+        self.min = 0
+        self.max = 1
 
         self.original_magnitude_array = magnitude_array
         self.current_magnitude_array = magnitude_array
@@ -117,6 +119,12 @@ class MusicSignal():
         factor = volume_slider_value/100
         self.mastered_magnitude_array = np.int16(np.multiply(factor,
                                                              self.current_magnitude_array))
+        self.max = max(np.abs(self.mastered_magnitude_array))
+
+def return_master_volume(self):
+    vol = mapRange(np.abs(self.music_signal.mastered_magnitude_array[self.pointsToAppend]), 0, self.music_signal.max, 0, 100)
+    return 2 * vol
+
 
 
 def waveform_update_plot(self):
