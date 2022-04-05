@@ -23,9 +23,9 @@ class MusicSignal():
 
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
         self.INSTRUMENT_FREQRANGE_DICT = {
-            "violin": [(2500, 5000)],
-            "drums": [(10, 2500)],
-            "wind": [(5000, 16000)]
+            "violin": [(1000, 24000)],
+            "drums": [(10, 499)],
+            "wind": [(500, 999)]
         }
         '''Contains instrument name and corresponding array of freq range tuples'''
 
