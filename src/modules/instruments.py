@@ -236,12 +236,18 @@ class Guitar(Instrument):
         self.play_string(guitar_sound)
 
     def set_chord_lcd(self, lcd):
-        if lcd == 0: return "o"
-        elif lcd == 1: return 'g'
-        elif lcd == 2: return 'D'
-        elif lcd == 3: return 'C'
-        elif lcd == 4: return 'E'
-        elif lcd == 5: return 'A'
+        if lcd == 0:
+            return "o"
+        elif lcd == 1:
+            return 'g'
+        elif lcd == 2:
+            return 'D'
+        elif lcd == 3:
+            return 'C'
+        elif lcd == 4:
+            return 'E'
+        elif lcd == 5:
+            return 'A'
 
 
 #TODO: connect in interface

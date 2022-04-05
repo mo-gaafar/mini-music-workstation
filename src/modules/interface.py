@@ -185,7 +185,7 @@ def init_connectors(self):
     self.piano_volume_dial.valueChanged.connect(
         lambda: self.piano_instrument.set_volume(self.piano_volume_dial.value()))
 
-    #self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
+    # self.chord_lcd = self.findChild(QLCDNumber, "chord_lcd")
     # self.chord_lcd.display('a')
 
     ############################ Drums buttons ###################################
@@ -312,6 +312,12 @@ def init_connectors(self):
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
     self.ride_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
+
+    # Time lcd
+    self.sec_lcd = self.findChild(QLCDNumber, "sec_lcd")
+    self.timer.timeout.connect(
+        lambda: self.sec_lcd.display(
+            self.pointsToAppend/self.music_signal.f_sampling))
 
     def about_us(self):
         QMessageBox.about(
