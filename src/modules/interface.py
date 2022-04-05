@@ -1,7 +1,7 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QTabWidget,QProgressBar,QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
+from PyQt5.QtWidgets import QTabWidget, QProgressBar, QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
@@ -31,11 +31,11 @@ def init_connectors(self):
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
-    
+
     self.actionAbout_us = self.findChild(QAction, "actionAbout_us")
     self.actionAbout_us.triggered.connect(
-        lambda: about_us(self)) 
-   
+        lambda: about_us(self))
+
    #######################################
 
     # play button
@@ -265,13 +265,11 @@ def init_connectors(self):
                                                  self.guitar_volume_label.setText(str(self.guitar_volume_dial.value())))
     self.guitar_volume_dial.valueChanged.connect(lambda:
                                                  self.guitar_instrument.set_volume(self.guitar_volume_dial.value()))
-        
-    
 
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
-        lambda: self.music_signal.modify_instrument("wind", self.verticalSlider_4.value()/5))
+        lambda: self.music_signal.set_instrument_factor("wind", self.verticalSlider_4.value()/5))
     self.verticalSlider_4.sliderReleased.connect(
         lambda: spectrogram.plot_spectro(self))
 
@@ -281,7 +279,7 @@ def init_connectors(self):
 
     self.verticalSlider_3 = self.findChild(QSlider, "verticalSlider_3")
     self.verticalSlider_3.sliderReleased.connect(
-        lambda: self.music_signal.modify_instrument("violin", self.verticalSlider_3.value()/5))
+        lambda: self.music_signal.set_instrument_factor("violin", self.verticalSlider_3.value()/5))
 
     self.master_volume_bar = self.findChild(QProgressBar, "master_volume_bar")
     self.timer.timeout.connect(
@@ -293,13 +291,14 @@ def init_connectors(self):
 
     self.verticalSlider_2 = self.findChild(QSlider, "verticalSlider_2")
     self.verticalSlider_2.sliderReleased.connect(
-        lambda: self.music_signal.modify_instrument("drums", self.verticalSlider_2.value()/5))
+        lambda: self.music_signal.set_instrument_factor("drums", self.verticalSlider_2.value()/5))
 
     self.slider1_label = self.findChild(QLabel, "slider1_label")
     self.verticalSlider_2.valueChanged.connect(
         lambda: self.slider1_label.setText(str(self.verticalSlider_2.value())))
 
     self.verticalSlider = self.findChild(QSlider, "verticalSlider")
+
     self.verticalSlider.sliderReleased.connect(
         lambda: self.music_signal.modify_master_volume(self.verticalSlider.value()))
 
@@ -307,54 +306,13 @@ def init_connectors(self):
     self.verticalSlider.valueChanged.connect(
         lambda: self.master_label.setText(str(self.verticalSlider.value())))
 
+    self.apply_pushButton = self.findChild(QPushButton, "apply_pushButton")
+    self.apply_pushButton.clicked.connect(lambda: emphasizer.emphasize(self))
+
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
     self.ride_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
 
     def about_us(self):
         QMessageBox.about(
-            self, ' About ', 'This is a musical instruments emphasizer \nCreated by junior students from the faculty of Engineering, Cairo Uniersity, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')
-   
-
-   
-   
-   
-   
-   
-   
-   
-    # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
-
-    # ''' Composer Tab'''
-
-    # self.clearComposerButton = self.findChild(
-    #     QPushButton, "clearComposerButton")
-    # self.clearComposerButton.clicked.connect(
-    #     lambda: print_debug("Not connected"))
-
-    # self.addSineButton = self.findChild(QPushButton, "addSineButton")
-    # self.addSineButton.clicked.connect(
-    #     lambda: print_debug("Not connected"))
-    # # self.addSineButton.clicked.connect(
-    # #    lambda: composer.plotSinusoidal(self))
-
-    # self.deleteSineButton = self.findChild(QPushButton, "deleteSineButton")
-    # self.deleteSineButton.hide()
-    # self.deleteSineButton.clicked.connect(
-    #     lambda: print_debug("Not connected"))
-
-    # # Creator Sliders and LCD
-
-    # # Phase
-    # self.phaseSlider = self.findChild(QSlider, "phaseSlider")
-    # self.phaseSlider.valueChanged.connect(
-    #     lambda: print_debug("Not connected"))
-
-    # self.phaseLCD = self.findChild(QLCDNumber, "phaseLCD")
-    # self.phaseSlider.valueChanged.connect(
-    #     lambda: print_debug("Not connected"))
-
-    # # Created signals combobox
-    # self.signalsMenu = self.findChild(QComboBox, "signalsMenu")
-    # self.signalsMenu.currentIndexChanged.connect(
-    #     lambda: print_debug("Not connected"))
+            self, ' About ', 'This is a musical instruments emphasizer and a digital audio workstation \nCreated by junior students from the faculty of Engineering, Cairo University, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')

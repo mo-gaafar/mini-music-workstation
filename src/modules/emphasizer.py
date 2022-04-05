@@ -41,7 +41,7 @@ class MusicSignal():
         self.n_samples = f_sampling*len(time_array)
         self.filepath = filepath
         self.n_channel = n_channel
-        self.last_slider_value = 0  # TODO: update the default to 100 in gui
+        self.last_slider_value = 100
 
         self.time_array = time_array
         self.min = 0
@@ -72,6 +72,8 @@ class MusicSignal():
 
         self.original_freq_magnitude_array = np.abs(fft_coefficients)
         self.freq_magnitude_array = np.abs(fft_coefficients)
+        self.modify_master_volume(
+            self.last_slider_value)  # update master volume
 
     def phase_preserved_inverse(self):
         '''Restores complex values using magnitude * e^(i theta)'''
@@ -79,6 +81,12 @@ class MusicSignal():
             self.freq_magnitude_array, np.exp(np.multiply(1j, self.freq_phase_array)))
         self.current_magnitude_array = np.int16(
             irfft(complex_coefficients))
+
+        self.modify_master_volume(
+            self.last_slider_value)  # update master volume
+
+    def set_instrument_factor(self, instrument, factor):
+        self.INSTRUMENT_MULTIPLIER_DICT[instrument] = factor
 
     def reset_signal(self):
         '''Stores original signal back into current (same with fft) '''
@@ -88,21 +96,15 @@ class MusicSignal():
         '''multiplies the frequency range's magnitude by a factor '''
         for frequency in self.freq_array:
             if starting < frequency < ending:
-                # TODO: Review the logic
+                # converting from frequency to corresponding fftfreq index
                 freq_sample_interval = len(self.freq_array)/(self.f_sampling/2)
                 freq_index = round(freq_sample_interval * frequency)
-                # print_debug("Modified Frequencies"+str(frequency) +
-                #             " Freq_Index "+str(freq_index))
-                # print_debug("Actual Current Frequency" +
-                # str(self.freq_array[freq_index]))
                 # maintains original freq array values to reduce cpu load
                 self.freq_magnitude_array[freq_index] = self.original_freq_magnitude_array[freq_index] * factor
 
-    def modify_instrument(self, instrument_name, magnitude_multiplier):
-        '''Should make use of all functions defined above'''
-        # self.fft_update() #inefficient (should only be called once per music signal)
+    def update_fourier_magnitudes(self):
+        '''Updates the magnitude arrays with the dictionary values'''
 
-        self.INSTRUMENT_MULTIPLIER_DICT[instrument_name] = magnitude_multiplier
         # supports multiple bands ;) + more efficient
         for instrument in self.INSTRUMENT_FREQRANGE_DICT:
             for range_array_tuple in self.INSTRUMENT_FREQRANGE_DICT[instrument]:
@@ -111,20 +113,18 @@ class MusicSignal():
                     int(range_array_tuple[1]),
                     self.INSTRUMENT_MULTIPLIER_DICT[instrument])
 
-        self.phase_preserved_inverse()
-        self.modify_master_volume(self.last_slider_value)
-
-    def modify_master_volume(self, volume_slider_value):
+    def modify_master_volume(self, volume_slider_value=100):
         self.last_slider_value = volume_slider_value
         factor = volume_slider_value/100
         self.mastered_magnitude_array = np.int16(np.multiply(factor,
                                                              self.current_magnitude_array))
         self.max = max(np.abs(self.mastered_magnitude_array))
 
-def return_master_volume(self):
-    vol = mapRange(np.abs(self.music_signal.mastered_magnitude_array[self.pointsToAppend]), 0, self.music_signal.max, 0, 100)
-    return 2 * vol
 
+def return_master_volume(self):
+    vol = mapRange(np.abs(
+        self.music_signal.mastered_magnitude_array[self.pointsToAppend]), 0, self.music_signal.max, 0, 100)
+    return int(2 * vol)
 
 
 def waveform_update_plot(self):
@@ -132,7 +132,7 @@ def waveform_update_plot(self):
     update_sample_interval = 10000
     time = self.music_signal.time_array[self.pointsToAppend:
                                         self.pointsToAppend+update_sample_interval]
-    magnitude = self.music_signal.current_magnitude_array[
+    magnitude = self.music_signal.mastered_magnitude_array[
         self.pointsToAppend:self.pointsToAppend+update_sample_interval]
 
     self.pointsToAppend += update_sample_interval
@@ -151,16 +151,16 @@ def play(self):
         print_debug(interval)
         self.timer.setInterval(interval)
         self.timer.start()
-    
+
         if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
             QMessageBox.warning(
                 self, 'NO SIGNAL ', 'You have to plot a signal first')
-    
+
         self.sound_object = pygame.sndarray.make_sound(
             array=self.music_signal.mastered_magnitude_array[self.pointsToAppend:])
         self.sound_object.play()
         spectro.plot_spectro(self)
-        self.toggle_play=1
+        self.toggle_play = 1
     else:
         pass
 
@@ -173,15 +173,27 @@ def pause(self):
 
 
 def stop(self):
-    
-    if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
-        QMessageBox.warning(
-            self, 'NO SIGNAL ', 'You have to plot a signal first')
     self.sound_object.stop()
     self.timer.stop()
     self.pointsToAppend = 0
     waveform_update_plot(self)
     self.toggle_play = 0
 
-    QMessageBox.information(
-            self, 'Music Workstation', 'Signal has been rested')
+
+def emphasize(self):
+    if len(self.music_signal.mastered_magnitude_array[self.pointsToAppend:]) == 0:
+        QMessageBox.warning(
+            self, 'NO SIGNAL ', 'You have to plot a signal first')
+    else:
+
+        pause(self)
+
+        # updates magnitudes in frequency domain based on slider values
+        self.music_signal.update_fourier_magnitudes()
+        # restores complex values using magnitude * e^(i theta)
+        self.music_signal.phase_preserved_inverse()
+        # multiplies the frequency range's magnitude by a factor
+        # self.music_signal.modify_master_volume(self.music_signal.last_slider_value)
+        spectro.plot_spectro(self)
+
+        # play(self)
