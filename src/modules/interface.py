@@ -6,6 +6,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
 from modules.utility import print_debug
+import math
 
 # interface globals
 
@@ -317,7 +318,17 @@ def init_connectors(self):
     self.sec_lcd = self.findChild(QLCDNumber, "sec_lcd")
     self.timer.timeout.connect(
         lambda: self.sec_lcd.display(
-            self.pointsToAppend/self.music_signal.f_sampling))
+            math.floor(self.pointsToAppend/self.music_signal.f_sampling) % 60))
+
+    self.cs_lcd = self.findChild(QLCDNumber, "cs_lcd")
+    self.timer.timeout.connect(
+        lambda: self.cs_lcd.display(
+            math.floor(((self.pointsToAppend/self.music_signal.f_sampling) % 1) * 100)))
+
+    self.min_lcd = self.findChild(QLCDNumber, "min_lcd")
+    self.timer.timeout.connect(
+        lambda: self.min_lcd.display(
+            ((self.pointsToAppend/self.music_signal.f_sampling) / 60) // 1))
 
     def about_us(self):
         QMessageBox.about(
