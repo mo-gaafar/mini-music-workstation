@@ -1,7 +1,7 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QTabWidget, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
+from PyQt5.QtWidgets import QTabWidget,QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
@@ -31,6 +31,12 @@ def init_connectors(self):
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
         lambda: openfile.browse_window(self))
+    
+    self.actionAbout_us = self.findChild(QAction, "actionAbout_us")
+    self.actionAbout_us.triggered.connect(
+        lambda: about_us(self)) 
+   
+   #######################################
 
     # play button
     self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
@@ -299,6 +305,18 @@ def init_connectors(self):
     self.ride_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
 
+    def about_us(self):
+        QMessageBox.about(
+            self, ' About ', 'This is a musical instruments emphasizer \nCreated by junior students from the faculty of Engineering, Cairo Uniersity, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')
+   
+
+   
+   
+   
+   
+   
+   
+   
     # self.WindowTabs = self.findChild(QTabWidget, "WindowTabs")
 
     # ''' Composer Tab'''
