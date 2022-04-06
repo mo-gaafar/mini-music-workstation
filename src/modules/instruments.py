@@ -23,9 +23,12 @@ class Instrument():
         return int_array
 
     def play_sound(self, sound):
+       
         sound = np.int16(np.multiply(sound, self.master_volume))
         sound_object = pygame.sndarray.make_sound(array=sound)
         sound_object.play()
+      
+       
 
     def set_volume(self, volume):
         self.master_volume = volume/100
@@ -71,7 +74,7 @@ class Drums(Instrument):
         self.play_drums(index)
     
     
-    def key(self, key):
+    def key_drums(self, key):
        
         if key == 's':
             self.play_drums("snare")
@@ -135,24 +138,60 @@ class Piano(Instrument):
         print_debug(input_note)
         sound_object = pygame.sndarray.make_sound(array=input_note)
         sound_object.play()
+        print_debug('play  #####################')
+
     
-    def key(self, key):
+    def key_piano(self, key):
        
-        if key == 's':
-            self.play_note()
-        elif key == 'k':
-            self.play_drums("kick")
-        elif key == 'h':
-            self.play_drums("hat")
-        elif key == 'f':
-            self.play_drums("FLoor_tom")
-        elif key == 't':
-            self.play_drums("H_tom")
+        if key == 'q':
+            self.generating_note(0)
+        elif key == 'w':
+            self.generating_note(1)
+        elif key == 'e':
+            self.generating_note(2)
         elif key == 'r':
-            self.play_drums("ride_cymbal")
-        elif key == 'c':    
-            self.play_drums("crash_cymbal")
-    
+            self.generating_note(3)
+        elif key == 't':
+            self.generating_note(4)
+        elif key == 'y':
+            self.generating_note(5)
+        elif key == 'u':    
+            self.generating_note(6)
+        elif key == 'i':    
+            self.generating_note(7)
+        elif key == 'o':
+            self.generating_note(8) 
+        elif key == 'p':
+            self.generating_note(9)
+        elif key == 'z':
+            self.generating_note(10)
+        elif key == 'x':
+            self.generating_note(11)
+        elif key == 'c':
+            self.generating_note(12)
+        elif key == 'v':
+            self.generating_note(13)
+        elif key == '1':
+            self.generating_note(14)
+        elif key == '2':
+            self.generating_note(15)
+        elif key == '3':
+            self.generating_note(16)
+        elif key == '4':
+            self.generating_note(17)
+        elif key == '5':
+            self.generating_note(18)
+        elif key == '6':
+            self.generating_note(19)
+        elif key == '7':
+            self.generating_note(20)
+        elif key == '8':
+            self.generating_note(21)
+        elif key == '9':
+            self.generating_note(22)
+        elif key == '0':
+            self.generating_note(23)
+
     def dial_value(self, dial_number):
         # TODO:LIMIT DIAL 1-7
         self.octave_number = dial_number
@@ -287,29 +326,3 @@ class Guitar(Instrument):
             return 'A'
 
 
-# def keyPressEvent(self, event):
-#     #  print(event.text())
-#     print(event.text())
-#     if event.text() == 's':
-#        self.play_drums('snare')
-        
-
-#TODO: connect in interface
-def keyboard_pressed(key, instrument_index):
-    # match key: match case needs python 3.10...
-    #     case 'a':
-    #         pass
-    #     case  #TODO: do this in the future :(
-    
-    if key == 'a':
-        pass
-    elif key == 's':
-        pass
-    elif key == 'd':
-        pass
-    elif key == 'f':
-        pass
-    elif key == 'g':
-        pass
-    elif key == 'h':
-        pass

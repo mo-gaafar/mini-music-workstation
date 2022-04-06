@@ -156,8 +156,7 @@ def init_connectors(self):
     self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(21))
 
-    self.Asharp_pushButton_2 = self.findChild(
-        QPushButton, "Asharp_pushButton_2")
+    self.Asharp_pushButton_2 = self.findChild(QPushButton, "Asharp_pushButton_2")
     self.Asharp_pushButton_2.pressed.connect(
         lambda: self.piano_instrument.generating_note(22))
 
@@ -282,6 +281,7 @@ def init_connectors(self):
                                                  self.guitar_instrument.set_volume(self.guitar_volume_dial.value()))
 
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
+   
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
         lambda: self.music_signal.set_instrument_factor("violin", self.verticalSlider_4.value()/5))
