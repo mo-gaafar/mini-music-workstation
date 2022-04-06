@@ -5,10 +5,10 @@ import wave
 from numpy import random
 import app
 from modules.utility import print_debug, print_log
-
+from modules import interface
 import sys
 from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QWidget, QShortcut, QLabel, QApplication
+from PyQt5.QtWidgets import QWidget, QShortcut, QLabel, QApplication ,QMessageBox
 
 
 class Instrument():
@@ -90,8 +90,13 @@ class Drums(Instrument):
             self.play_drums("ride_cymbal")
         elif key == 'c':    
             self.play_drums("crash_cymbal")
-    
-                 
+        #     # QMessageBox.warning(
+        #     #     self, ' Drums ', 's - (snare") k - ("kick") h - ("hat") f - ("FLoor_tom") t - ("H_tom") r - ("ride_cymbal") c - ("crash_cymbal")')
+        # elif key == 'm':
+        #     QMessageBox.warning(
+        #         self, ' Drums ', 'ok')
+
+                          
    
 class Piano(Instrument):
     def __init__(self):
@@ -191,54 +196,55 @@ class Piano(Instrument):
         self.play_sound(wave)
     
     def key_piano(self, key):
-       
-        if key == 'q':
+        #sharps are numbers 
+       #first octave is small while second octave capital
+        if key == 'Q':
             self.generating_note(0)
-        elif key == 'w':
-            self.generating_note(1)
-        elif key == 'e':
-            self.generating_note(2)
-        elif key == 'r':
-            self.generating_note(3)
-        elif key == 't':
-            self.generating_note(4)
-        elif key == 'y':
-            self.generating_note(5)
-        elif key == 'u':    
-            self.generating_note(6)
-        elif key == 'i':    
-            self.generating_note(7)
-        elif key == 'o':
-            self.generating_note(8) 
-        elif key == 'p':
-            self.generating_note(9)
-        elif key == 'z':
-            self.generating_note(10)
-        elif key == 'x':
-            self.generating_note(11)
-        elif key == 'c':
-            self.generating_note(12)
-        elif key == 'v':
-            self.generating_note(13)
-        elif key == '1':
-            self.generating_note(14)
         elif key == '2':
-            self.generating_note(15)
+            self.generating_note(1)
+        elif key == 'W':
+            self.generating_note(2)
         elif key == '3':
-            self.generating_note(16)
-        elif key == '4':
-            self.generating_note(17)
-        elif key == '5':
-            self.generating_note(18)
+            self.generating_note(3)
+        elif key == 'E':
+            self.generating_note(4)
+        elif key == 'R':
+            self.generating_note(5)
+        elif key == '5':    
+            self.generating_note(6)
+        elif key == 'T':    
+            self.generating_note(7)
         elif key == '6':
-            self.generating_note(19)
+            self.generating_note(8) 
+        elif key == 'Y':
+            self.generating_note(9)
         elif key == '7':
-            self.generating_note(20)
-        elif key == '8':
-            self.generating_note(21)
+            self.generating_note(10)
+        elif key == 'U':
+            self.generating_note(11)
+        elif key == 'I':
+            self.generating_note(12)
         elif key == '9':
-            self.generating_note(22)
+            self.generating_note(13)
+        elif key == 'O':
+            self.generating_note(14)
         elif key == '0':
+            self.generating_note(15)
+        elif key == 'P':
+            self.generating_note(16)
+        elif key == 'Z':
+            self.generating_note(17)
+        elif key == 'S':
+            self.generating_note(18)
+        elif key == 'X':
+            self.generating_note(19)
+        elif key == 'D':
+            self.generating_note(20)
+        elif key == 'C':
+            self.generating_note(21)
+        elif key == 'F':
+            self.generating_note(22)
+        elif key == 'V':
             self.generating_note(23)
 
 
