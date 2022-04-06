@@ -158,6 +158,8 @@ def play(self):
         self.sound_object.play()
         spectro.plot_spectro(self)
         self.toggle_play = 1
+       
+
     else:
         pass
 
@@ -168,6 +170,12 @@ def pause(self):
     self.sound_object.stop()
     self.toggle_play = 0
 
+def pause_apply(self):
+
+    self.toggle_apply = self.toggle_play
+    pause(self)
+    
+   
 
 def stop(self):
     self.sound_object.stop()
@@ -183,7 +191,7 @@ def emphasize(self):
             self, 'NO SIGNAL ', 'You have to plot a signal first')
     else:
 
-        pause(self)
+        pause_apply(self)
 
         # updates magnitudes in frequency domain based on slider values
         self.music_signal.update_fourier_magnitudes()
@@ -192,5 +200,7 @@ def emphasize(self):
         # multiplies the frequency range's magnitude by a factor
         # self.music_signal.modify_master_volume(self.music_signal.last_slider_value)
         spectro.plot_spectro(self)
-
-        # play(self)
+     
+        if(self.toggle_apply==1):
+           # self.toggle_play=0
+            play(self)
