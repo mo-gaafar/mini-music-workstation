@@ -45,7 +45,8 @@ class MainWindow(QtWidgets.QMainWindow):
         interface.create_piano_layout(self)
         interface.init_connectors(self)
         create_spectrogram_figure(self)
-   ############################################ test keyboard_pressed
+   
+
     def keyPressEvent(self, event):
 
             self.pressed_key = event.text()  

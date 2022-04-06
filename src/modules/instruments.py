@@ -138,59 +138,6 @@ class Piano(Instrument):
         print_debug(input_note)
         sound_object = pygame.sndarray.make_sound(array=input_note)
         sound_object.play()
-        print_debug('play  #####################')
-
-    
-    def key_piano(self, key):
-       
-        if key == 'q':
-            self.generating_note(0)
-        elif key == 'w':
-            self.generating_note(1)
-        elif key == 'e':
-            self.generating_note(2)
-        elif key == 'r':
-            self.generating_note(3)
-        elif key == 't':
-            self.generating_note(4)
-        elif key == 'y':
-            self.generating_note(5)
-        elif key == 'u':    
-            self.generating_note(6)
-        elif key == 'i':    
-            self.generating_note(7)
-        elif key == 'o':
-            self.generating_note(8) 
-        elif key == 'p':
-            self.generating_note(9)
-        elif key == 'z':
-            self.generating_note(10)
-        elif key == 'x':
-            self.generating_note(11)
-        elif key == 'c':
-            self.generating_note(12)
-        elif key == 'v':
-            self.generating_note(13)
-        elif key == '1':
-            self.generating_note(14)
-        elif key == '2':
-            self.generating_note(15)
-        elif key == '3':
-            self.generating_note(16)
-        elif key == '4':
-            self.generating_note(17)
-        elif key == '5':
-            self.generating_note(18)
-        elif key == '6':
-            self.generating_note(19)
-        elif key == '7':
-            self.generating_note(20)
-        elif key == '8':
-            self.generating_note(21)
-        elif key == '9':
-            self.generating_note(22)
-        elif key == '0':
-            self.generating_note(23)
 
     def dial_value(self, dial_number):
         # TODO:LIMIT DIAL 1-7
@@ -242,6 +189,57 @@ class Piano(Instrument):
         wave = self.generating_wave(freq, duration=3)
 
         self.play_sound(wave)
+    
+    def key_piano(self, key):
+       
+        if key == 'q':
+            self.generating_note(0)
+        elif key == 'w':
+            self.generating_note(1)
+        elif key == 'e':
+            self.generating_note(2)
+        elif key == 'r':
+            self.generating_note(3)
+        elif key == 't':
+            self.generating_note(4)
+        elif key == 'y':
+            self.generating_note(5)
+        elif key == 'u':    
+            self.generating_note(6)
+        elif key == 'i':    
+            self.generating_note(7)
+        elif key == 'o':
+            self.generating_note(8) 
+        elif key == 'p':
+            self.generating_note(9)
+        elif key == 'z':
+            self.generating_note(10)
+        elif key == 'x':
+            self.generating_note(11)
+        elif key == 'c':
+            self.generating_note(12)
+        elif key == 'v':
+            self.generating_note(13)
+        elif key == '1':
+            self.generating_note(14)
+        elif key == '2':
+            self.generating_note(15)
+        elif key == '3':
+            self.generating_note(16)
+        elif key == '4':
+            self.generating_note(17)
+        elif key == '5':
+            self.generating_note(18)
+        elif key == '6':
+            self.generating_note(19)
+        elif key == '7':
+            self.generating_note(20)
+        elif key == '8':
+            self.generating_note(21)
+        elif key == '9':
+            self.generating_note(22)
+        elif key == '0':
+            self.generating_note(23)
 
 
 class Guitar(Instrument):
