@@ -199,69 +199,69 @@ def init_connectors(self):
     ############################ Drums buttons ###################################
 
     self.snare_pushButton = self.findChild(QPushButton, "snare_pushButton")
-    self.snare_pushButton.clicked.connect(
+    self.snare_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('snare'))
 
     self.kick_pushButton = self.findChild(QPushButton, "kick_pushButton")
-    self.kick_pushButton.clicked.connect(
+    self.kick_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('kick'))
 
     self.kick_pushButton_3 = self.findChild(QPushButton, "kick_pushButton_3")
-    self.kick_pushButton_3.clicked.connect(
+    self.kick_pushButton_3.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('kick'))
 
     self.highhat1_pushButton = self.findChild(
         QPushButton, "highhat1_pushButton")
-    self.highhat1_pushButton.clicked.connect(
+    self.highhat1_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('hat'))
 
     self.highhat_2pushButton = self.findChild(
         QPushButton, "highhat_2pushButton")
-    self.highhat_2pushButton.clicked.connect(
+    self.highhat_2pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('hat'))
 
     self.hightom_pushButton = self.findChild(QPushButton, "hightom_pushButton")
-    self.hightom_pushButton.clicked.connect(
+    self.hightom_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
 
     self.floortom_pushButton = self.findChild( QPushButton, "floortom_pushButton")
-    self.floortom_pushButton.clicked.connect(
+    self.floortom_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
 
     self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
-    self.crash_pushButton.clicked.connect(
+    self.crash_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
    
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
-    self.ride_pushButton.clicked.connect(
+    self.ride_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
 
    
     ################### guitar keys ##############################
     
     self.Estring_pushButton = self.findChild(QPushButton, "Estring_pushButton")
-    self.Estring_pushButton.clicked.connect(
+    self.Estring_pushButton.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(0))
 
     self.Astring_pushButton = self.findChild(QPushButton, "Astring_pushButton")
-    self.Astring_pushButton.clicked.connect(
+    self.Astring_pushButton.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(1))
 
     self.Dstring_pushButton = self.findChild(QPushButton, "Dstring_pushButton")
-    self.Dstring_pushButton.clicked.connect(
+    self.Dstring_pushButton.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(2))
 
     self.Gstring_pushButton = self.findChild(QPushButton, "Gstring_pushButton")
-    self.Gstring_pushButton.clicked.connect(
+    self.Gstring_pushButton.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(3))
 
     self.Bstring_pushButton = self.findChild(QPushButton, "Bstring_pushButton")
-    self.Bstring_pushButton.clicked.connect(
+    self.Bstring_pushButton.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(4))
 
     self.Estring_pushButton_2 = self.findChild(
         QPushButton, "Estring_pushButton_2")
-    self.Estring_pushButton_2.clicked.connect(
+    self.Estring_pushButton_2.pressed.connect(
         lambda: self.guitar_instrument.guitar_string_sound(5))
 
     self.chord_dial = self.findChild(QDial, "chord_dial")
