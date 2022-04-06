@@ -3,8 +3,12 @@ import numpy as np
 import pygame
 import wave
 from numpy import random
-
+import app
 from modules.utility import print_debug, print_log
+
+import sys
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QWidget, QShortcut, QLabel, QApplication
 
 
 class Instrument():
@@ -13,6 +17,7 @@ class Instrument():
     def __init__(self):
         self.master_volume = 1
 
+      
     def float_to_int16(self, float_array):
         int_array = np.int16(float_array * (32767/2))
         return int_array
@@ -46,6 +51,8 @@ class Drums(Instrument):
         self.read_drum_tones = {
             'snare': [], 'hat': [], 'kick': [], 'FLoor_tom': [], 'H_tom': [], 'ride_cymbal': [], 'crash_cymbal': []}
         self.read_all_samples()
+        
+   
 
     def read_all_samples(self):
         for key in self.drum_kit_tones:
@@ -56,14 +63,33 @@ class Drums(Instrument):
                 self.read_drum_tones[key].append(signal)
 
     def play_drums(self, tone):
-
+        print_debug(tone)
         play_sound = np.int16(random.choice(self.read_drum_tones[tone]))
         self.play_sound(play_sound)
 
     def selecting_drum_kit(self, index):
         self.play_drums(index)
-
-
+    
+    
+    def key(self, key):
+       
+        if key == 's':
+            self.play_drums("snare")
+        elif key == 'k':
+            self.play_drums("kick")
+        elif key == 'h':
+            self.play_drums("hat")
+        elif key == 'f':
+            self.play_drums("FLoor_tom")
+        elif key == 't':
+            self.play_drums("H_tom")
+        elif key == 'r':
+            self.play_drums("ride_cymbal")
+        elif key == 'c':    
+            self.play_drums("crash_cymbal")
+    
+                 
+   
 class Piano(Instrument):
     def __init__(self):
         super().__init__()
@@ -109,7 +135,24 @@ class Piano(Instrument):
         print_debug(input_note)
         sound_object = pygame.sndarray.make_sound(array=input_note)
         sound_object.play()
-
+    
+    def key(self, key):
+       
+        if key == 's':
+            self.play_note()
+        elif key == 'k':
+            self.play_drums("kick")
+        elif key == 'h':
+            self.play_drums("hat")
+        elif key == 'f':
+            self.play_drums("FLoor_tom")
+        elif key == 't':
+            self.play_drums("H_tom")
+        elif key == 'r':
+            self.play_drums("ride_cymbal")
+        elif key == 'c':    
+            self.play_drums("crash_cymbal")
+    
     def dial_value(self, dial_number):
         # TODO:LIMIT DIAL 1-7
         self.octave_number = dial_number
@@ -244,13 +287,20 @@ class Guitar(Instrument):
             return 'A'
 
 
+# def keyPressEvent(self, event):
+#     #  print(event.text())
+#     print(event.text())
+#     if event.text() == 's':
+#        self.play_drums('snare')
+        
+
 #TODO: connect in interface
 def keyboard_pressed(key, instrument_index):
     # match key: match case needs python 3.10...
     #     case 'a':
     #         pass
     #     case  #TODO: do this in the future :(
-
+    
     if key == 'a':
         pass
     elif key == 's':

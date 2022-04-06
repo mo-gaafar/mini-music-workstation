@@ -24,10 +24,18 @@ def create_piano_layout(self):
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
 
+def update_current_tab_index(self,index):  
+    self.current_tab_index = index
 
 def init_connectors(self):
     '''Initializes all event connectors and triggers'''
-
+    
+    
+    self.selection_tabWidget = self.findChild(QTabWidget, "selection_tabWidget")
+    self.selection_tabWidget.currentChanged.connect(
+        lambda:  update_current_tab_index(self,self.selection_tabWidget.currentIndex()))
+    
+    
     ''' Menu Bar'''
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
@@ -217,15 +225,21 @@ def init_connectors(self):
     self.hightom_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
 
-    self.floortom_pushButton = self.findChild(
-        QPushButton, "floortom_pushButton")
+    self.floortom_pushButton = self.findChild( QPushButton, "floortom_pushButton")
     self.floortom_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
 
     self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
     self.crash_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
+   
+    self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
+    self.ride_pushButton.clicked.connect(
+        lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
+
+   
     ################### guitar keys ##############################
+    
     self.Estring_pushButton = self.findChild(QPushButton, "Estring_pushButton")
     self.Estring_pushButton.clicked.connect(
         lambda: self.guitar_instrument.guitar_string_sound(0))
@@ -309,10 +323,6 @@ def init_connectors(self):
 
     self.apply_pushButton = self.findChild(QPushButton, "apply_pushButton")
     self.apply_pushButton.clicked.connect(lambda: emphasizer.emphasize(self))
-
-    self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
-    self.ride_pushButton.clicked.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
 
     # Time lcd
     self.sec_lcd = self.findChild(QLCDNumber, "sec_lcd")

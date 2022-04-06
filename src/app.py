@@ -1,11 +1,12 @@
 # https://namingconvention.org/python/ use the pythonic naming convention here (friendly reminder)
 
-from PyQt5 import QtGui, QtWidgets, uic, QtCore
+from PyQt5 import QtGui, QtWidgets, uic, QtCore 
+from PyQt5.QtWidgets import QTabWidget
 from modules import interface, resource
 from modules.instruments import *
 from modules.emphasizer import *
 import numpy as np
-
+from modules.utility import print_debug
 import sys
 
 from modules.spectrogram import create_spectrogram_figure
@@ -30,20 +31,28 @@ class MainWindow(QtWidgets.QMainWindow):
         pygame.mixer.pre_init(
             channels=1, allowedchanges=0, buffer=512, frequency=44100)
         pygame.mixer.init()
-
+       
         self.music_signal = MusicSignal()
         self.piano_instrument = Piano()
         self.drums_instrument = Drums()
         self.guitar_instrument = Guitar()
         self.toggle_play = 0
         self.toggle_apply = 0
-
+        self.pressed_key =''
+        self.current_tab_index = 0
         # initialize points to app
         self.pointsToAppend = 0
         interface.create_piano_layout(self)
         interface.init_connectors(self)
         create_spectrogram_figure(self)
-
+   ############################################ test keyboard_pressed
+    def keyPressEvent(self, event):
+            #  print(event.text())
+            print_debug('1         ' + self.pressed_key)
+            self.pressed_key = event.text()  
+            print_debug('2         ' + self.pressed_key)   
+            if (self.current_tab_index == 2):
+                 self.drums_instrument.key(self.pressed_key)
 
 def main():
 
