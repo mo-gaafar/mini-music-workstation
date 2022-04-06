@@ -2,15 +2,9 @@
 
 # # OLD FUNCTIONS
 # # TODO: no idea make it work
-from modules import emphasizer
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as Canvas
-from scipy import signal, mean
-from scipy.io import wavfile
-import os
-import wave
+
 import pylab
 
 

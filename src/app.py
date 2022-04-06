@@ -1,7 +1,6 @@
 # https://namingconvention.org/python/ use the pythonic naming convention here (friendly reminder)
 
 from PyQt5 import QtGui, QtWidgets, uic, QtCore
-from modules import utility as util
 from modules import interface, resource
 from modules.instruments import *
 from modules.emphasizer import *

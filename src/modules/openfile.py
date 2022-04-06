@@ -5,23 +5,16 @@
 # TODO: create MusicSignal object with filepath, time,magnitude, sampling frequency information
 
 # # converts file path to SampledSignal object
-from winsound import PlaySound
 from PyQt5.QtWidgets import QFileDialog
-import wfdb
-import csv
-import numpy
 import matplotlib.pyplot as plt
 import numpy as np
-import wave
-import sys
-import app
+
 from modules import spectrogram
 from modules.utility import print_debug
 from scipy.io import wavfile
 
 # from main import MAX_SAMPLES
 # import viewer
-import sounddevice as sd
 from modules.emphasizer import *
 
 

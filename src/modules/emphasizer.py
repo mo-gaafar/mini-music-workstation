@@ -1,12 +1,7 @@
 # define class and related functions
 
-from signal import signal
-from click import pass_context
-from modules import spectrogram
-from matplotlib.pyplot import magnitude_spectrum
-from scipy.fft import rfftfreq, rfft, ifft, irfft
+from scipy.fft import rfftfreq, rfft, irfft
 import numpy as np
-import sounddevice as sd
 from modules.utility import *
 from modules import spectrogram as spectro
 import PyQt5.QtCore

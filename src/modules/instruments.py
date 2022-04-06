@@ -1,14 +1,8 @@
-# TODO: structure needs more work
-from types import new_class
+
 import numpy as np
-from numpy.core.fromnumeric import size
-from numpy.core.function_base import linspace
-import sounddevice as sd
-import scipy
 import pygame
 import wave
-from collections import defaultdict
-from numpy import array, random
+from numpy import random
 
 from modules.utility import print_debug, print_log
 
