@@ -325,4 +325,18 @@ class Guitar(Instrument):
         elif lcd == 5:
             return 'A'
 
-
+    def key_guitar(self, key):
+        
+            if key == '1':
+                self.guitar_string_sound(0)
+            elif key == '2':
+                self.guitar_string_sound(1)
+            elif key == '3':
+                self.guitar_string_sound(2)
+            elif key == '4':
+                self.guitar_string_sound(3)
+            elif key == '5':
+                self.guitar_string_sound(4)
+            elif key == '6':
+                self.guitar_string_sound(5)
+          

@@ -47,16 +47,16 @@ class MainWindow(QtWidgets.QMainWindow):
         create_spectrogram_figure(self)
    ############################################ test keyboard_pressed
     def keyPressEvent(self, event):
-            #  print(event.text())
-            print_debug('1         ' + self.pressed_key)
+
             self.pressed_key = event.text()  
-            print_debug('2         ' + self.pressed_key)   
+          
+            ## detect which tab
             if (self.current_tab_index == 0):
                 self.piano_instrument.key_piano(self.pressed_key)  
-            elif (self.current_tab_index == 0):
-                pass
+            elif (self.current_tab_index == 1):
+                self.guitar_instrument.key_guitar(self.pressed_key)   
             elif (self.current_tab_index == 2):
-                 self.drums_instrument.key_drums(self.pressed_key)
+                self.drums_instrument.key_drums(self.pressed_key)
                 
 def main():
 
