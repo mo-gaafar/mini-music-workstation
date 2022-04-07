@@ -2,8 +2,8 @@
 import logging
 
 # utility globals
-DEBUG_MODE = True
-LOGGING_MODE = False
+DEBUG_MODE = False
+LOGGING_MODE = True
 
 
 logging.basicConfig(filename="logs.log",

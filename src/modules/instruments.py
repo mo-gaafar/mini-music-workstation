@@ -46,7 +46,13 @@ class Drums(Instrument):
         super().__init__()
         self.drum_sampling_rate = 44100
         self.drum_kit_tones = {
-            'snare': ['snare1.wav', 'snare2.wav', 'snare3.wav', 'snare4.wav'], 'hat': ['hat1.wav', 'hat2.wav', 'hat3.wav', 'hat4.wav'], 'kick': ['kick1.wav', 'kick2.wav', 'kick3.wav', 'kick4.wav'], 'FLoor_tom': ['Floor_tom1.wav', 'Floor_tom2.wav', 'Floor_tom3.wav', 'Floor_tom4.wav'], 'H_tom': ['H_tom1.wav', 'H_tom2.wav', 'H_tom3.wav', 'H_tom4.wav'], 'ride_cymbal': ['ride_cymbal1.wav', 'ride_cymbal2.wav', 'ride_cymbal3.wav', 'ride_cymbal4.wav'], 'crash_cymbal': ['crash_cymbal1.wav', 'crash_cymbal2.wav', 'crash_cymbal3.wav', 'crash_cymbal4.wav']}
+            'snare': ['snare1.wav', 'snare2.wav', 'snare3.wav', 'snare4.wav'], 
+            'hat': ['hat1.wav', 'hat2.wav', 'hat3.wav', 'hat4.wav'], 
+            'kick': ['kick1.wav', 'kick2.wav', 'kick3.wav', 'kick4.wav'], 
+            'FLoor_tom': ['Floor_tom1.wav', 'Floor_tom2.wav', 'Floor_tom3.wav', 'Floor_tom4.wav'], 
+            'H_tom': ['H_tom1.wav', 'H_tom2.wav', 'H_tom3.wav', 'H_tom4.wav'], 
+            'ride_cymbal': ['ride_cymbal1.wav', 'ride_cymbal2.wav', 'ride_cymbal3.wav', 'ride_cymbal4.wav'], 
+            'crash_cymbal': ['crash_cymbal1.wav', 'crash_cymbal2.wav', 'crash_cymbal3.wav', 'crash_cymbal4.wav']}
 
         self.read_drum_tones = {
             'snare': [], 'hat': [], 'kick': [], 'FLoor_tom': [], 'H_tom': [], 'ride_cymbal': [], 'crash_cymbal': []}

@@ -37,6 +37,25 @@ def update_current_tab_index(self, index):
     self.current_tab_index = index
 
 
+def animate_pushbutton(self, piano_keyboard):
+
+    key_index = piano_key_index_dict[piano_keyboard]
+    button_name = ""
+
+    if key_index < 12:
+        button_name = piano_dict[key_index]+"_pushButton"
+    elif 12 < key_index < 24:
+        button_name = piano_dict[key_index-12]+"_pushButton_2"
+    if key_index < 24:
+        self.button = self.findChild(QPushButton, button_name)
+        self.button.animateClick(50)
+
+
+def about_us(self):
+    QMessageBox.about(
+        self, ' About ', 'This is a musical instruments emphasizer and a digital audio workstation \nCreated by junior students from the faculty of Engineering, Cairo University, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')
+
+
 def init_connectors(self):
     '''Initializes all event connectors and triggers'''
 
@@ -235,7 +254,8 @@ def init_connectors(self):
     self.hightom_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
 
-    self.floortom_pushButton = self.findChild( QPushButton, "floortom_pushButton")
+    self.floortom_pushButton = self.findChild(
+        QPushButton, "floortom_pushButton")
     self.floortom_pushButton.pressed.connect(
         lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
 
@@ -349,22 +369,3 @@ def init_connectors(self):
     self.timer.timeout.connect(
         lambda: self.min_lcd.display(
             ((self.pointsToAppend/self.music_signal.f_sampling) / 60) // 1))
-
-
-def animate_pushbutton(self, piano_keyboard):
-
-    key_index = piano_key_index_dict[piano_keyboard]
-    button_name = ""
-
-    if key_index < 12:
-        button_name = piano_dict[key_index]+"_pushButton"
-    elif 12 < key_index < 24:
-        button_name = piano_dict[key_index-12]+"_pushButton_2"
-    if key_index <24:
-        self.button = self.findChild(QPushButton, button_name)
-        self.button.animateClick(50)
-
-
-def about_us(self):
-    QMessageBox.about(
-        self, ' About ', 'This is a musical instruments emphasizer and a digital audio workstation \nCreated by junior students from the faculty of Engineering, Cairo University, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')

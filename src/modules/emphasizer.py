@@ -18,7 +18,7 @@ class MusicSignal():
 
     def __init__(self, filepath=0, time_array=[], magnitude_array=[], f_sampling=1, n_channel=0):
         self.INSTRUMENT_FREQRANGE_DICT = {
-            "violin": [(1000, 24000)],
+            "violin": [(1000, 22000)],
             "drums": [(10, 499)],
             "wind": [(500, 999)]
         }
@@ -92,7 +92,8 @@ class MusicSignal():
         for frequency in self.freq_array:
             if starting < frequency < ending:
                 # converting from frequency to corresponding fftfreq index
-                freq_sample_interval = len(self.freq_array)/(self.f_sampling/2) #how many samples are there in unit frequency
+                # how many samples are there in unit frequency
+                freq_sample_interval = len(self.freq_array)/(self.f_sampling/2)
                 freq_index = round(freq_sample_interval * frequency)
                 # maintains original freq array values to reduce cpu load
                 self.freq_magnitude_array[freq_index] = self.original_freq_magnitude_array[freq_index] * factor
@@ -158,7 +159,6 @@ def play(self):
         self.sound_object.play()
         spectro.plot_spectro(self)
         self.toggle_play = 1
-       
 
     else:
         pass
@@ -170,12 +170,12 @@ def pause(self):
     self.sound_object.stop()
     self.toggle_play = 0
 
+
 def pause_apply(self):
 
     self.toggle_apply = self.toggle_play
     pause(self)
-    
-   
+
 
 def stop(self):
     self.sound_object.stop()
@@ -200,7 +200,7 @@ def emphasize(self):
         # multiplies the frequency range's magnitude by a factor
         # self.music_signal.modify_master_volume(self.music_signal.last_slider_value)
         spectro.plot_spectro(self)
-     
-        if(self.toggle_apply==1):
+
+        if(self.toggle_apply == 1):
            # self.toggle_play=0
             play(self)
