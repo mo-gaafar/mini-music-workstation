@@ -45,6 +45,7 @@ class MainWindow(QtWidgets.QMainWindow):
         interface.create_piano_layout(self)
         interface.init_connectors(self)
         create_spectrogram_figure(self)
+   
 
     def keyPressEvent(self, event):
 
