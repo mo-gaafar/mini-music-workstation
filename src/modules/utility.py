@@ -3,7 +3,7 @@ import logging
 
 # utility globals
 DEBUG_MODE = True
-LOGGING_MODE = True
+LOGGING_MODE = False
 
 
 logging.basicConfig(filename="logs.log",

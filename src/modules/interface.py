@@ -1,14 +1,22 @@
 # OLD CODE.. REMOVE THIS COMMENT WHEN DONE MODIFYING
 
+from ctypes import util
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QTabWidget, QProgressBar, QMessageBox, QAction, QPushButton, QSlider, QComboBox, QLCDNumber, QStackedWidget, QStackedLayout, QWidget, QGroupBox, QHBoxLayout, QVBoxLayout, QDial, QLabel, QGridLayout
 from PyQt5.QtGui import *
 from PyQt5.QtCore import Qt
 from modules import openfile, emphasizer, instruments, spectrogram
-from modules.utility import print_debug
+from modules.utility import print_debug, print_log
 import math
 
 # interface globals
+piano_dict = {0: "C", 1: "Csharp", 2: "D", 3: "Dsharp",
+              4: "E", 5: "F", 6: "Fsharp", 7: "G", 8: "Gsharp",
+              9: "A", 10: "Asharp", 11: "B"}
+
+piano_key_index_dict = {
+    "q": 0, "Q": 1, "w": 2, "W": 3, "e": 4, "r": 5, "R": 6, "t": 7, "T": 8, "y": 9, "Y": 10, "u": 11,
+    "s": 12, "S": 13, "d": 14, "D": 15, "f": 16, "g": 17, "G": 18, "h": 19, "H": 20, "j": 21, "J": 22, "k": 23}
 
 
 def create_piano_layout(self):
@@ -24,18 +32,19 @@ def create_piano_layout(self):
     self.verticalLayout_4.addLayout(self.layout)
     self.layout.setAlignment(Qt.AlignCenter)
 
-def update_current_tab_index(self,index):  
+
+def update_current_tab_index(self, index):
     self.current_tab_index = index
+
 
 def init_connectors(self):
     '''Initializes all event connectors and triggers'''
-    
-    
-    self.selection_tabWidget = self.findChild(QTabWidget, "selection_tabWidget")
+
+    self.selection_tabWidget = self.findChild(
+        QTabWidget, "selection_tabWidget")
     self.selection_tabWidget.currentChanged.connect(
-        lambda:  update_current_tab_index(self,self.selection_tabWidget.currentIndex()))
-    
-    
+        lambda:  update_current_tab_index(self, self.selection_tabWidget.currentIndex()))
+
     ''' Menu Bar'''
     self.actionOpen = self.findChild(QAction, "actionOpen")
     self.actionOpen.triggered.connect(
@@ -66,6 +75,7 @@ def init_connectors(self):
         lambda: emphasizer.waveform_update_plot(self))  # Event handler
 
     ################### piano keys ##############################
+
     # c
     self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
     self.C_pushButton.pressed.connect(
@@ -156,7 +166,8 @@ def init_connectors(self):
     self.pause_pushButton.pressed.connect(
         lambda: self.piano_instrument.generating_note(21))
 
-    self.Asharp_pushButton_2 = self.findChild(QPushButton, "Asharp_pushButton_2")
+    self.Asharp_pushButton_2 = self.findChild(
+        QPushButton, "Asharp_pushButton_2")
     self.Asharp_pushButton_2.pressed.connect(
         lambda: self.piano_instrument.generating_note(22))
 
@@ -224,21 +235,21 @@ def init_connectors(self):
     self.hightom_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
 
-    self.floortom_pushButton = self.findChild( QPushButton, "floortom_pushButton")
+    self.floortom_pushButton = self.findChild(
+        QPushButton, "floortom_pushButton")
     self.floortom_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
 
     self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
     self.crash_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
-   
+
     self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
     self.ride_pushButton.clicked.connect(
         lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
 
-   
     ################### guitar keys ##############################
-    
+
     self.Estring_pushButton = self.findChild(QPushButton, "Estring_pushButton")
     self.Estring_pushButton.clicked.connect(
         lambda: self.guitar_instrument.guitar_string_sound(0))
@@ -281,7 +292,7 @@ def init_connectors(self):
                                                  self.guitar_instrument.set_volume(self.guitar_volume_dial.value()))
 
     # ++++++++++++++++++++EMPHASIZER++++++++++++++++++++++++++
-   
+
     self.verticalSlider_4 = self.findChild(QSlider, "verticalSlider_4")
     self.verticalSlider_4.sliderReleased.connect(
         lambda: self.music_signal.set_instrument_factor("violin", self.verticalSlider_4.value()/5))
@@ -340,6 +351,21 @@ def init_connectors(self):
         lambda: self.min_lcd.display(
             ((self.pointsToAppend/self.music_signal.f_sampling) / 60) // 1))
 
-    def about_us(self):
-        QMessageBox.about(
-            self, ' About ', 'This is a musical instruments emphasizer and a digital audio workstation \nCreated by junior students from the faculty of Engineering, Cairo University, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')
+
+def animate_pushbutton(self, piano_keyboard):
+
+    key_index = piano_key_index_dict[piano_keyboard]
+    button_name = ""
+
+    if key_index < 12:
+        button_name = piano_dict[key_index]+"_pushButton"
+    elif 12 < key_index < 24:
+        button_name = piano_dict[key_index-12]+"_pushButton_2"
+    if key_index <24:
+        self.button = self.findChild(QPushButton, button_name)
+        self.button.animateClick(50)
+
+
+def about_us(self):
+    QMessageBox.about(
+        self, ' About ', 'This is a musical instruments emphasizer and a digital audio workstation \nCreated by junior students from the faculty of Engineering, Cairo University, Systems and Biomedical Engineering department \n \nTeam members: \n-Mohammed Nasser \n-Abdullah Saeed \n-Zeyad Mansour \n-Mariam Khaled \n \nhttps://github.com/mo-gaafar/Mini_Music_Workstation.git')
