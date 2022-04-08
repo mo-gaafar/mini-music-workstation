@@ -17,6 +17,9 @@
 mono_crash.*
 
 # Build results
+build/
+dist/
+
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -350,3 +353,14 @@ MigrationBackup/
 .ionide/
 logs.txt
 app.exe
+build/app/Analysis-00.toc
+build/app/app.exe.manifest
+build/app/app.pkg
+build/app/base_library.zip
+build/app/PYZ-00.pyz
+build/app/PYZ-00.toc
+build/app/Tree-00.toc
+build/app/Tree-01.toc
+build/app/Tree-02.toc
+build/app/warn-app.txt
+build/app/xref-app.html
