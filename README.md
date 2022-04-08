@@ -40,8 +40,6 @@ https://user-images.githubusercontent.com/46086535/162456463-b045b229-1437-46f3-
 
 
 
-WORK IN PROGRESS
-
 ## Libraries
 
 Full list in requirements.txt
