@@ -33,11 +33,7 @@ Musical instrument emphasizer plus 3 playable virtual instruments
 - Randomized Samples
 - Keyboard controllable
 
-## Preview Videos
-
-
-https://user-images.githubusercontent.com/46086535/162455590-e216a59e-c4e4-4113-9481-beaf924d676d.mp4
-
+## Preview Video
 
 
 https://user-images.githubusercontent.com/46086535/162456463-b045b229-1437-46f3-a2b8-5ed5ac8ae7d3.mp4
