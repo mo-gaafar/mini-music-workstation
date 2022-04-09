@@ -15,8 +15,8 @@ piano_dict = {0: "C", 1: "Csharp", 2: "D", 3: "Dsharp",
               9: "A", 10: "Asharp", 11: "B"}
 
 piano_key_index_dict = {
-    "q": 0, "Q": 1, "w": 2, "W": 3, "e": 4, "r": 5, "R": 6, "t": 7, "T": 8, "y": 9, "Y": 10, "u": 11,
-    "s": 12, "S": 13, "d": 14, "D": 15, "f": 16, "g": 17, "G": 18, "h": 19, "H": 20, "j": 21, "J": 22, "k": 23}
+    "q": 0, "1": 1, "w": 2, "2": 3, "e": 4, "r": 5, "3": 6, "t": 7, "4": 8, "y": 9, "5": 10, "u": 11,
+    "i": 12, "6": 13, "o": 14, "7": 15, "p": 16, "[": 17, "8": 18, "]": 19, "9": 20, "\\": 21, "0": 22, "'": 23}
 
 
 def create_piano_layout(self):
@@ -44,7 +44,7 @@ def animate_pushbutton(self, piano_keyboard):
 
     if key_index < 12:
         button_name = piano_dict[key_index]+"_pushButton"
-    elif 12 < key_index < 24:
+    elif 12 <= key_index < 24:
         button_name = piano_dict[key_index-12]+"_pushButton_2"
     if key_index < 24:
         self.button = self.findChild(QPushButton, button_name)

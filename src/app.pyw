@@ -27,10 +27,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         print_debug("Connectors Initialized")
 
-        # initialize arrays and variables
+        # initialize the sound library
         pygame.mixer.pre_init(
             channels=1, allowedchanges=0, buffer=512, frequency=44100)
         pygame.mixer.init()
+        pygame.mixer.set_num_channels(64)
+
+        # initialize arrays and variables
 
         self.music_signal = MusicSignal()
         self.piano_instrument = Piano()
@@ -52,8 +55,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # detect which tab
         if (self.current_tab_index == 0):
-            self.piano_instrument.key_piano(self.pressed_key)
-            interface.animate_pushbutton(self, self.pressed_key)
+            # check if the key is a piano key
+            if self.pressed_key in interface.piano_key_index_dict:
+                self.piano_instrument.key_piano(self.pressed_key)
+                interface.animate_pushbutton(self, self.pressed_key)
         elif (self.current_tab_index == 1):
             self.guitar_instrument.key_guitar(self.pressed_key)
         elif (self.current_tab_index == 2):
