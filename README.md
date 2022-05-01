@@ -34,7 +34,7 @@ Musical instrument emphasizer plus 3 playable virtual instruments
 - Keyboard controllable
 
 ## Controls
-###<kbd>Drums</kbd>
+### <kbd>Drums</kbd>
 Crash cymbal:<kbd>y</kbd>
 Ride cymbal: <kbd>u</kbd>
 Hi-hat: <kbd>e </kbd>or <kbd>w</kbd>
@@ -43,7 +43,7 @@ Floor tom: <kbd>j</kbd>
 Snare drum: <kbd>s</kbd> or <kbd>a</kbd>
 Bass drum: <kbd>x</kbd> or <kbd>z</kbd>
 
-### <kbd>Piano</kbd>
+### <kbd> Piano </kbd>
 
 Sharp notes <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd> <kbd>7</kbd> <kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd>
 
