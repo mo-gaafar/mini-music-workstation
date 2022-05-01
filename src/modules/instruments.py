@@ -209,16 +209,9 @@ class Guitar(Instrument):
         return np.array(samples)
 
     def guitar_chord_selection(self, dial_number):
-        if dial_number == 1:
-            self.chord = self.guitar_chords['G_major']
-        elif dial_number == 2:
-            self.chord = self.guitar_chords['D_major']
-        elif dial_number == 3:
-            self.chord = self.guitar_chords['C_major']
-        elif dial_number == 4:
-            self.chord = self.guitar_chords['E_major']
-        elif dial_number == 5:
-            self.chord = self.guitar_chords['A_major']
+        """Maps the dial number to a guitar chord."""
+        if dial_number in interface.guitar_dial_chord_dict:
+            self.chord = self.guitar_chords[interface.guitar_dial_chord_dict[dial_number]]
 
     def guitar_chord_selection(self, dial_number):
 

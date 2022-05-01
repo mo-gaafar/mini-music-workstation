@@ -10,6 +10,7 @@ from modules.utility import print_debug, print_log
 import math
 
 # interface globals
+# Keyboard shortcuts
 piano_dict = {0: "C", 1: "Csharp", 2: "D", 3: "Dsharp",
               4: "E", 5: "F", 6: "Fsharp", 7: "G", 8: "Gsharp",
               9: "A", 10: "Asharp", 11: "B"}
@@ -18,9 +19,12 @@ piano_key_index_dict = {
     "q": 0, "1": 1, "w": 2, "2": 3, "e": 4, "r": 5, "3": 6, "t": 7, "4": 8, "y": 9, "5": 10, "u": 11,
     "i": 12, "6": 13, "o": 14, "7": 15, "p": 16, "[": 17, "8": 18, "]": 19, "9": 20, "\\": 21, "0": 22, "'": 23}
 
-drums_key_dict = {'s': "snare", 'k': "kick", 'h': "hat",
-                  'f': "FLoor_tom", 'c': "crash_cymbal",
-                  'r': "ride_cymbal", 't': "H_tom"}
+drums_key_dict = {'s': "snare", 'a': "snare", 'x': "kick", 'z': "kick",
+                  'e': "hat", 'w': "hat", 'j': "FLoor_tom", 'y': "crash_cymbal",
+                  'u': "ride_cymbal", 'g': "H_tom"}
+
+guitar_dial_chord_dict = {1: "G_major", 2: "D_major",
+                          3: "C_major", 4: "E_major", 5: "A_major"}
 
 
 def create_piano_layout(self):
