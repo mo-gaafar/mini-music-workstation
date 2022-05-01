@@ -23,6 +23,8 @@ drums_key_dict = {'s': "snare", 'a': "snare", 'x': "kick", 'z': "kick",
                   'e': "hat", 'w': "hat", 'j': "FLoor_tom", 'y': "crash_cymbal",
                   'u': "ride_cymbal", 'g': "H_tom"}
 
+guitar_key_string_index_dict = {'1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5}
+
 guitar_dial_chord_dict = {1: "G_major", 2: "D_major",
                           3: "C_major", 4: "E_major", 5: "A_major"}
 

@@ -251,5 +251,6 @@ class Guitar(Instrument):
 
     def key_guitar(self, key):
         """Maps the key pressed to the guitar string sound."""
-        if 1 <= key <= 6:
-            self.guitar_string_sound(key-1)
+        if key in interface.guitar_key_string_index_dict:
+            self.guitar_string_sound(
+                interface.guitar_key_string_index_dict[key])
