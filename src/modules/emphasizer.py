@@ -77,8 +77,7 @@ class MusicSignal():
         self.current_magnitude_array = np.int16(
             irfft(complex_coefficients))
 
-        self.modify_master_volume(
-            self.last_slider_value)  # update master volume
+        self.modify_master_volume(self.last_slider_value)  # update master volume
 
     def set_instrument_factor(self, instrument, factor):
         self.INSTRUMENT_MULTIPLIER_DICT[instrument] = factor

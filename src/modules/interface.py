@@ -18,6 +18,10 @@ piano_key_index_dict = {
     "q": 0, "1": 1, "w": 2, "2": 3, "e": 4, "r": 5, "3": 6, "t": 7, "4": 8, "y": 9, "5": 10, "u": 11,
     "i": 12, "6": 13, "o": 14, "7": 15, "p": 16, "[": 17, "8": 18, "]": 19, "9": 20, "\\": 21, "0": 22, "'": 23}
 
+drums_key_dict = {'s': "snare", 'k': "kick", 'h': "hat",
+                  'f': "FLoor_tom", 'c': "crash_cymbal",
+                  'r': "ride_cymbal", 't': "H_tom"}
+
 
 def create_piano_layout(self):
     self.keys = self.findChild(QWidget, "keys")
