@@ -3,7 +3,6 @@ import numpy as np
 import pygame
 import wave
 from numpy import random
-import app
 from modules.utility import print_debug, print_log
 from modules import interface
 import sys
@@ -38,7 +37,7 @@ class Drums(Instrument):
         self.drum_sampling_rate = 44100
         self.drum_kit_tones = {
             'snare': ['snare1.wav', 'snare2.wav', 'snare3.wav', 'snare4.wav'],
-            'hat': ['hat1.wav', 'hat2.wav', 'hat3.wav', 'hat4.wav'],
+            'hat': ['hat1.wav', 'hat2.wav', 'hat3.wav', 'hat3.wav'],
             'kick': ['kick1.wav', 'kick2.wav', 'kick3.wav', 'kick4.wav'],
             'FLoor_tom': ['Floor_tom1.wav', 'Floor_tom2.wav', 'Floor_tom3.wav', 'Floor_tom4.wav'],
             'H_tom': ['H_tom1.wav', 'H_tom2.wav', 'H_tom3.wav', 'H_tom4.wav'],
@@ -66,21 +65,9 @@ class Drums(Instrument):
         self.play_drums(index)
 
     def key_drums(self, key):
-
-        if key == 's':
-            self.play_drums("snare")
-        elif key == 'k':
-            self.play_drums("kick")
-        elif key == 'h':
-            self.play_drums("hat")
-        elif key == 'f':
-            self.play_drums("FLoor_tom")
-        elif key == 't':
-            self.play_drums("H_tom")
-        elif key == 'r':
-            self.play_drums("ride_cymbal")
-        elif key == 'c':
-            self.play_drums("crash_cymbal")
+        """ This function is used to play the drums based on the key pressed """
+        if key in interface.drums_key_dict:
+            self.play_drums(interface.drums_key_dict[key])
 
 
 class Piano(Instrument):
@@ -222,16 +209,9 @@ class Guitar(Instrument):
         return np.array(samples)
 
     def guitar_chord_selection(self, dial_number):
-        if dial_number == 1:
-            self.chord = self.guitar_chords['G_major']
-        elif dial_number == 2:
-            self.chord = self.guitar_chords['D_major']
-        elif dial_number == 3:
-            self.chord = self.guitar_chords['C_major']
-        elif dial_number == 4:
-            self.chord = self.guitar_chords['E_major']
-        elif dial_number == 5:
-            self.chord = self.guitar_chords['A_major']
+        """Maps the dial number to a guitar chord."""
+        if dial_number in interface.guitar_dial_chord_dict:
+            self.chord = self.guitar_chords[interface.guitar_dial_chord_dict[dial_number]]
 
     def guitar_chord_selection(self, dial_number):
 
@@ -270,16 +250,7 @@ class Guitar(Instrument):
             return 'A'
 
     def key_guitar(self, key):
-
-        if key == '1':
-            self.guitar_string_sound(0)
-        elif key == '2':
-            self.guitar_string_sound(1)
-        elif key == '3':
-            self.guitar_string_sound(2)
-        elif key == '4':
-            self.guitar_string_sound(3)
-        elif key == '5':
-            self.guitar_string_sound(4)
-        elif key == '6':
-            self.guitar_string_sound(5)
+        """Maps the key pressed to the guitar string sound."""
+        if key in interface.guitar_key_string_index_dict:
+            self.guitar_string_sound(
+                interface.guitar_key_string_index_dict[key])
