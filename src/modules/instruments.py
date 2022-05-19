@@ -58,11 +58,10 @@ class Drums(Instrument):
 
     def play_drums(self, tone):
         print_debug(tone)
-        play_sound = np.int16(random.choice(self.read_drum_tones[tone]))
+        play_sound = np.array(random.choice(
+            self.read_drum_tones[tone])).astype(np.int16)
         self.play_sound(play_sound)
 
-    def selecting_drum_kit(self, index):
-        self.play_drums(index)
 
     def key_drums(self, key):
         """ This function is used to play the drums based on the key pressed """
@@ -139,7 +138,6 @@ class Piano(Instrument):
         elif octave_number > 4:
             n = key_index+12*(octave_number-5)+3
             return n
-        
 
     def generating_note(self, key_index):
         if key_index < 12:
@@ -218,10 +216,10 @@ class Guitar(Instrument):
         wave = self.wavetable_initiator(frequancy)
         guitar_sound = self.get_sample(wave, self.GUITAR_SAMPLING_RATE * 5)
         self.play_string(guitar_sound)
-    #dictionary for lcd chords
+    # dictionary for lcd chords
+
     def set_chord_lcd(self, lcd):
         return self.lcd_chord_dict[lcd]
-        
 
     def key_guitar(self, key):
         """Maps the key pressed to the guitar string sound."""
