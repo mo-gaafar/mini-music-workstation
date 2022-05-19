@@ -28,7 +28,7 @@ guitar_key_string_index_dict = {'1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5}
 guitar_dial_chord_dict = {1: "G_major", 2: "D_major",
                           3: "C_major", 4: "E_major", 5: "A_major"}
 
-
+# function for push buttons connectors
 def create_piano_layout(self):
     self.keys = self.findChild(QWidget, "keys")
     self.halftones = self.findChild(QWidget, "halftones")
@@ -84,19 +84,19 @@ def init_connectors(self):
         lambda: about_us(self))
 
    #######################################
+    # function for push buttons connectors
+    emphasizer_buttons =["play_pushButton", "pause_pushButton","stop_pushButton"]
 
-    # play button
-    self.play_pushButton = self.findChild(QPushButton, "play_pushButton")
-    self.play_pushButton.clicked.connect(
-        lambda: emphasizer.play(self))
-    # pause button
-    self.pause_pushButton = self.findChild(QPushButton, "pause_pushButton")
-    self.pause_pushButton.clicked.connect(
-        lambda: emphasizer.pause(self))
-    # stop
-    self.stop_pushButton = self.findChild(QPushButton, "stop_pushButton")
-    self.stop_pushButton.clicked.connect(
-        lambda: emphasizer.stop(self))
+   
+    for index in emphasizer_buttons:
+        self.pushButton = self.findChild(QPushButton,index)
+        if index == "play_pushButton":
+            self.pushButton.clicked.connect(lambda: emphasizer.play(self))
+        elif index == "pause_pushButton":
+            self.pushButton.clicked.connect(lambda: emphasizer.pause(self))
+        elif index == "stop_pushButton":
+            self.pushButton.clicked.connect(lambda: emphasizer.stop(self))
+ 
     # Initialize Qt Timer
     self.timer = QtCore.QTimer()
     self.timer.setInterval(50)  # Overflow timer
@@ -104,105 +104,19 @@ def init_connectors(self):
         lambda: emphasizer.waveform_update_plot(self))  # Event handler
 
     ################### piano keys ##############################
+    piano_keys_dict={"C_pushButton":self.C_pushButton,"Csharp_pushButton":self.Csharp_pushButton,"D_pushButton":self.D_pushButton,"Dsharp_pushButton":self.Dsharp_pushButton,
+                     "E_pushButton":self.E_pushButton,"F_pushButton":self.F_pushButton,"Fsharp_pushButton":self.Fsharp_pushButton,"G_pushButton":self.G_pushButton,"Gsharp_pushButton":self.Gsharp_pushButton,
+                     "A_pushButton":self.A_pushButton,"Asharp_pushButton":self.Asharp_pushButton,"B_pushButton":self.B_pushButton,"C_pushButton_2":self.C_pushButton_2,"Csharp_pushButton_2":self.Csharp_pushButton_2,
+                     "D_pushButton_2":self.D_pushButton_2,"Dsharp_pushButton_2":self.Dsharp_pushButton_2,"E_pushButton_2":self.E_pushButton_2,"F_pushButton_2":self.F_pushButton_2,"Fsharp_pushButton_2":self.Fsharp_pushButton_2,
+                     "G_pushButton_2":self.G_pushButton_2,"Gsharp_pushButton_2":self.Gsharp_pushButton_2,"A_pushButton_2":self.A_pushButton_2,"Asharp_pushButton_2":self.Asharp_pushButton_2,"B_pushButton_2":self.B_pushButton_2}
+    notes=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
-    # c
-    self.C_pushButton = self.findChild(QPushButton, "C_pushButton")
-    self.C_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(0))
-    # c sharp
-    self.Csharp_pushButton = self.findChild(QPushButton, "Csharp_pushButton")
-    self.Csharp_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(1))
-    # d
-    self.D_pushButton = self.findChild(QPushButton, "D_pushButton")
-    self.D_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(2))
-    # d sharp
-    self.pause_pushButton = self.findChild(QPushButton, "Dsharp_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(3))
-    # e
-    self.pause_pushButton = self.findChild(QPushButton, "E_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(4))
-    # f
-    self.pause_pushButton = self.findChild(QPushButton, "F_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(5))
-    # f sharp
-    self.pause_pushButton = self.findChild(QPushButton, "Fsharp_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(6))
-    # g
-
-    self.pause_pushButton = self.findChild(QPushButton, "G_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(7))
-    # g sharp
-    self.pause_pushButton = self.findChild(QPushButton, "Gsharp_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(8))
-    # a
-    self.pause_pushButton = self.findChild(QPushButton, "A_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(9))
-    # a sharp
-    self.pause_pushButton = self.findChild(QPushButton, "Asharp_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(10))
-    # b
-    self.pause_pushButton = self.findChild(QPushButton, "B_pushButton")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(11))
-
-    self.pause_pushButton = self.findChild(QPushButton, "C_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(12))
-
-    self.pause_pushButton = self.findChild(QPushButton, "Csharp_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(13))
-
-    self.pause_pushButton = self.findChild(QPushButton, "D_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(14))
-
-    self.pause_pushButton = self.findChild(QPushButton, "Dsharp_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(15))
-
-    self.pause_pushButton = self.findChild(QPushButton, "E_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(16))
-
-    self.pause_pushButton = self.findChild(QPushButton, "F_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(17))
-
-    self.pause_pushButton = self.findChild(QPushButton, "Fsharp_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(18))
-
-    self.pause_pushButton = self.findChild(QPushButton, "G_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(19))
-
-    self.pause_pushButton = self.findChild(QPushButton, "Gsharp_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(20))
-
-    self.pause_pushButton = self.findChild(QPushButton, "A_pushButton_2")
-    self.pause_pushButton.pressed.connect(
-        lambda: self.piano_instrument.generating_note(21))
-
-    self.Asharp_pushButton_2 = self.findChild(
-        QPushButton, "Asharp_pushButton_2")
-    self.Asharp_pushButton_2.pressed.connect(
-        lambda: self.piano_instrument.generating_note(22))
-
-    self.B_pushButton_2 = self.findChild(QPushButton, "B_pushButton_2")
-    self.B_pushButton_2.pressed.connect(
-        lambda: self.piano_instrument.generating_note(23))
+    for note,index in enumerate(piano_keys_dict):
+        piano_keys_dict[index] = self.findChild(QPushButton,index)
+        print(piano_keys_dict[index])
+        print(notes[note])
+        piano_keys_dict[index].pressed.connect(lambda: self.piano_instrument.generating_note(notes[note]))
+   
     # DIAL 2
     self.octave_dial = self.findChild(QDial, "octave_dial")
     self.octave_dial.valueChanged.connect(
@@ -238,71 +152,26 @@ def init_connectors(self):
 
     ############################ Drums buttons ###################################
 
-    self.snare_pushButton = self.findChild(QPushButton, "snare_pushButton")
-    self.snare_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('snare'))
+    drums_tones_dict={"snare_pushButton":'snare',"kick_pushButton":'kick',"kick_pushButton_3":'kick',"highhat1_pushButton":'hat',
+                     "highhat_2pushButton":'hat',"hightom_pushButton":'H_tom',"floortom_pushButton":'FLoor_tom',
+                     "crash_pushButton":'crash_cymbal',"ride_pushButton":'ride_cymbal'}
 
-    self.kick_pushButton = self.findChild(QPushButton, "kick_pushButton")
-    self.kick_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('kick'))
-
-    self.kick_pushButton_3 = self.findChild(QPushButton, "kick_pushButton_3")
-    self.kick_pushButton_3.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('kick'))
-
-    self.highhat1_pushButton = self.findChild(
-        QPushButton, "highhat1_pushButton")
-    self.highhat1_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('hat'))
-
-    self.highhat_2pushButton = self.findChild(
-        QPushButton, "highhat_2pushButton")
-    self.highhat_2pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('hat'))
-
-    self.hightom_pushButton = self.findChild(QPushButton, "hightom_pushButton")
-    self.hightom_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('H_tom'))
-
-    self.floortom_pushButton = self.findChild(
-        QPushButton, "floortom_pushButton")
-    self.floortom_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('FLoor_tom'))
-
-    self.crash_pushButton = self.findChild(QPushButton, "crash_pushButton")
-    self.crash_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('crash_cymbal'))
-
-    self.ride_pushButton = self.findChild(QPushButton, "ride_pushButton")
-    self.ride_pushButton.pressed.connect(
-        lambda: self.drums_instrument.selecting_drum_kit('ride_cymbal'))
+    for index in drums_tones_dict:
+        self.pushButton = self.findChild(QPushButton,index)
+        self.pushButton.pressed.connect(lambda: self.drums_instrument.selecting_drum_kit(drums_tones_dict[index]))
+    
 
     ################### guitar keys ##############################
 
-    self.Estring_pushButton = self.findChild(QPushButton, "Estring_pushButton")
-    self.Estring_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(0))
+    guitar_keys_dict={"Estring_pushButton":0,"Astring_pushButton":1,"Dstring_pushButton":2,"Gstring_pushButton":3,
+                      "Bstring_pushButton":4,"Estring_pushButton_2":5}
 
-    self.Astring_pushButton = self.findChild(QPushButton, "Astring_pushButton")
-    self.Astring_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(1))
+  
+    for index in guitar_keys_dict:
+        self.pushButton = self.findChild(QPushButton,index)
+        self.pushButton.pressed.connect(lambda: self.guitar_instrument.guitar_string_sound(guitar_keys_dict[index]))
 
-    self.Dstring_pushButton = self.findChild(QPushButton, "Dstring_pushButton")
-    self.Dstring_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(2))
-
-    self.Gstring_pushButton = self.findChild(QPushButton, "Gstring_pushButton")
-    self.Gstring_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(3))
-
-    self.Bstring_pushButton = self.findChild(QPushButton, "Bstring_pushButton")
-    self.Bstring_pushButton.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(4))
-
-    self.Estring_pushButton_2 = self.findChild(
-        QPushButton, "Estring_pushButton_2")
-    self.Estring_pushButton_2.pressed.connect(
-        lambda: self.guitar_instrument.guitar_string_sound(5))
+   
 
     self.chord_dial = self.findChild(QDial, "chord_dial")
     self.chord_dial.valueChanged.connect(
@@ -365,17 +234,17 @@ def init_connectors(self):
     self.apply_pushButton.clicked.connect(lambda: emphasizer.emphasize(self))
 
     # Time lcd
-    self.sec_lcd = self.findChild(QLCDNumber, "sec_lcd")
-    self.timer.timeout.connect(
-        lambda: self.sec_lcd.display(
-            math.floor(self.pointsToAppend/self.music_signal.f_sampling) % 60))
 
-    self.cs_lcd = self.findChild(QLCDNumber, "cs_lcd")
-    self.timer.timeout.connect(
-        lambda: self.cs_lcd.display(
-            math.floor(((self.pointsToAppend/self.music_signal.f_sampling) % 1) * 100)))
+    time_lcd_buttons =["sec_lcd","cs_lcd","min_lcd"]
+    
+    for index in time_lcd_buttons:
+        self.lcd = self.findChild(QLCDNumber,index)
+        if index == "sec_lcd":
+            self.timer.timeout.connect(lambda: self.lcd.display( math.floor(self.pointsToAppend/self.music_signal.f_sampling) % 60))
+        elif index == "cs_lcd":
+            self.timer.timeout.connect(lambda: self.lcd.display(math.floor(((self.pointsToAppend/self.music_signal.f_sampling) % 1) * 100)))
+        elif index == "min_lcd":
+            self.timer.timeout.connect(lambda: self.lcd.display(((self.pointsToAppend/self.music_signal.f_sampling) / 60) // 1))
 
-    self.min_lcd = self.findChild(QLCDNumber, "min_lcd")
-    self.timer.timeout.connect(
-        lambda: self.min_lcd.display(
-            ((self.pointsToAppend/self.music_signal.f_sampling) / 60) // 1))
+
+    
