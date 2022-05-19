@@ -58,11 +58,10 @@ class Drums(Instrument):
 
     def play_drums(self, tone):
         print_debug(tone)
-        play_sound = np.int16(random.choice(self.read_drum_tones[tone]))
+        play_sound = np.array(random.choice(
+            self.read_drum_tones[tone])).astype(np.int16)
         self.play_sound(play_sound)
 
-    def selecting_drum_kit(self, index):
-        self.play_drums(index)
 
     def key_drums(self, key):
         """ This function is used to play the drums based on the key pressed """
@@ -129,33 +128,15 @@ class Piano(Instrument):
         OCTAVE_LENGTH = 12
         A4_INDEX = 10
 
-        if octave_number == 0:
-            n = OCTAVE_LENGTH - key_index + 12*3+9
-            return -n
-        elif octave_number == 1:
-            n = OCTAVE_LENGTH - key_index+12*2+9
-            return -n
-        elif octave_number == 2:
-            n = OCTAVE_LENGTH - key_index+12+9
-            return -n
-        elif octave_number == 3:
-            n = OCTAVE_LENGTH - key_index+9
+        if octave_number < 4:
+            n = OCTAVE_LENGTH - key_index + 12*(3-octave_number)+9
             return -n
         elif octave_number == 4:
             n = key_index-A4_INDEX + 1
             return n
 
-        elif octave_number == 5:
-            n = key_index+3
-            return n
-        elif octave_number == 6:
-            n = key_index+12+3
-            return n
-        elif octave_number == 7:
-            n = key_index+12*2+3
-            return n
-        elif octave_number == 8:
-            n = key_index+12*3+3
+        elif octave_number > 4:
+            n = key_index+12*(octave_number-5)+3
             return n
 
     def generating_note(self, key_index):
@@ -182,6 +163,7 @@ class Guitar(Instrument):
             'C_major': [82, 131, 165, 196, 262, 329],
             'E_major': [82, 123, 165, 208, 247, 329],
             'A_major': [82, 110, 165, 220, 277, 329]}
+        self.lcd_chord_dict = {0: "o", 1: "g", 2: "D", 3: "C",  4: "E", 5: "A"}
         self.chord = self.guitar_chords['G_major']  # default
         self.samples = []
 
@@ -234,20 +216,10 @@ class Guitar(Instrument):
         wave = self.wavetable_initiator(frequancy)
         guitar_sound = self.get_sample(wave, self.GUITAR_SAMPLING_RATE * 5)
         self.play_string(guitar_sound)
+    # dictionary for lcd chords
 
     def set_chord_lcd(self, lcd):
-        if lcd == 0:
-            return "o"
-        elif lcd == 1:
-            return 'g'
-        elif lcd == 2:
-            return 'D'
-        elif lcd == 3:
-            return 'C'
-        elif lcd == 4:
-            return 'E'
-        elif lcd == 5:
-            return 'A'
+        return self.lcd_chord_dict[lcd]
 
     def key_guitar(self, key):
         """Maps the key pressed to the guitar string sound."""
