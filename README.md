@@ -34,22 +34,22 @@ Musical instrument emphasizer plus 3 playable virtual instruments
 - Keyboard controllable
 
 ## Controls
-### <kbd>Drums</kbd>
-Crash cymbal:<kbd>y</kbd>
-Ride cymbal: <kbd>u</kbd>
-Hi-hat: <kbd>e </kbd>or <kbd>w</kbd>
-High tom-tom: <kbd>g</kbd>
-Floor tom: <kbd>j</kbd>
-Snare drum: <kbd>s</kbd> or <kbd>a</kbd>
-Bass drum: <kbd>x</kbd> or <kbd>z</kbd>
+### Drums
+Crash cymbal:<kbd>y</kbd> <br>
+Ride cymbal: <kbd>u</kbd> <br>
+Hi-hat: <kbd>e </kbd>or <kbd>w</kbd> <br>
+High tom-tom: <kbd>g</kbd> <br>
+Floor tom: <kbd>j</kbd> <br>
+Snare drum: <kbd>s</kbd> or <kbd>a</kbd> <br>
+Bass drum: <kbd>x</kbd> or <kbd>z</kbd> <br>
 
-### <kbd> Piano </kbd>
+### Piano
 
 Sharp notes <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd> <kbd>7</kbd> <kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd>
 
 Flat notes </kbd> <kbd>q</kbd> <kbd>w</kbd> <kbd>e</kbd> <kbd>r</kbd> <kbd>t</kbd> <kbd>y</kbd> <kbd>u</kbd> <kbd>i</kbd> <kbd>o</kbd> <kbd>p</kbd> <kbd>[</kbd> <kbd>]</kbd> <kbd>\\</kbd> <kbd>'</kbd>
 
-### <kbd>Guitar</kbd>
+### Guitar
 Strings <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd>
 
 
@@ -69,8 +69,9 @@ Full list in requirements.txt
 - matplotlib
 
 ## Team Members
-
-- Mohamed Nasser
-- Zeyad Mansour
-- Mariam Khaled
-- Abdullah Saeed
+| Name | Role|
+|-----------|-------|
+| Mohamed Nasser | FFT Emphasizer and SW Architecture|
+| Zeyad Mansour | User Interface, Piano sus and overtones|
+| Mariam Khaled | Piano and Guitar |
+| Abdullah Saeed | Drumkit |
