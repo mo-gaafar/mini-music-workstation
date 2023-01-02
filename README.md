@@ -2,6 +2,11 @@
 
 Musical instrument emphasizer plus 3 playable virtual instruments
 
+## Preview Video
+
+https://user-images.githubusercontent.com/46086535/162456463-b045b229-1437-46f3-a2b8-5ed5ac8ae7d3.mp4
+
+
 ## Features
 
 ### Equalizer/ Instrument Emphaizer
@@ -51,13 +56,6 @@ Flat notes </kbd> <kbd>q</kbd> <kbd>w</kbd> <kbd>e</kbd> <kbd>r</kbd> <kbd>t</kb
 
 ### Guitar
 Strings <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd>
-
-
-## Preview Video
-
-
-https://user-images.githubusercontent.com/46086535/162456463-b045b229-1437-46f3-a2b8-5ed5ac8ae7d3.mp4
-
 
 
 ## Libraries
